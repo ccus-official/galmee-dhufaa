@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="om">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#16313F">
+<title>Galmee Dhufaa</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#EEF2EE; --surface:#FFFFFF; --ink:#16313F; --muted:#5B6F78; --line:#D3DDD6;
+  --present:#2E7D4F; --present-bg:#DDF0E3;
+  --absent:#BF3B25; --absent-bg:#F9DDD7;
+  --late:#9A6B00; --late-bg:#FBEBB8;
+  --accent:#16313F; --accent-ink:#FFFFFF; --focus:#1B6FD1;
+  --font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Ethiopic","Abyssinica SIL",sans-serif;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1B22; --surface:#172830; --ink:#E6EFEA; --muted:#97AAB1; --line:#2A3F49;
+    --present:#6CCB8D; --present-bg:#1C3A2A; --absent:#FF8F78; --absent-bg:#432119;
+    --late:#F2C94C; --late-bg:#40330D; --accent:#E6EFEA; --accent-ink:#0F1B22; --focus:#6AB0FF;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1B22; --surface:#172830; --ink:#E6EFEA; --muted:#97AAB1; --line:#2A3F49;
+  --present:#6CCB8D; --present-bg:#1C3A2A; --absent:#FF8F78; --absent-bg:#432119;
+  --late:#F2C94C; --late-bg:#40330D; --accent:#E6EFEA; --accent-ink:#0F1B22; --focus:#6AB0FF;
+}
+html{scroll-padding-top:calc(env(safe-area-inset-top,0px) + 64px)}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 var(--font);-webkit-text-size-adjust:100%}
+h1,h2{font-family:var(--font);margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px 120px}
+header{padding:18px 0 8px}
+header h1{font-size:26px;font-weight:800;letter-spacing:-.01em}
+header p{margin:2px 0 10px;color:var(--muted);font-size:15px}
+.prefs{display:flex;gap:8px}
+.prefs label{flex:1;font-size:12px;color:var(--muted);display:flex;flex-direction:column;gap:2px}
+.prefs select{min-height:40px;border:1px solid var(--line);border-radius:9px;background:var(--surface);padding:0 8px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);background:var(--bg);z-index:5;display:flex;gap:6px;padding:8px 0;border-bottom:1px solid var(--line);margin-top:8px}
+nav button{flex:1;min-height:44px;border:1px solid var(--line);background:transparent;border-radius:10px;font-weight:600;cursor:pointer}
+nav button[aria-selected="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.bar{display:flex;gap:10px;margin:16px 0 8px;flex-wrap:wrap}
+.bar>label{flex:1 1 140px;display:flex;flex-direction:column;font-size:13px;color:var(--muted);gap:4px}
+.bar select,.bar input{min-height:46px;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:0 10px;width:100%}
+.bar>label.dl{flex:1 1 100%}
+.dsel{display:grid;grid-template-columns:68px minmax(0,1fr) 88px;gap:6px}
+.dsel select{padding:0 6px;font-size:15px}
+.counts{display:flex;gap:8px;margin:12px 0}
+.chip{flex:1;border-radius:10px;padding:8px 10px;font-size:13px;font-weight:600}
+.chip b{display:block;font-size:24px;line-height:1.1;font-weight:800}
+.chip.p{background:var(--present-bg);color:var(--present)}
+.chip.a{background:var(--absent-bg);color:var(--absent)}
+.chip.l{background:var(--late-bg);color:var(--late)}
+.tools{display:flex;justify-content:space-between;align-items:center;margin:4px 0 10px;gap:8px}
+.tools .saved{font-size:13px;color:var(--muted)}
+.btn{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.btn.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.danger{background:var(--absent);border-color:var(--absent);color:#fff}
+.row{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-bottom:8px}
+.row .nm{font-weight:700;margin-bottom:8px;display:flex;justify-content:space-between;gap:8px}
+.row .nm span:last-child{color:var(--muted);font-weight:400;font-size:14px}
+.seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.seg button{min-height:46px;border-radius:9px;border:1.5px solid var(--line);background:transparent;font-weight:600;cursor:pointer}
+.seg button[data-s="P"][aria-pressed="true"]{background:var(--present-bg);border-color:var(--present);color:var(--present)}
+.seg button[data-s="A"][aria-pressed="true"]{background:var(--absent-bg);border-color:var(--absent);color:var(--absent)}
+.seg button[data-s="L"][aria-pressed="true"]{background:var(--late-bg);border-color:var(--late);color:var(--late)}
+.sms{margin-top:8px;display:flex;align-items:center;gap:8px;font-size:14px;color:var(--muted)}
+.sms .btn{min-height:40px;padding:0 12px;font-size:14px;width:100%}
+.empty{text-align:center;padding:36px 16px;color:var(--muted);background:var(--surface);border:1px dashed var(--line);border-radius:12px;margin-top:16px}
+.empty b{display:block;color:var(--ink);font-size:18px;margin-bottom:6px}
+.empty .btn{margin-top:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:14px}
+.card h2{font-size:18px;margin-bottom:10px}
+.card textarea,.card input[type=text]{width:100%;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:10px;min-height:46px}
+.card textarea{min-height:110px;resize:vertical}
+.card>.btn{margin-top:10px;width:100%}
+.card .two{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.item{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid var(--line)}
+.item:last-child{border-bottom:0}
+.item .btn{min-height:40px;padding:0 12px}
+.rep{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center}
+.pct{font-weight:800;font-size:22px}
+.pct.low{color:var(--absent)}
+.meter{grid-column:1/-1;height:8px;border-radius:4px;background:var(--line);overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.meter .mp{background:var(--present)}.meter .ml{background:var(--late)}.meter .ma{background:var(--absent)}
+.small{font-size:13px;color:var(--muted)}
+.note{background:var(--late-bg);color:var(--late);border-radius:10px;padding:10px 12px;font-size:14px;margin:12px 0}
+.ok{background:var(--present-bg);color:var(--present);border-radius:10px;padding:8px 12px;font-size:14px;margin-top:8px}
+.err{background:var(--absent-bg);color:var(--absent);border-radius:10px;padding:8px 12px;font-size:14px;margin-top:8px}
+.fld label{display:block;font-size:13px;color:var(--muted);margin-top:8px}
+.fld input,.fld select{width:100%;min-height:46px;border:1px solid var(--line);border-radius:10px;background:var(--bg);padding:0 10px;margin-top:4px;color:var(--ink)}
+.card summary{min-height:32px}
+#cstat{font-size:13px;color:var(--present);margin:-4px 0 8px;font-weight:600}
+nav{gap:4px}
+nav button{font-size:14px;padding:0 2px}
+.seg button:disabled,.btn:disabled{opacity:.5;cursor:not-allowed}
+.chk{display:flex;align-items:center;gap:10px;min-height:40px}
+.chk input{width:22px;height:22px;flex:none}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:26px;font-weight:800;letter-spacing:.14em;text-align:center;padding:10px;background:var(--bg);border-radius:10px;border:1px dashed var(--line);user-select:all}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1 id="ttl"></h1>
+    <p id="tag"></p>
+    <div id="cstat"></div>
+    <div class="prefs" id="prefs"></div>
+  </header>
+  <nav role="tablist" id="nav"></nav>
+  <main id="app"></main>
+</div>
+
+<script>
+(function(){
+/* ---------- Afaanota / Languages ---------- */
+var T={
+om:{langName:"Afaan Oromoo",
+ title:"Galmee Dhufaa",tag:"Dhufaa fi hafaa barattootaa guyyaa guyyaan galmeessi.",
+ tabs:["Galmee","Ripoortii","Kutaa"],lang:"Afaan",cal:"Kaalaandara",eth:"Itoophiyaa",greg:"Idil-addunyaa",
+ klass:"Kutaa",date:"Guyyaa",day:"Guyyaa",month:"Ji'a",year:"Waggaa",
+ P:"Dhufe",A:"Hafe",L:"Turte",allP:"Hunda dhufe godhi",
+ unm:function(n){return n+" hin galmaa'in"},allDone:"Hundumtuu galmaa'e",
+ note:"Galmeen ofumaan kuufama. \"Turte\" jechuun barataan booda dhufe jechuudha.",
+ noClassT:"Kutaan tokkollee hin jiru",noClassX:"Duraan kutaa kee fi maqaa barattootaa itti dabali.",mkClass:"Kutaa uumi",
+ noStT:"Barattoonni hin jiran",noStX:"Kutaa kana keessatti maqaa barattootaa dabali.",addSt:"Barattoota dabali",
+ repT:"Ripoortiin hin jiru",repX:"Galmee guyyaa tokko galmeessi, ergasii as argita.",days:"Guyyaan galmaa'e",
+ low:function(n){return "Barattoota "+n+" dhufaan isaanii 80% gadi. Maatii isaanii quunnamuu yaadi."},
+ line:function(p,l,a){return "Dhufe "+p+" · Turte "+l+" · Hafe "+a},pctNote:"Dhufaan = (Dhufe + Turte) ÷ guyyaa galmaa'e.",
+ newClass:"Kutaa haaraa",ph:"Fkn. Kutaa 7A",addClass:"Kutaa dabali",yours:"Kutaawwan kee",nSt:"barattoota",del:"Haqi",sure:"Mirkaneessi",
+ addStT:function(n){return "Barattoota dabali: "+n},
+ stPh:"Maqaa tokko sarara tokko irratti. Bilbila maatii yoo jiraate maqaa booda dabali:\nCaalaa Tolasaa, 0911223344\nMaartuu Dammaqsaa",
+ stT:function(n){return "Barattoota ("+n+")"},
+ sms:"SMS maatiif ergi",noPhone:"Lakkoofsi bilbilaa hin jiru",
+ smsBody:function(n,d,c){return "Maatii kabajamoo, "+n+" guyyaa "+d+" mana barumsaa ("+c+") hin dhufne."},
+ bk:"Ragaa kuusuu (backup)",bkX:"Ragaa kee hunda barreeffama tokkotti jijjiiri. Bakka nageenyi qabuutti (fkn. Telegram \"Saved Messages\") kuusi.",
+ bkMake:"Backup uumi",bkRestore:"Backup deebisi",bkDone:"Backup qophaa'eera. Garagalcha kana kophii godhi.",bkOk:"Ragaan deebi'eera.",bkErr:"Barreeffamni kun sirrii miti.",bkPh:"Backup asitti maxxansi",
+ local:"Ragaan kun mobaayilii kee irratti qofa kuufama.",
+ name:"Maqaa",sex:"Saala",male:"Dhiira",female:"Dubartii",age:"Umurii",yrs:"waggaa",phone:"Bilbila maatii (filannoo)",
+ addOne:"Barataa dabali",edit:"Fooyyessi",saveEd:"Kuusi",cancel:"Dhiisi",bulk:"Barattoota baay'ee yeroo tokko dabali",
+ bulkPh:"Maqaa tokko sarara tokko irratti. Saala, umurii fi bilbila komaan addaan baasi:\nCaalaa Tolasaa, Dhiira, 12, 0911223344\nMaartuu Dammaqsaa, Dubartii, 11",
+ gTitle:"Dhufaa saala irratti",
+ savedOn:"Kuufameera",hist:"Guyyaawwan duraan galmaa'an (tuqtee bani)"},
+am:{langName:"አማርኛ",
+ title:"የመገኘት መዝገብ",tag:"የተማሪዎችን መገኘት እና መቅረት በየቀኑ ይመዝግቡ።",
+ tabs:["መዝገብ","ሪፖርት","ክፍል"],lang:"ቋንቋ",cal:"ቀን መቁጠሪያ",eth:"ኢትዮጵያ",greg:"ዓለም አቀፍ",
+ klass:"ክፍል",date:"ቀን",day:"ቀን",month:"ወር",year:"ዓመት",
+ P:"መጣ",A:"ቀረ",L:"ዘገየ",allP:"ሁሉንም መጣ አድርግ",
+ unm:function(n){return n+" አልተመዘገቡም"},allDone:"ሁሉም ተመዝግበዋል",
+ note:"መዝገቡ በራስ-ሰር ይቀመጣል። «ዘገየ» ማለት ተማሪው ዘግይቶ መጥቷል ማለት ነው።",
+ noClassT:"ክፍል የለም",noClassX:"መጀመሪያ ክፍል እና የተማሪዎችን ስም ያክሉ።",mkClass:"ክፍል ፍጠር",
+ noStT:"ተማሪዎች የሉም",noStX:"በዚህ ክፍል ውስጥ የተማሪዎችን ስም ያክሉ።",addSt:"ተማሪዎች ጨምር",
+ repT:"ሪፖርት የለም",repX:"የአንድ ቀን መዝገብ ይመዝግቡ፣ ከዚያ እዚህ ይታያል።",days:"የተመዘገቡ ቀናት",
+ low:function(n){return n+" ተማሪዎች ከ80% በታች ተገኝተዋል። ቤተሰቦቻቸውን ማነጋገር ያስቡ።"},
+ line:function(p,l,a){return "መጣ "+p+" · ዘገየ "+l+" · ቀረ "+a},pctNote:"መገኘት = (መጣ + ዘገየ) ÷ የተመዘገቡ ቀናት",
+ newClass:"አዲስ ክፍል",ph:"ለምሳሌ፡ 7ኛ ክፍል ሀ",addClass:"ክፍል ጨምር",yours:"ክፍሎችዎ",nSt:"ተማሪዎች",del:"ሰርዝ",sure:"አረጋግጥ",
+ addStT:function(n){return "ተማሪዎች ጨምር፡ "+n},
+ stPh:"በአንድ መስመር አንድ ስም። የወላጅ ስልክ ካለ ከስሙ በኋላ ይጻፉ፡\nአበበ ከበደ, 0911223344\nሰላም ተስፋዬ",
+ stT:function(n){return "ተማሪዎች ("+n+")"},
+ sms:"ለወላጅ ኤስኤምኤስ ላክ",noPhone:"ስልክ ቁጥር የለም",
+ smsBody:function(n,d,c){return "ውድ ወላጅ፣ ተማሪ "+n+" በ"+d+" ከትምህርት ቤት ("+c+") ቀርቷል።"},
+ bk:"ምትኬ",bkX:"ሁሉንም መረጃ ወደ አንድ ጽሑፍ ይቀይሩ። በአስተማማኝ ቦታ (ለምሳሌ የቴሌግራም «Saved Messages») ያስቀምጡ።",
+ bkMake:"ምትኬ ፍጠር",bkRestore:"ምትኬ መልስ",bkDone:"ምትኬ ተዘጋጅቷል። ይህን ጽሑፍ ቅዳ።",bkOk:"መረጃው ተመልሷል።",bkErr:"ጽሑፉ ትክክል አይደለም።",bkPh:"ምትኬውን እዚህ ይለጥፉ",
+ local:"ይህ መረጃ በስልክዎ ላይ ብቻ ይቀመጣል።",
+ name:"ስም",sex:"ጾታ",male:"ወንድ",female:"ሴት",age:"ዕድሜ",yrs:"ዓመት",phone:"የወላጅ ስልክ (አማራጭ)",
+ addOne:"ተማሪ ጨምር",edit:"አርም",saveEd:"አስቀምጥ",cancel:"ተወው",bulk:"ብዙ ተማሪዎችን በአንድ ጊዜ ጨምር",
+ bulkPh:"በአንድ መስመር አንድ ስም። ጾታ፣ ዕድሜ እና ስልክ በኮማ ይለዩ፡\nአበበ ከበደ, ወንድ, 12, 0911223344\nሰላም ተስፋዬ, ሴት, 11",
+ gTitle:"መገኘት በጾታ",
+ savedOn:"ተቀምጧል",hist:"ቀደም ብለው የተመዘገቡ ቀናት (ነክተው ይክፈቱ)"},
+en:{langName:"English",
+ title:"Attendance Register",tag:"Record student attendance and absences every day.",
+ tabs:["Register","Report","Classes"],lang:"Language",cal:"Calendar",eth:"Ethiopian",greg:"Gregorian",
+ klass:"Class",date:"Date",day:"Day",month:"Month",year:"Year",
+ P:"Present",A:"Absent",L:"Late",allP:"Mark all present",
+ unm:function(n){return n+" not marked"},allDone:"Everyone is marked",
+ note:"Changes save automatically. \"Late\" means the student arrived late.",
+ noClassT:"No classes yet",noClassX:"Start by adding your class and its students.",mkClass:"Create a class",
+ noStT:"No students yet",noStX:"Add the names of the students in this class.",addSt:"Add students",
+ repT:"No report yet",repX:"Record attendance for one day and the report will appear here.",days:"Days recorded",
+ low:function(n){return n+" students are below 80% attendance. Consider contacting their families."},
+ line:function(p,l,a){return "Present "+p+" · Late "+l+" · Absent "+a},pctNote:"Attendance = (Present + Late) ÷ days recorded.",
+ newClass:"New class",ph:"e.g. Grade 7A",addClass:"Add class",yours:"Your classes",nSt:"students",del:"Delete",sure:"Confirm",
+ addStT:function(n){return "Add students: "+n},
+ stPh:"One name per line. Add a parent's phone after the name if you have it:\nAbebe Kebede, 0911223344\nSelam Tesfaye",
+ stT:function(n){return "Students ("+n+")"},
+ sms:"Send SMS to parent",noPhone:"No phone number",
+ smsBody:function(n,d,c){return "Dear parent, "+n+" was absent from school ("+c+") on "+d+"."},
+ bk:"Backup",bkX:"Turn all your data into one block of text. Keep it somewhere safe (e.g. Telegram \"Saved Messages\").",
+ bkMake:"Create backup",bkRestore:"Restore backup",bkDone:"Backup ready. Copy this text.",bkOk:"Data restored.",bkErr:"This text is not a valid backup.",bkPh:"Paste a backup here",
+ local:"This data is stored only on your phone.",
+ name:"Name",sex:"Gender",male:"Male",female:"Female",age:"Age",yrs:"yrs",phone:"Parent's phone (optional)",
+ addOne:"Add student",edit:"Edit",saveEd:"Save",cancel:"Cancel",bulk:"Add many students at once",
+ bulkPh:"One name per line. Separate gender, age and phone with commas:\nAbebe Kebede, Male, 12, 0911223344\nSelam Tesfaye, Female, 11",
+ gTitle:"Attendance by gender",
+ savedOn:"Saved",hist:"Dates already recorded (tap to open)"}
+};
+var MONTHS={
+ om:["Fuulbana","Onkoloolessa","Sadaasa","Muddee","Amajjii","Guraandhala","Bitootessa","Ebla","Caamsaa","Waxabajjii","Adoolessa","Hagayya","Qaammee"],
+ am:["መስከረም","ጥቅምት","ኅዳር","ታኅሣሥ","ጥር","የካቲት","መጋቢት","ሚያዝያ","ግንቦት","ሰኔ","ሐምሌ","ነሐሴ","ጳጉሜን"],
+ en:["Meskerem","Tikimt","Hidar","Tahsas","Tir","Yekatit","Megabit","Miyazya","Ginbot","Sene","Hamle","Nehase","Pagume"]
+};
+
+var T2={
+om:{tab4:"Seensa",
+ cTitle:"Cloud: ragaa waliin qoodachuu",cInfo:"Seenuun, barsiisonni fi hogganaan ragaa wal fakkaataa argu. Interneet malee illee galmeessuu ni dandeessa; interneet yeroo argatte ofumaan wal-simata.",
+ email:"Email",pass:"Jecha icciitii (qubee 6 ol)",yourName:"Maqaa kee",
+ signIn:"Seeni",signUp:"Akaawuntii uumi",toUp:"Akaawuntii hin qabduu? Uumi",toIn:"Akaawuntii qabdaa? Seeni",forgot:"Jecha icciitii dagatte?",
+ resetSent:"Email jecha icciitii haaromsuuf ergameera. Inbox kee ilaali.",signOut:"Ba'i",
+ connecting:"Wal-qabsiisaa jira…",cloudFail:"Cloud hin argamne. Cloud website irratti kaa'ame qofa hojjeta. Ykn interneet kee ilaali.",
+ setupT:"Mana barnootaa kee filadhu",createSch:"Mana barnootaa haaraa uumi (hogganaa)",schName:"Maqaa mana barnootaa",createBtn:"Uumi",
+ joinSch:"Mana barnootaa jiru hirmaadhu (barsiisaa)",schCode:"Koodii mana barnootaa",joinBtn:"Hirmaadhu",
+ roleP:"Hogganaa",roleT:"Barsiisaa",school:"Mana barnootaa",yourRole:"Gahee kee",shareCode:"Koodii mana barnootaa (barsiisotaaf kenni)",
+ online:"Interneetii irra jirta",offline:"Interneet hin jiru",syncing:"Wal-simachaa jira…",synced:"Wal-simateera",
+ migT:"Ragaa mobaayilii ol-kaasi",migX:function(n){return "Kutaa "+n+" mobaayilii kee irra jiru gara cloud tti ol-kaasi."},migBtn:"Ol-kaasi",migDone:"Ol-kaa'amaa jira. Interneet yeroo argatu xumurama.",
+ teachers:"Barsiisota",noTeachers:"Barsiisaan tokkollee hin hirmaanne. Koodii mana barnootaa isaaniif kenni.",assign:"Kutaa isaaniif kenni",removeT:"Baasi",
+ pendingT:"Kutaan siif hin kennamne. Hogganaa kutaa akka siif kennu gaafadhu, ykn kutaa mataa kee Kutaa tab keessaa uumi.",
+ lockedN:"Barsiisaan guyyaa 3 darbe sirreessuu hin danda'u. Hogganaa gaafadhu.",
+ removedT:"Mana barnootaa kana keessaa si baasaniiru.",resetBtn:"Mana barnootaa biraa filadhu",
+ eInvalid:"Email ykn jecha icciitii dogoggora.",eExists:"Email kun duraan galmaa'eera.",eWeak:"Jecha icciitii dadhabaa dha (qubee 6 ol barbaachisa).",eEmail:"Email sirrii miti.",eNet:"Interneet hin jiru.",eMany:"Yeroo baay'ee yaalte. Booda yaali.",eDenied:"Hayyamni hin jiru. Koodiin mana barnootaa dogoggora ta'uu mala.",eOther:"Dogoggorri uumame. Irra deebi'ii yaali.",
+ needNet:"Kana gochuuf interneet barbaachisa.",fillAll:"Bakka duwwaa hunda guuti."},
+am:{tab4:"መለያ",
+ cTitle:"ክላውድ፡ መረጃ መጋራት",cInfo:"በመግባት መምህራንና ርዕሰ መምህሩ ተመሳሳይ መረጃ ያያሉ። ያለ ኢንተርኔትም መመዝገብ ይችላሉ፤ ኢንተርኔት ሲያገኙ በራሱ ይመሳሰላል።",
+ email:"ኢሜይል",pass:"የይለፍ ቃል (ከ6 ፊደል በላይ)",yourName:"ስምዎ",
+ signIn:"ግባ",signUp:"መለያ ፍጠር",toUp:"መለያ የለዎትም? ይፍጠሩ",toIn:"መለያ አለዎት? ይግቡ",forgot:"የይለፍ ቃል ረስተዋል?",
+ resetSent:"የይለፍ ቃል ማስተካከያ ኢሜይል ተልኳል። ገቢ መልዕክት ሳጥንዎን ይመልከቱ።",signOut:"ውጣ",
+ connecting:"በመገናኘት ላይ…",cloudFail:"ክላውድ አልተገኘም። ክላውድ የሚሰራው ድር ላይ በተጫነው አፕ ብቻ ነው። ወይም ኢንተርኔትዎን ይመልከቱ።",
+ setupT:"ትምህርት ቤትዎን ይምረጡ",createSch:"አዲስ ትምህርት ቤት ፍጠር (ርዕሰ መምህር)",schName:"የትምህርት ቤት ስም",createBtn:"ፍጠር",
+ joinSch:"ያለ ትምህርት ቤት ተቀላቀል (መምህር)",schCode:"የትምህርት ቤት ኮድ",joinBtn:"ተቀላቀል",
+ roleP:"ርዕሰ መምህር",roleT:"መምህር",school:"ትምህርት ቤት",yourRole:"ሚናዎ",shareCode:"የትምህርት ቤት ኮድ (ለመምህራን ይስጡ)",
+ online:"ኢንተርኔት አለ",offline:"ኢንተርኔት የለም",syncing:"በመመሳሰል ላይ…",synced:"ተመስሏል",
+ migT:"የስልክ መረጃ ጫን",migX:function(n){return n+" በስልክዎ ላይ ያሉ ክፍሎችን ወደ ክላውድ ይጫኑ።"},migBtn:"ጫን",migDone:"በመጫን ላይ ነው። ኢንተርኔት ሲያገኝ ይጠናቀቃል።",
+ teachers:"መምህራን",noTeachers:"እስካሁን የተቀላቀለ መምህር የለም። የትምህርት ቤቱን ኮድ ይስጧቸው።",assign:"ክፍል ስጣቸው",removeT:"አስወግድ",
+ pendingT:"ክፍል አልተሰጠዎትም። ርዕሰ መምህሩን ክፍል እንዲሰጥዎ ይጠይቁ፣ ወይም በ«ክፍል» ትር ውስጥ የራስዎን ክፍል ይፍጠሩ።",
+ lockedN:"መምህር ከ3 ቀን በፊት የተመዘገበውን ማስተካከል አይችልም። ርዕሰ መምህሩን ይጠይቁ።",
+ removedT:"ከዚህ ትምህርት ቤት ተወግደዋል።",resetBtn:"ሌላ ትምህርት ቤት ምረጥ",
+ eInvalid:"ኢሜይል ወይም የይለፍ ቃል የተሳሳተ ነው።",eExists:"ይህ ኢሜይል ቀደም ብሎ ተመዝግቧል።",eWeak:"የይለፍ ቃሉ ደካማ ነው (ከ6 ፊደል በላይ ያስፈልጋል)።",eEmail:"ኢሜይሉ ትክክል አይደለም።",eNet:"ኢንተርኔት የለም።",eMany:"ብዙ ጊዜ ሞክረዋል። በኋላ ይሞክሩ።",eDenied:"ፈቃድ የለም። የትምህርት ቤት ኮዱ የተሳሳተ ሊሆን ይችላል።",eOther:"ስህተት ተፈጥሯል። እንደገና ይሞክሩ።",
+ needNet:"ይህን ለማድረግ ኢንተርኔት ያስፈልጋል።",fillAll:"ሁሉንም ባዶ ቦታዎች ይሙሉ።"},
+en:{tab4:"Account",
+ cTitle:"Cloud: share your data",cInfo:"Sign in so teachers and the principal see the same records. You can still record attendance offline; it syncs automatically when you are back online.",
+ email:"Email",pass:"Password (6+ characters)",yourName:"Your name",
+ signIn:"Sign in",signUp:"Create account",toUp:"No account? Create one",toIn:"Have an account? Sign in",forgot:"Forgot password?",
+ resetSent:"A password reset email was sent. Check your inbox.",signOut:"Sign out",
+ connecting:"Connecting…",cloudFail:"Cloud is not available. It only works in the app hosted on a website. Otherwise check your internet.",
+ setupT:"Choose your school",createSch:"Create a new school (principal)",schName:"School name",createBtn:"Create",
+ joinSch:"Join an existing school (teacher)",schCode:"School code",joinBtn:"Join",
+ roleP:"Principal",roleT:"Teacher",school:"School",yourRole:"Your role",shareCode:"School code (give it to your teachers)",
+ online:"Online",offline:"Offline",syncing:"Syncing…",synced:"Synced",
+ migT:"Upload phone data",migX:function(n){return "Upload the "+n+" class(es) stored on this phone to the cloud."},migBtn:"Upload",migDone:"Uploading. It finishes when you are online.",
+ teachers:"Teachers",noTeachers:"No teachers have joined yet. Give them the school code.",assign:"Assign classes",removeT:"Remove",
+ pendingT:"You have no classes yet. Ask the principal to assign you a class, or create your own in the Classes tab.",
+ lockedN:"Teachers cannot edit records older than 3 days. Ask the principal.",
+ removedT:"You were removed from this school.",resetBtn:"Choose another school",
+ eInvalid:"Wrong email or password.",eExists:"This email is already registered.",eWeak:"Password is too weak (6+ characters).",eEmail:"Invalid email address.",eNet:"No internet connection.",eMany:"Too many attempts. Try again later.",eDenied:"Permission denied. The school code may be wrong.",eOther:"Something went wrong. Please try again.",
+ needNet:"You need internet to do this.",fillAll:"Fill in all the fields."}
+};
+Object.keys(T2).forEach(function(k){Object.keys(T2[k]).forEach(function(f){T[k][f]=T2[k][f]})});
+/* Ji'oota Idil-addunyaa (Gregorian) */
+var GMONTHS={
+ en:["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],
+ am:["ጃንዋሪ","ፌብሩዋሪ","ማርች","ኤፕሪል","ሜይ","ጁን","ጁላይ","ኦገስት","ሴፕቴምበር","ኦክቶበር","ኖቬምበር","ዲሴምበር"]
+};
+/* English: Gregorian month in which each Ethiopian month begins */
+var ETH_START_EN=["Sep","Oct","Nov","Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep"];
+function monthLabel(i){
+  var lang=state.settings.lang,n=MONTHS[lang][i-1];
+  return lang==="en"?n+" ("+ETH_START_EN[i-1]+")":n;
+}
+/* ---------- Kaalaandara Itoophiyaa ---------- */
+function gToJDN(y,m,d){var a=Math.floor((14-m)/12),yy=y+4800-a,mm=m+12*a-3;return d+Math.floor((153*mm+2)/5)+365*yy+Math.floor(yy/4)-Math.floor(yy/100)+Math.floor(yy/400)-32045}
+function jdnToG(j){var a=j+32044,b=Math.floor((4*a+3)/146097),c=a-Math.floor(146097*b/4),d=Math.floor((4*c+3)/1461),e=c-Math.floor(1461*d/4),m=Math.floor((5*e+2)/153);return{d:e-Math.floor((153*m+2)/5)+1,m:m+3-12*Math.floor(m/10),y:100*b+d-4800+Math.floor(m/10)}}
+function jdnToE(j){var r=(j-1723856)%1461;if(r<0)r+=1461;var n=(r%365)+365*Math.floor(r/1460);return{y:4*Math.floor((j-1723856)/1461)+Math.floor(r/365)-Math.floor(r/1460),m:Math.floor(n/30)+1,d:(n%30)+1}}
+function eToJDN(y,m,d){return 1723856+365+365*(y-1)+Math.floor(y/4)+30*m+d-31}
+function pad(n){return String(n).padStart(2,"0")}
+function isoToE(iso){var p=iso.split("-");return jdnToE(gToJDN(+p[0],+p[1],+p[2]))}
+function eToIso(y,m,d){var g=jdnToG(eToJDN(y,m,d));return g.y+"-"+pad(g.m)+"-"+pad(g.d)}
+function daysIn(y,m){return m<13?30:(y%4===3?6:5)}
+var START_Y=2019,END_Y=2030,START_ISO=eToIso(START_Y,1,1),END_ISO=eToIso(END_Y,13,daysIn(END_Y,13));
+function todayIso(){var d=new Date();return d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate())}
+
+var COL;try{COL=new Intl.Collator(undefined,{sensitivity:"base",numeric:true})}catch(e){COL={compare:function(a,b){return a<b?-1:a>b?1:0}}}
+function sortSt(c){if(c&&c.students)c.students.sort(function(a,b){return COL.compare(a.name,b.name)})}
+function sortCl(list){list.sort(function(a,b){return COL.compare(a.name,b.name)})}
+/* ---------- Ragaa / State ---------- */
+var KEY="galmee-dhufaa-v1";
+var state={classes:[],records:{},current:null,settings:{lang:"om",cal:"eth"}};
+try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&p.classes){state=p;state.settings=state.settings||{lang:"om",cal:"eth"}}}}catch(e){}
+if(state.classes.length)state.settings.chosen=true;
+state.saved=state.saved||{};
+state.classes.forEach(sortSt);sortCl(state.classes);
+var localState=state;
+function save(){try{localStorage.setItem(KEY,JSON.stringify(localState))}catch(e){}}
+var tab="take",date=todayIso(),confirmId=null,bkMsg=null,bkText="",editId=null;
+function L(){return T[state.settings.lang]||T.om}
+function uid(){return Math.random().toString(36).slice(2,9)}
+function esc(s){return String(s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]})}
+function cls(){for(var i=0;i<state.classes.length;i++){if(state.classes[i].id===state.current)return state.classes[i]}return state.classes[0]||null}
+function recKey(c,d){return c.id+"|"+d}
+function getRec(c,d){return state.records[recKey(c,d)]||{}}
+function fmtStamp(ms){
+  var d=new Date(ms);
+  return fmtDate(d.getFullYear()+"-"+pad(d.getMonth()+1)+"-"+pad(d.getDate()))+", "+pad(d.getHours())+":"+pad(d.getMinutes());
+}
+function fmtDate(iso){
+  if(state.settings.cal==="eth"){var e=isoToE(iso);return e.d+" "+MONTHS[state.settings.lang][e.m-1]+" "+e.y}
+  var p=iso.split("-"),gm=GMONTHS[state.settings.lang]||GMONTHS.en;return (+p[2])+" "+gm[+p[1]-1]+" "+p[0];
+}
+function normPhone(s){
+  var d=String(s).replace(/[^0-9+]/g,"");
+  if(d.indexOf("+")===0)return d;
+  if(d.indexOf("251")===0)return "+"+d;
+  if(d.indexOf("0")===0)return "+251"+d.slice(1);
+  return "+251"+d;
+}
+
+function metaOf(s,withPhone){
+  var t=L(),a=[];
+  if(s.sex==="M")a.push(t.male);else if(s.sex==="F")a.push(t.female);
+  if(s.age)a.push(s.age+" "+t.yrs);
+  if(withPhone&&s.phone)a.push(esc(s.phone));
+  return a.join(" · ");
+}
+function parseLine(line){
+  var parts=line.split(/[,;\t]/).map(function(x){return x.trim()}).filter(Boolean);
+  var st={id:uid(),name:parts[0]||line};
+  parts.slice(1).forEach(function(p){
+    if(/^(m|male|boy|dhiira|dhiir|dh|ወንድ|ወ)$/i.test(p))st.sex="M";
+    else if(/^(f|female|girl|dubartii|dubart|dub|d|ሴት|ሴ)$/i.test(p))st.sex="F";
+    else if(/^\+?[0-9][0-9\s-]{7,}$/.test(p))st.phone=p.replace(/[\s-]/g,"");
+    else if(/^[0-9]{1,2}$/.test(p)&&+p>0)st.age=+p;
+  });
+  return st;
+}
+function studentFields(p,s){
+  var t=L();s=s||{};
+  return '<div class="fld"><label>'+t.name+'<input type="text" id="'+p+'Name" value="'+esc(s.name||"")+'" autocomplete="off"></label>'+
+    '<div class="two"><label>'+t.sex+'<select id="'+p+'Sex"><option value="">—</option><option value="M"'+(s.sex==="M"?' selected':'')+'>'+t.male+'</option><option value="F"'+(s.sex==="F"?' selected':'')+'>'+t.female+'</option></select></label>'+
+    '<label>'+t.age+'<input type="number" inputmode="numeric" min="1" max="99" id="'+p+'Age" value="'+(s.age||"")+'"></label></div>'+
+    '<label>'+t.phone+'<input type="tel" inputmode="tel" id="'+p+'Phone" value="'+esc(s.phone||"")+'"></label></div>';
+}
+function readFields(p,s){
+  s.name=document.getElementById(p+"Name").value.trim();
+  var sx=document.getElementById(p+"Sex").value;if(sx)s.sex=sx;else delete s.sex;
+  var ag=parseInt(document.getElementById(p+"Age").value,10);if(ag>0&&ag<100)s.age=ag;else delete s.age;
+  var ph=document.getElementById(p+"Phone").value.replace(/[\s-]/g,"");if(ph)s.phone=ph;else delete s.phone;
+  return s;
+}
+function genderToday(c,r){
+  var t=L(),m=0,f=0,any=false;
+  c.students.forEach(function(s){
+    if(!s.sex)return;any=true;
+    if(r[s.id]==="P"||r[s.id]==="L"){if(s.sex==="M")m++;else f++}
+  });
+  if(!any)return "";
+  return '<p class="small" style="margin:0 0 8px">'+t.P+': '+t.male+' '+m+' · '+t.female+' '+f+'</p>';
+}
+function genderReport(rows){
+  var t=L(),g={M:{n:0,pl:0,tot:0},F:{n:0,pl:0,tot:0}},any=false;
+  rows.forEach(function(r){
+    if(!r.s.sex)return;any=true;var x=g[r.s.sex];x.n++;x.pl+=r.P+r.L;x.tot+=r.tot;
+  });
+  if(!any)return "";
+  function pc(x){return x.tot?Math.round(x.pl/x.tot*100)+"%":"—"}
+  return '<div class="counts"><div class="chip p"><b>'+pc(g.M)+'</b>'+t.male+' ('+g.M.n+')</div><div class="chip p"><b>'+pc(g.F)+'</b>'+t.female+' ('+g.F.n+')</div></div>';
+}
+
+/* ---------- Mul'isuu / Render ---------- */
+var app=document.getElementById("app");
+
+function renderChrome(){
+  var t=L();
+  document.documentElement.lang=state.settings.lang;
+  document.title=t.title;
+  document.getElementById("ttl").textContent=t.title;
+  document.getElementById("tag").textContent=t.tag;
+  var langs=Object.keys(T).map(function(k){return '<option value="'+k+'"'+(k===state.settings.lang?' selected':'')+'>'+T[k].langName+'</option>'}).join("");
+  document.getElementById("prefs").innerHTML=
+    '<label>'+t.lang+'<select data-pref="lang">'+langs+'</select></label>'+
+    '<label>'+t.cal+'<select data-pref="cal"><option value="eth"'+(state.settings.cal==="eth"?' selected':'')+'>'+t.eth+'</option><option value="greg"'+(state.settings.cal==="greg"?' selected':'')+'>'+t.greg+'</option></select></label>';
+  var ids=["take","report","manage","acct"],names=[t.tabs[0],t.tabs[1],t.tabs[2],t.tab4];
+  document.getElementById("nav").innerHTML=ids.map(function(id,i){
+    return '<button role="tab" data-tab="'+id+'" aria-selected="'+(tab===id)+'">'+names[i]+'</button>';
+  }).join("");
+  var cs=document.getElementById("cstat");
+  cs.textContent=cloudMode?"☁ "+(cloud.schoolName||"")+" · "+roleName(cloud.role)+" · "+syncText():"";
+}
+function chooser(){
+  return '<div class="card" style="margin-top:16px"><h2>Afaan filadhu · ቋንቋ ይምረጡ · Choose language</h2>'+
+    Object.keys(T).map(function(k){return '<button class="btn ghost" style="width:100%;margin-top:10px;min-height:56px;font-size:18px" data-lang="'+k+'">'+T[k].langName+'</button>'}).join("")+'</div>';
+}
+function render(){
+  renderPending=false;
+  renderChrome();
+  if(!state.settings.chosen){
+    document.getElementById("nav").innerHTML="";document.getElementById("prefs").innerHTML="";
+    app.innerHTML=chooser();return;
+  }
+  app.innerHTML=tab==="take"?viewTake():tab==="report"?viewReport():tab==="manage"?viewManage():viewAccount();
+}
+
+function datePicker(){
+  var t=L();
+  if(state.settings.cal==="eth"){
+    var e=isoToE(date),thisY=isoToE(todayIso()).y,n=daysIn(e.y,e.m),i,h='<div class="dsel">';
+    h+='<select aria-label="'+t.day+'" data-edate="d">';for(i=1;i<=n;i++)h+='<option value="'+i+'"'+(i===e.d?' selected':'')+'>'+i+'</option>';h+='</select>';
+    h+='<select aria-label="'+t.month+'" data-edate="m">';for(i=1;i<=13;i++)h+='<option value="'+i+'"'+(i===e.m?' selected':'')+'>'+monthLabel(i)+'</option>';h+='</select>';
+    h+='<select aria-label="'+t.year+'" data-edate="y">';for(i=START_Y;i<=END_Y;i++)h+='<option value="'+i+'"'+(i===e.y?' selected':'')+'>'+i+'</option>';h+='</select></div>';
+    return h;
+  }
+  return '<input type="date" value="'+date+'" min="'+START_ISO+'" max="'+END_ISO+'" data-gdate="1">';
+}
+function classPicker(withDate){
+  var c=cls(),t=L();
+  return '<div class="bar"><label>'+t.klass+'<select data-change="class">'+
+    state.classes.map(function(k){return '<option value="'+k.id+'"'+(c&&k.id===c.id?' selected':'')+'>'+esc(k.name)+'</option>'}).join("")+
+    '</select></label>'+(withDate?'<label class="dl">'+t.date+datePicker()+'</label>':'')+'</div>';
+}
+function noClass(){var t=L();return '<div class="empty"><b>'+t.noClassT+'</b>'+t.noClassX+'<br><button class="btn" data-go="manage">'+t.mkClass+'</button></div>'}
+
+function viewTake(){
+  var c=cls(),t=L();
+  if(!c)return noClass();
+  var out=classPicker(true),locked=isLocked();
+  if(!c.students.length)return out+'<div class="empty"><b>'+t.noStT+'</b>'+t.noStX+'<br><button class="btn" data-go="manage">'+t.addSt+'</button></div>';
+  var r=getRec(c,date),p=0,a=0,l=0;
+  c.students.forEach(function(s){var v=r[s.id];if(v==="P")p++;else if(v==="A")a++;else if(v==="L")l++});
+  var un=c.students.length-p-a-l;
+  out+='<div class="counts"><div class="chip p"><b>'+p+'</b>'+t.P+'</div><div class="chip a"><b>'+a+'</b>'+t.A+'</div><div class="chip l"><b>'+l+'</b>'+t.L+'</div></div>';
+  if(locked)out+='<div class="note">'+t.lockedN+'</div>';
+  var stamp=state.saved[recKey(c,date)];
+  if(stamp)out+='<p class="small" style="margin:0 0 8px;color:var(--present)">✓ '+t.savedOn+': '+fmtStamp(stamp)+'</p>';
+  out+=genderToday(c,r)+'<div class="tools"><span class="saved">'+(un?t.unm(un):t.allDone)+'</span><button class="btn ghost" data-act="allp"'+(locked?' disabled':'')+'>'+t.allP+'</button></div>';
+  c.students.forEach(function(s,i){
+    var v=r[s.id];
+    out+='<div class="row"><div class="nm"><span>'+esc(s.name)+(metaOf(s,false)?' <span class="small">'+metaOf(s,false)+'</span>':'')+'</span><span>'+(i+1)+'</span></div><div class="seg">'+
+      ['P','A','L'].map(function(k){return '<button data-act="mark" data-sid="'+s.id+'" data-s="'+k+'" aria-pressed="'+(v===k)+'"'+(locked?' disabled':'')+'>'+t[k]+'</button>'}).join("")+'</div>';
+    if(v==="A"){
+      if(s.phone){
+        var body=t.smsBody(s.name,fmtDate(date),c.name);
+        out+='<div class="sms"><a class="btn ghost" href="sms:'+esc(normPhone(s.phone))+'?body='+encodeURIComponent(body)+'">✉ '+t.sms+' ('+esc(s.phone)+')</a></div>';
+      }else out+='<div class="sms">'+t.noPhone+'</div>';
+    }
+    out+='</div>';
+  });
+  return out+'<p class="small">'+t.note+'</p>';
+}
+
+function viewReport(){
+  var c=cls(),t=L();
+  if(!c)return noClass();
+  var out=classPicker(false);
+  if(!c.students.length)return out+'<div class="empty"><b>'+t.noStT+'</b>'+t.noStX+'</div>';
+  var dates=Object.keys(state.records).filter(function(k){return k.indexOf(c.id+"|")===0}).map(function(k){return k.split("|")[1]});
+  if(!dates.length)return out+'<div class="empty"><b>'+t.repT+'</b>'+t.repX+'</div>';
+  var rows=c.students.map(function(s){
+    var P=0,A=0,Lt=0;
+    dates.forEach(function(d){var v=getRec(c,d)[s.id];if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++});
+    var tot=P+A+Lt;
+    return {s:s,P:P,A:A,L:Lt,tot:tot,pct:tot?Math.round((P+Lt)/tot*100):0};
+  });
+  var low=rows.filter(function(r){return r.tot>0&&r.pct<80});
+  out+='<p class="small">'+t.days+': <b>'+dates.length+'</b></p>';
+  var gr=genderReport(rows);if(gr)out+='<p class="small" style="margin-bottom:0">'+t.gTitle+'</p>'+gr;
+  if(low.length)out+='<div class="note">'+t.low(low.length)+'</div>';
+  var recent=dates.slice().sort().reverse().slice(0,14);
+  out+='<p class="small" style="margin-bottom:6px">'+t.hist+'</p><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px">'+
+    recent.map(function(d){return '<button class="btn ghost" style="min-height:40px;padding:0 10px;font-size:14px" data-open="'+d+'">'+fmtDate(d)+'</button>'}).join("")+'</div>';
+  rows.sort(function(a,b){return a.pct-b.pct});
+  rows.forEach(function(r){
+    var n=r.tot||1;
+    out+='<div class="row"><div class="rep"><div><b>'+esc(r.s.name)+'</b><div class="small">'+t.line(r.P,r.L,r.A)+'</div></div>'+
+      '<div class="pct'+(r.tot&&r.pct<80?' low':'')+'">'+(r.tot?r.pct+'%':'—')+'</div>'+
+      '<div class="meter"><i class="mp" style="width:'+(r.P/n*100)+'%"></i><i class="ml" style="width:'+(r.L/n*100)+'%"></i><i class="ma" style="width:'+(r.A/n*100)+'%"></i></div></div></div>';
+  });
+  return out+'<p class="small">'+t.pctNote+'</p>';
+}
+
+function viewManage(){
+  var c=cls(),t=L();
+  var out='<div class="card" style="margin-top:16px"><h2>'+t.newClass+'</h2><input type="text" id="newClass" placeholder="'+esc(t.ph)+'" autocomplete="off"><button class="btn" data-act="addclass">'+t.addClass+'</button></div>';
+  if(state.classes.length){
+    var canDel=!cloudMode||cloud.role==="principal";
+    out+='<div class="card"><h2>'+t.yours+'</h2>'+state.classes.map(function(k){
+      var ask=confirmId==="c"+k.id;
+      return '<div class="item"><span><b>'+esc(k.name)+'</b><br><span class="small">'+k.students.length+' '+t.nSt+'</span></span>'+(canDel?'<button class="btn '+(ask?'danger':'ghost')+'" data-act="delclass" data-id="'+k.id+'">'+(ask?t.sure:t.del)+'</button>':'')+'</div>';
+    }).join("")+'</div>';
+  }
+  if(c){
+    out+=classPicker(false);
+    out+='<div class="card"><h2>'+esc(t.addStT(c.name))+'</h2>'+studentFields("a")+'<button class="btn" data-act="addone">'+t.addOne+'</button></div>';
+    out+='<details class="card"><summary style="cursor:pointer;font-weight:700">'+t.bulk+'</summary><textarea id="newStudents" style="margin-top:10px" placeholder="'+esc(t.bulkPh)+'"></textarea><button class="btn" style="margin-top:10px;width:100%" data-act="addstudents">'+t.addSt+'</button></details>';
+    if(c.students.length){
+      out+='<div class="card"><h2>'+t.stT(c.students.length)+'</h2>'+c.students.map(function(s){
+        var ask=confirmId==="s"+s.id;
+        if(editId===s.id){return '<div class="item" style="display:block">'+studentFields("e",s)+'<div class="two"><button class="btn" data-act="saveed" data-id="'+s.id+'">'+t.saveEd+'</button><button class="btn ghost" data-act="canceled">'+t.cancel+'</button></div></div>'}
+        return '<div class="item"><span>'+esc(s.name)+(metaOf(s,true)?'<br><span class="small">'+metaOf(s,true)+'</span>':'')+'</span><span style="display:flex;gap:6px"><button class="btn ghost" data-act="editst" data-id="'+s.id+'">'+t.edit+'</button><button class="btn '+(ask?'danger':'ghost')+'" data-act="delstudent" data-id="'+s.id+'">'+(ask?t.sure:t.del)+'</button></span></div>';
+      }).join("")+'</div>';
+    }
+  }
+  if(!cloudMode)out+='<div class="card"><h2>'+t.bk+'</h2><p class="small" style="margin-top:0">'+t.bkX+'</p>'+
+    '<textarea id="bkText" placeholder="'+esc(t.bkPh)+'">'+esc(bkText)+'</textarea>'+
+    '<div class="two"><button class="btn ghost" data-act="bkmake">'+t.bkMake+'</button><button class="btn ghost" data-act="bkrestore">'+t.bkRestore+'</button></div>'+
+    (bkMsg?'<div class="'+bkMsg.k+'">'+bkMsg.t+'</div>':'')+'</div>';
+  return out+(cloudMode?'':'<p class="small">'+t.local+'</p>');
+}
+
+/* ---------- Taateewwan / Events ---------- */
+document.addEventListener("change",function(e){
+  var t=e.target;
+  if(t.dataset.assign){cloudAssign(t.dataset.assign,t.dataset.uid,t.checked);return}
+  if(t.dataset.pref==="lang"){state.settings.lang=t.value;save();render();return}
+  if(t.dataset.pref==="cal"){state.settings.cal=t.value;save();render();return}
+  if(t.dataset.change==="class"){state.current=t.value;save();confirmId=null;render();return}
+  if(t.dataset.gdate&&t.value){date=t.value<START_ISO?START_ISO:(t.value>END_ISO?END_ISO:t.value);render();return}
+  if(t.dataset.edate){
+    var e0=isoToE(date),y=e0.y,m=e0.m,d=e0.d;
+    if(t.dataset.edate==="y")y=+t.value;
+    if(t.dataset.edate==="m")m=+t.value;
+    if(t.dataset.edate==="d")d=+t.value;
+    d=Math.min(d,daysIn(y,m));
+    date=eToIso(y,m,d);if(date<START_ISO)date=START_ISO;if(date>END_ISO)date=END_ISO;render();
+  }
+});
+document.addEventListener("click",function(e){
+  var op=e.target.closest("button[data-open]");
+  if(op){date=op.dataset.open;tab="take";render();window.scrollTo(0,0);return}
+  var lg=e.target.closest("button[data-lang]");
+  if(lg){state.settings.lang=lg.dataset.lang;state.settings.chosen=true;save();render();return}
+  var tb=e.target.closest("button[data-tab]");
+  if(tb){tab=tb.dataset.tab;confirmId=null;bkMsg=null;editId=null;cloud.errMsg=null;cloud.msg=null;if(tab==="acct")ensureCloud();render();window.scrollTo(0,0);return}
+  var g=e.target.closest("[data-go]");
+  if(g){tab=g.dataset.go;render();window.scrollTo(0,0);return}
+  var b=e.target.closest("[data-act]");if(!b)return;
+  var act=b.dataset.act,c=cls(),y;
+  if(act==="mark"&&c){
+    if(isLocked())return;
+    var k=recKey(c,date),r=state.records[k]||(state.records[k]={});
+    if(r[b.dataset.sid]===b.dataset.s)delete r[b.dataset.sid];else r[b.dataset.sid]=b.dataset.s;
+    state.saved[k]=Date.now();save();
+    if(cloudMode){var chg={};chg[b.dataset.sid]=r[b.dataset.sid]||null;cloudMark(c,date,chg)}
+    y=window.scrollY;render();window.scrollTo(0,y);
+  }else if(act==="allp"&&c){
+    var k2=recKey(c,date),r2=state.records[k2]||(state.records[k2]={});
+    if(isLocked())return;
+    var chg2={};c.students.forEach(function(s){if(!r2[s.id]){r2[s.id]="P";chg2[s.id]="P"}});
+    state.saved[k2]=Date.now();save();if(cloudMode&&Object.keys(chg2).length)cloudMark(c,date,chg2);y=window.scrollY;render();window.scrollTo(0,y);
+  }else if(act==="addclass"){
+    var inp=document.getElementById("newClass"),n=inp.value.trim();
+    if(!n){inp.focus();return}
+    var nc={id:uid(),name:n,students:[],teacherUids:[]};if(cloudMode)nc._new=true;
+    state.classes.push(nc);sortCl(state.classes);state.current=nc.id;save();cloudSaveClass(nc);render();
+  }else if(act==="addstudents"&&c){
+    var ta=document.getElementById("newStudents");
+    var lines=ta.value.split("\n").map(function(x){return x.trim()}).filter(Boolean);
+    if(!lines.length){ta.focus();return}
+    lines.forEach(function(line){c.students.push(parseLine(line))});
+    sortSt(c);save();cloudSaveClass(c);render();
+  }else if(act==="delclass"){
+    var id="c"+b.dataset.id;
+    if(confirmId!==id){confirmId=id;render();return}
+    if(cloudMode&&cloud.role!=="principal")return;
+    if(cloudMode)cloudDeleteClass(b.dataset.id);
+    state.classes=state.classes.filter(function(k){return k.id!==b.dataset.id});
+    Object.keys(state.records).forEach(function(k){if(k.indexOf(b.dataset.id+"|")===0)delete state.records[k]});
+    if(state.current===b.dataset.id)state.current=state.classes[0]?state.classes[0].id:null;
+    confirmId=null;save();render();
+  }else if(act==="delstudent"&&c){
+    var id2="s"+b.dataset.id;
+    if(confirmId!==id2){confirmId=id2;render();return}
+    c.students=c.students.filter(function(s){return s.id!==b.dataset.id});
+    Object.keys(state.records).forEach(function(k){if(state.records[k])delete state.records[k][b.dataset.id]});
+    confirmId=null;save();cloudSaveClass(c);render();
+  }else if(act==="addone"&&c){
+    var an=document.getElementById("aName");
+    if(!an.value.trim()){an.focus();return}
+    c.students.push(readFields("a",{id:uid()}));sortSt(c);save();cloudSaveClass(c);render();
+  }else if(act==="editst"){
+    editId=b.dataset.id;render();
+  }else if(act==="canceled"){
+    editId=null;render();
+  }else if(act==="saveed"&&c){
+    var st=c.students.filter(function(x){return x.id===b.dataset.id})[0];
+    if(st){if(!document.getElementById("eName").value.trim())return;readFields("e",st)}
+    sortSt(c);editId=null;save();cloudSaveClass(c);render();
+  }else if(act==="csignup"){doSignUp()
+  }else if(act==="csignin"){doSignIn()
+  }else if(act==="cmode"){cloud.authMode=cloud.authMode==="up"?"in":"up";cloud.errMsg=null;cloud.msg=null;render()
+  }else if(act==="creset"){doReset()
+  }else if(act==="csignout"){doSignOut()
+  }else if(act==="ccreate"){createSchool()
+  }else if(act==="cjoin"){joinSchool()
+  }else if(act==="cresetuser"){resetUserSchool()
+  }else if(act==="cmigrate"){migrateLocal()
+  }else if(act==="rmteacher"){
+    var tid="t"+b.dataset.uid;
+    if(confirmId!==tid){confirmId=tid;render();return}
+    confirmId=null;removeTeacher(b.dataset.uid);
+  }else if(act==="bkmake"){
+    bkText=JSON.stringify(state);bkMsg={k:"ok",t:L().bkDone};render();
+    try{navigator.clipboard.writeText(bkText)}catch(er){}
+    var el=document.getElementById("bkText");if(el){el.focus();el.select()}
+  }else if(act==="bkrestore"){
+    var txt=document.getElementById("bkText").value.trim();
+    try{
+      var o=JSON.parse(txt);
+      if(!o||!Array.isArray(o.classes)||typeof o.records!=="object")throw new Error("bad");
+      o.settings=o.settings||state.settings;o.saved=o.saved||{};o.classes.forEach(sortSt);sortCl(o.classes);state=o;localState=o;save();bkText="";bkMsg={k:"ok",t:L().bkOk};
+    }catch(er){bkText=txt;bkMsg={k:"err",t:L().bkErr}}
+    render();
+  }
+});
+
+
+/* ---------- Cloud (Firebase) ---------- */
+var FB_CFG={apiKey:"AIzaSyC-CdRX6D2dOjAPFCQdl5N6J6EsTLiotmM",authDomain:"galmee-dhufaa.firebaseapp.com",projectId:"galmee-dhufaa",storageBucket:"galmee-dhufaa.firebasestorage.app",messagingSenderId:"243122059521",appId:"1:243122059521:web:694d01ab7f5010b7b10300"};
+var FB_VER="10.14.1";
+var cloudMode=false;
+var cloud={sdk:null,sdkP:null,started:false,db:null,auth:null,authKnown:false,status:"idle",user:null,schoolId:null,schoolName:"",role:null,
+  members:[],userUnsubs:[],schoolUnsubs:[],dataUnsubs:[],attUnsubs:{},pend:{},errMsg:null,msg:null,needSetup:false,removed:false,authMode:"in"};
+var renderPending=false;
+
+function val(id){var el=document.getElementById(id);return el?el.value.trim():""}
+function roleName(r){var t=L();return r==="principal"?t.roleP:t.roleT}
+function anyPending(){return Object.keys(cloud.pend).some(function(k){return cloud.pend[k]})}
+function syncText(){var t=L();return !navigator.onLine?t.offline+(anyPending()?" ⏳":""):(anyPending()?t.syncing:t.synced)}
+function inField(){var a=document.activeElement;return !!(a&&a!==document.body&&app.contains(a)&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))}
+function softRender(){if(inField()){renderPending=true;return}render()}
+document.addEventListener("focusout",function(){
+  if(!renderPending)return;
+  setTimeout(function(){if(renderPending&&!inField())render()},900);
+});
+window.addEventListener("online",softRender);
+window.addEventListener("offline",softRender);
+
+function errText(code){
+  var t=L(),m={"auth/invalid-credential":t.eInvalid,"auth/wrong-password":t.eInvalid,"auth/user-not-found":t.eInvalid,"auth/invalid-login-credentials":t.eInvalid,
+    "auth/email-already-in-use":t.eExists,"auth/weak-password":t.eWeak,"auth/invalid-email":t.eEmail,"auth/network-request-failed":t.eNet,
+    "unavailable":t.eNet,"auth/too-many-requests":t.eMany,"permission-denied":t.eDenied};
+  return (m[code]||t.eOther)+(code?" ("+code+")":"");
+}
+function onErr(e){
+  var code=e&&e.code?String(e.code).replace(/^firestore\//,""):"";
+  cloud.errMsg=errText(code);cloud.msg=null;softRender();
+}
+function runUnsubs(arr){while(arr.length){try{arr.pop()()}catch(e){}}}
+function newCloudState(){return {classes:[],records:{},saved:{},current:null,settings:localState.settings}}
+function exitCloudMode(){cloudMode=false;state=localState}
+function stopData(){
+  runUnsubs(cloud.dataUnsubs);
+  Object.keys(cloud.attUnsubs).forEach(function(k){try{cloud.attUnsubs[k]()}catch(e){}});
+  cloud.attUnsubs={};cloud.pend={};cloud.members=[];
+}
+function leaveSchool(){runUnsubs(cloud.schoolUnsubs);stopData();cloud.schoolId=null;cloud.schoolName="";cloud.role=null;exitCloudMode()}
+
+function loadSdk(){
+  if(cloud.sdkP)return cloud.sdkP;
+  var base="https://www.gstatic.com/firebasejs/"+FB_VER+"/";
+  cloud.sdkP=Promise.all([import(base+"firebase-app.js"),import(base+"firebase-auth.js"),import(base+"firebase-firestore.js")]).then(function(m){
+    cloud.sdk={app:m[0],auth:m[1],fs:m[2]};return cloud.sdk;
+  });
+  cloud.sdkP.catch(function(){cloud.sdkP=null});
+  return cloud.sdkP;
+}
+function ensureCloud(){
+  if(cloud.started)return;
+  cloud.started=true;cloud.status="connecting";
+  loadSdk().then(function(sdk){
+    var app=sdk.app.initializeApp(FB_CFG);
+    cloud.auth=sdk.auth.getAuth(app);
+    try{cloud.db=sdk.fs.initializeFirestore(app,{localCache:sdk.fs.persistentLocalCache({tabManager:sdk.fs.persistentMultipleTabManager()})})}
+    catch(e){cloud.db=sdk.fs.getFirestore(app)}
+    cloud.status="ready";
+    sdk.auth.onAuthStateChanged(cloud.auth,onUser);
+  }).catch(function(){cloud.status="fail";cloud.started=false;softRender()});
+}
+
+function onUser(user){
+  cloud.authKnown=true;
+  runUnsubs(cloud.userUnsubs);leaveSchool();
+  cloud.user=user||null;cloud.needSetup=false;cloud.removed=false;
+  if(!user){cloud.authMode="in";render();return}
+  try{localStorage.setItem("galmee-cloud","1")}catch(e){}
+  var fs=cloud.sdk.fs;
+  cloud.userUnsubs.push(fs.onSnapshot(fs.doc(cloud.db,"users",user.uid),function(snap){
+    var d=snap.exists()?snap.data():null;
+    if(d&&d.schoolId){
+      if(cloud.schoolId!==d.schoolId)enterSchool(d.schoolId);
+    }else{
+      if(cloud.schoolId)leaveSchool();
+      cloud.needSetup=true;
+    }
+    softRender();
+  },onErr));
+}
+function enterSchool(sid){
+  leaveSchool();
+  cloud.schoolId=sid;cloud.needSetup=false;cloud.removed=false;
+  var fs=cloud.sdk.fs,db=cloud.db,uid=cloud.user.uid;
+  cloud.schoolUnsubs.push(fs.onSnapshot(fs.doc(db,"schools",sid,"members",uid),function(snap){
+    if(!snap.exists()){cloud.removed=true;stopData();cloud.role=null;exitCloudMode();softRender();return}
+    cloud.removed=false;
+    var role=snap.data().role;
+    if(role!==cloud.role){cloud.role=role;startData()}
+    softRender();
+  },onErr));
+  cloud.schoolUnsubs.push(fs.onSnapshot(fs.doc(db,"schools",sid),function(snap){
+    cloud.schoolName=snap.exists()?(snap.data().name||""):"";softRender();
+  },function(){}));
+}
+function startData(){
+  stopData();
+  var fs=cloud.sdk.fs,db=cloud.db,sid=cloud.schoolId,uid=cloud.user.uid;
+  cloudMode=true;state=newCloudState();
+  var col=fs.collection(db,"schools",sid,"classes");
+  var q=cloud.role==="principal"?col:fs.query(col,fs.where("teacherUids","array-contains",uid));
+  cloud.dataUnsubs.push(fs.onSnapshot(q,{includeMetadataChanges:true},function(snap){
+    cloud.pend.classes=snap.metadata.hasPendingWrites;
+    var list=[];
+    snap.forEach(function(d){var v=d.data({serverTimestamps:"estimate"});list.push({id:d.id,name:v.name||"",students:v.students||[],teacherUids:v.teacherUids||[]})});
+    sortCl(list);list.forEach(sortSt);
+    state.classes=list;
+    if(!state.current||!list.some(function(c){return c.id===state.current}))state.current=list[0]?list[0].id:null;
+    syncAttListeners();softRender();
+  },onErr));
+  if(cloud.role==="principal"){
+    cloud.dataUnsubs.push(fs.onSnapshot(fs.collection(db,"schools",sid,"members"),function(snap){
+      var m=[];snap.forEach(function(d){var v=d.data();m.push({uid:d.id,role:v.role,name:v.name||"",email:v.email||""})});
+      cloud.members=m;softRender();
+    },onErr));
+  }
+}
+function syncAttListeners(){
+  var fs=cloud.sdk.fs,keep={};
+  state.classes.forEach(function(c){
+    keep[c.id]=1;
+    if(cloud.attUnsubs[c.id])return;
+    var cid=c.id,st=state;
+    cloud.attUnsubs[cid]=fs.onSnapshot(fs.collection(cloud.db,"schools",cloud.schoolId,"classes",cid,"attendance"),{includeMetadataChanges:true},function(snap){
+      cloud.pend["a"+cid]=snap.metadata.hasPendingWrites;
+      snap.docChanges().forEach(function(ch){
+        var k=cid+"|"+ch.doc.id;
+        if(ch.type==="removed"){delete st.records[k];delete st.saved[k];return}
+        var v=ch.doc.data({serverTimestamps:"estimate"}),marks={};
+        Object.keys(v.marks||{}).forEach(function(sid){if(v.marks[sid])marks[sid]=v.marks[sid]});
+        st.records[k]=marks;
+        var u=v.updatedAt;st.saved[k]=u&&u.toMillis?u.toMillis():Date.now();
+      });
+      softRender();
+    },onErr);
+  });
+  Object.keys(cloud.attUnsubs).forEach(function(id){if(!keep[id]){try{cloud.attUnsubs[id]()}catch(e){}delete cloud.attUnsubs[id]}});
+}
+
+/* ----- Barreeffama / writes (hin eegin: interneet malee deebii hin kennu) ----- */
+function cloudSaveClass(c){
+  if(!cloudMode||!c)return;
+  var fs=cloud.sdk.fs,ref=fs.doc(cloud.db,"schools",cloud.schoolId,"classes",c.id);
+  var data={name:c.name,students:c.students,updatedAt:fs.serverTimestamp(),updatedBy:cloud.user.uid};
+  var p;
+  if(c._new){
+    data.teacherUids=cloud.role==="principal"?[]:[cloud.user.uid];data.createdBy=cloud.user.uid;
+    c._new=false;p=fs.setDoc(ref,data);
+  }else p=fs.updateDoc(ref,data);
+  p.catch(onErr);
+}
+function cloudMark(c,d,changes){
+  var fs=cloud.sdk.fs;
+  fs.setDoc(fs.doc(cloud.db,"schools",cloud.schoolId,"classes",c.id,"attendance",d),
+    {date:d,marks:changes,updatedAt:fs.serverTimestamp(),updatedBy:cloud.user.uid},{merge:true}).catch(onErr);
+}
+function cloudDeleteClass(cid){
+  var fs=cloud.sdk.fs,db=cloud.db,sid=cloud.schoolId;
+  Object.keys(state.records).forEach(function(k){
+    if(k.indexOf(cid+"|")===0)fs.deleteDoc(fs.doc(db,"schools",sid,"classes",cid,"attendance",k.split("|")[1])).catch(onErr);
+  });
+  fs.deleteDoc(fs.doc(db,"schools",sid,"classes",cid)).catch(onErr);
+}
+function cloudAssign(cid,uid,on){
+  var fs=cloud.sdk.fs;
+  fs.updateDoc(fs.doc(cloud.db,"schools",cloud.schoolId,"classes",cid),{teacherUids:on?fs.arrayUnion(uid):fs.arrayRemove(uid)}).catch(onErr);
+}
+function removeTeacher(uid){
+  var fs=cloud.sdk.fs,db=cloud.db,sid=cloud.schoolId;
+  state.classes.forEach(function(c){
+    if(c.teacherUids.indexOf(uid)>=0)fs.updateDoc(fs.doc(db,"schools",sid,"classes",c.id),{teacherUids:fs.arrayRemove(uid)}).catch(onErr);
+  });
+  fs.deleteDoc(fs.doc(db,"schools",sid,"members",uid)).catch(onErr);
+}
+function isLocked(){
+  if(!cloudMode||cloud.role!=="teacher")return false;
+  var p=date.split("-"),n=todayIso().split("-");
+  return gToJDN(+n[0],+n[1],+n[2])-gToJDN(+p[0],+p[1],+p[2])>3;
+}
+
+/* ----- Seensa / Auth ----- */
+function doSignUp(){
+  var em=val("cEmail"),pw=(document.getElementById("cPass")||{}).value||"",nm=val("cName");
+  if(!em||!pw){cloud.errMsg=L().fillAll;render();return}
+  cloud.errMsg=null;cloud.msg=null;
+  var A=cloud.sdk.auth;
+  A.createUserWithEmailAndPassword(cloud.auth,em,pw).then(function(cred){
+    if(nm)return A.updateProfile(cred.user,{displayName:nm}).catch(function(){});
+  }).catch(onErr);
+}
+function doSignIn(){
+  var em=val("cEmail"),pw=(document.getElementById("cPass")||{}).value||"";
+  if(!em||!pw){cloud.errMsg=L().fillAll;render();return}
+  cloud.errMsg=null;cloud.msg=null;
+  cloud.sdk.auth.signInWithEmailAndPassword(cloud.auth,em,pw).catch(onErr);
+}
+function doReset(){
+  var em=val("cEmail");
+  if(!em){cloud.errMsg=L().fillAll;render();return}
+  cloud.errMsg=null;
+  cloud.sdk.auth.sendPasswordResetEmail(cloud.auth,em).then(function(){cloud.msg=L().resetSent;softRender()}).catch(onErr);
+}
+function doSignOut(){
+  try{localStorage.removeItem("galmee-cloud")}catch(e){}
+  cloud.sdk.auth.signOut(cloud.auth).catch(onErr);
+}
+function genCode(){
+  var al="ABCDEFGHJKLMNPQRSTUVWXYZ23456789",a=new Uint8Array(6),o="";
+  (window.crypto||window.msCrypto).getRandomValues(a);
+  for(var i=0;i<6;i++)o+=al[a[i]%al.length];
+  return o;
+}
+function createSchool(){
+  var t=L(),nm=val("sName"),me=val("sUser")||cloud.user.displayName||cloud.user.email||"";
+  if(!nm){cloud.errMsg=t.fillAll;render();return}
+  if(!navigator.onLine){cloud.errMsg=t.needNet;render();return}
+  cloud.errMsg=null;var tries=0;
+  (function attempt(){
+    var fs=cloud.sdk.fs,db=cloud.db,u=cloud.user,code=genCode(),b=fs.writeBatch(db);
+    b.set(fs.doc(db,"schools",code),{name:nm,ownerUid:u.uid,createdAt:fs.serverTimestamp()});
+    b.set(fs.doc(db,"schools",code,"members",u.uid),{role:"principal",email:u.email||"",name:me,joinedAt:fs.serverTimestamp()});
+    b.set(fs.doc(db,"users",u.uid),{schoolId:code,email:u.email||""});
+    b.commit().catch(function(e){
+      if(e&&e.code==="permission-denied"&&++tries<4)return attempt();
+      onErr(e);
+    });
+  })();
+}
+function joinSchool(){
+  var t=L(),code=val("sCode").toUpperCase().replace(/[^A-Z0-9]/g,""),me=val("sUser")||cloud.user.displayName||cloud.user.email||"";
+  if(!code){cloud.errMsg=t.fillAll;render();return}
+  if(!navigator.onLine){cloud.errMsg=t.needNet;render();return}
+  cloud.errMsg=null;
+  var fs=cloud.sdk.fs,db=cloud.db,u=cloud.user,b=fs.writeBatch(db);
+  b.set(fs.doc(db,"schools",code,"members",u.uid),{role:"teacher",email:u.email||"",name:me,joinedAt:fs.serverTimestamp()});
+  b.set(fs.doc(db,"users",u.uid),{schoolId:code,email:u.email||""});
+  b.commit().catch(onErr);
+}
+function resetUserSchool(){
+  var fs=cloud.sdk.fs;
+  fs.deleteDoc(fs.doc(cloud.db,"users",cloud.user.uid)).catch(onErr);
+}
+function migrateLocal(){
+  var fs=cloud.sdk.fs,db=cloud.db,sid=cloud.schoolId,uid=cloud.user.uid;
+  localState.classes.forEach(function(c){
+    fs.setDoc(fs.doc(db,"schools",sid,"classes",c.id),{name:c.name,students:c.students,teacherUids:cloud.role==="principal"?[]:[uid],
+      createdBy:uid,updatedAt:fs.serverTimestamp(),updatedBy:uid}).catch(onErr);
+  });
+  Object.keys(localState.records).forEach(function(k){
+    var p=k.split("|"),marks=localState.records[k];
+    if(!marks||!Object.keys(marks).length)return;
+    fs.setDoc(fs.doc(db,"schools",sid,"classes",p[0],"attendance",p[1]),{date:p[1],marks:marks,updatedAt:fs.serverTimestamp(),updatedBy:uid},{merge:true}).catch(onErr);
+  });
+  localState.migrated=true;save();cloud.msg=L().migDone;render();
+}
+
+/* ----- Fuula Akaawuntii ----- */
+function viewAccount(){
+  var t=L(),out="";
+  if(cloud.errMsg)out+='<div class="err" style="margin-top:12px">'+esc(cloud.errMsg)+'</div>';
+  if(cloud.msg)out+='<div class="ok" style="margin-top:12px">'+esc(cloud.msg)+'</div>';
+  if(cloud.status==="fail")return out+'<div class="empty"><b>☁</b>'+t.cloudFail+'</div>';
+  if(!cloud.authKnown)return out+'<div class="empty">'+t.connecting+'</div>';
+  if(!cloud.user){
+    var up=cloud.authMode==="up";
+    return out+'<div class="card" style="margin-top:16px"><h2>'+t.cTitle+'</h2><p class="small" style="margin-top:0">'+t.cInfo+'</p><div class="fld">'+
+      (up?'<label>'+t.yourName+'<input type="text" id="cName" autocomplete="name"></label>':'')+
+      '<label>'+t.email+'<input type="email" id="cEmail" autocomplete="email" inputmode="email"></label>'+
+      '<label>'+t.pass+'<input type="password" id="cPass" autocomplete="'+(up?'new-password':'current-password')+'"></label></div>'+
+      '<button class="btn" data-act="'+(up?'csignup':'csignin')+'">'+(up?t.signUp:t.signIn)+'</button>'+
+      '<div class="two" style="grid-template-columns:1fr"><button class="btn ghost" data-act="cmode">'+(up?t.toIn:t.toUp)+'</button>'+(up?'':'<button class="btn ghost" data-act="creset">'+t.forgot+'</button>')+'</div></div>';
+  }
+  var u=cloud.user;
+  var signout='<button class="btn ghost" data-act="csignout" style="width:100%;margin-bottom:14px">'+t.signOut+' ('+esc(u.email||"")+')</button>';
+  if(cloud.needSetup){
+    out+='<div class="card" style="margin-top:16px"><h2>'+t.setupT+'</h2><div class="fld"><label>'+t.yourName+'<input type="text" id="sUser" value="'+esc(u.displayName||"")+'" autocomplete="name"></label></div></div>';
+    out+='<div class="card"><h2>'+t.createSch+'</h2><div class="fld"><label>'+t.schName+'<input type="text" id="sName"></label></div><button class="btn" data-act="ccreate">'+t.createBtn+'</button></div>';
+    out+='<div class="card"><h2>'+t.joinSch+'</h2><div class="fld"><label>'+t.schCode+'<input type="text" id="sCode" autocapitalize="characters" autocomplete="off"></label></div><button class="btn" data-act="cjoin">'+t.joinBtn+'</button></div>';
+    return out+signout;
+  }
+  if(cloud.removed)return out+'<div class="empty" style="margin-top:16px"><b>'+t.removedT+'</b><button class="btn" data-act="cresetuser">'+t.resetBtn+'</button></div>'+signout;
+  if(!cloud.role)return out+'<div class="empty" style="margin-top:16px">'+t.connecting+'</div>'+signout;
+  out+='<div class="card" style="margin-top:16px"><h2>'+esc(cloud.schoolName||t.school)+'</h2>'+
+    '<p class="small" style="margin:0">'+t.yourRole+': <b>'+roleName(cloud.role)+'</b></p>'+
+    '<p class="small" style="margin:4px 0 0">'+syncText()+'</p>'+
+    (cloud.role==="principal"?'<p class="small" style="margin:12px 0 6px">'+t.shareCode+'</p><div class="code">'+esc(cloud.schoolId)+'</div>':'')+'</div>';
+  if(cloud.role==="teacher"&&!state.classes.length)out+='<div class="note">'+t.pendingT+'</div>';
+  if(localState.classes.length&&!localState.migrated)
+    out+='<div class="card"><h2>'+t.migT+'</h2><p class="small" style="margin-top:0">'+t.migX(localState.classes.length)+'</p><button class="btn" data-act="cmigrate">'+t.migBtn+'</button></div>';
+  if(cloud.role==="principal"){
+    var tl=cloud.members.filter(function(m){return m.role==="teacher"});
+    out+='<div class="card"><h2>'+t.teachers+'</h2>'+(tl.length?tl.map(function(m){
+      var ask=confirmId==="t"+m.uid;
+      return '<div class="item" style="display:block"><b>'+esc(m.name||m.email)+'</b><div class="small">'+esc(m.email)+'</div>'+
+        (state.classes.length?'<div class="small" style="margin-top:6px">'+t.assign+'</div>':'')+
+        state.classes.map(function(c){return '<label class="chk"><input type="checkbox" data-assign="'+c.id+'" data-uid="'+m.uid+'"'+(c.teacherUids.indexOf(m.uid)>=0?' checked':'')+'> '+esc(c.name)+'</label>'}).join("")+
+        '<button class="btn '+(ask?'danger':'ghost')+'" style="margin-top:8px;min-height:40px" data-act="rmteacher" data-uid="'+m.uid+'">'+(ask?t.sure:t.removeT)+'</button></div>';
+    }).join(""):'<p class="small" style="margin:0">'+t.noTeachers+'</p>')+'</div>';
+  }
+  return out+signout;
+}
+
+render();
+try{if(localStorage.getItem("galmee-cloud")==="1")ensureCloud()}catch(e){}
+
+/* ---------- Interneet malee / Offline (PWA) ---------- */
+if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){
+  window.addEventListener("load",function(){try{navigator.serviceWorker.register("sw.js").catch(function(){})}catch(e){}});
+}
+})();
+</script>
+</body>
+</html>
