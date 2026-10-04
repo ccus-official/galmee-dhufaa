@@ -106,6 +106,18 @@ nav button{font-size:14px;padding:0 2px}
 .chk{display:flex;align-items:center;gap:10px;min-height:40px}
 .chk input{width:22px;height:22px;flex:none}
 .code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:26px;font-weight:800;letter-spacing:.14em;text-align:center;padding:10px;background:var(--bg);border-radius:10px;border:1px dashed var(--line);user-select:all}
+
+#printArea{display:none}
+@media print{
+  @page{size:landscape;margin:10mm}
+  html,body{background:#fff!important;padding:0!important}
+  body>*:not(#printArea){display:none!important}
+  #printArea{display:block;color:#000;background:#fff;font:11px/1.35 system-ui,"Noto Sans","Noto Sans Ethiopic",sans-serif}
+  #printArea table{border-collapse:collapse;width:100%}
+  #printArea th,#printArea td{border:1px solid #444;padding:2px 4px;text-align:center}
+  #printArea td.n,#printArea th.n{text-align:left;white-space:nowrap}
+  #printArea td.a{font-weight:700}
+}
 </style>
 </head>
 <body>
@@ -120,6 +132,7 @@ nav button{font-size:14px;padding:0 2px}
   <main id="app"></main>
 </div>
 
+<div id="printArea"></div>
 <script>
 (function(){
 /* ---------- Afaanota / Languages ---------- */
@@ -224,6 +237,12 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  teachers:"Barsiisota",noTeachers:"Barsiisaan tokkollee hin hirmaanne. Koodii mana barnootaa isaaniif kenni.",assign:"Kutaa isaaniif kenni",removeT:"Baasi",
  pendingT:"Kutaan siif hin kennamne. Hogganaa kutaa akka siif kennu gaafadhu, ykn kutaa mataa kee Kutaa tab keessaa uumi.",
  lockedN:"Barsiisaan galmee har'a fi kaleessa qofa sirreessuu danda'a. Hogganaa gaafadhu.",
+ exT:"Ripoortii baasi",exPeriod:"Yeroo",exAll:"Guyyaa galmaa'e hunda",exThis:"Ji'a kana",exLast:"Ji'a darbe",exL30:"Guyyaa 30 darban",
+ exCsv:"Excel (CSV) buusi",exPrint:"PDF / Maxxansi",exSum:"Walitti qabama mana barnootaa (CSV)",
+ exNote:"CSV Excel ykn Google Sheets keessatti banama. PDF argachuuf, fuula maxxansaa keessatti \"Save as PDF\" filadhu. Lakkoofsi bilbilaa hin ramadamu.",
+ exSchool:"Mana barnootaa",exLegend:"Mallattoo",exMade:"Guyyaa uumame",exDays:"Guyyaa galmaa'e",exTotalP:"Dhufe+Turte (guyyaa tokkoon)",exStu:"Barattoota",exAtt:"Dhufaa %",exTotal:"Waliigala",
+ exNoData:"Yeroo kana keessa galmeen hin jiru.",exP:"D",exL:"T",exA:"H",
+
  removedT:"Mana barnootaa kana keessaa si baasaniiru.",resetBtn:"Mana barnootaa biraa filadhu",
  eInvalid:"Email ykn jecha icciitii dogoggora.",eExists:"Email kun duraan galmaa'eera.",eWeak:"Jecha icciitii dadhabaa dha (qubee 6 ol barbaachisa).",eEmail:"Email sirrii miti.",eNet:"Interneet hin jiru.",eMany:"Yeroo baay'ee yaalte. Booda yaali.",eDenied:"Hayyamni hin jiru. Koodiin mana barnootaa dogoggora ta'uu mala.",eOther:"Dogoggorri uumame. Irra deebi'ii yaali.",
  needNet:"Kana gochuuf interneet barbaachisa.",fillAll:"Bakka duwwaa hunda guuti."},
@@ -241,6 +260,12 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  teachers:"መምህራን",noTeachers:"እስካሁን የተቀላቀለ መምህር የለም። የትምህርት ቤቱን ኮድ ይስጧቸው።",assign:"ክፍል ስጣቸው",removeT:"አስወግድ",
  pendingT:"ክፍል አልተሰጠዎትም። ርዕሰ መምህሩን ክፍል እንዲሰጥዎ ይጠይቁ፣ ወይም በ«ክፍል» ትር ውስጥ የራስዎን ክፍል ይፍጠሩ።",
  lockedN:"መምህር የዛሬንና የትናንትናን መዝገብ ብቻ ማስተካከል ይችላል። ርዕሰ መምህሩን ይጠይቁ።",
+ exT:"ሪፖርት አውጣ",exPeriod:"ጊዜ",exAll:"የተመዘገቡ ቀናት ሁሉ",exThis:"ይህ ወር",exLast:"ባለፈው ወር",exL30:"ያለፉት 30 ቀናት",
+ exCsv:"Excel (CSV) አውርድ",exPrint:"PDF / አትም",exSum:"የትምህርት ቤቱ ጥቅል ሪፖርት (CSV)",
+ exNote:"CSV በ Excel ወይም Google Sheets ይከፈታል። PDF ለማግኘት በህትመት ገጹ «Save as PDF» ይምረጡ። የስልክ ቁጥር አይካተትም።",
+ exSchool:"ትምህርት ቤት",exLegend:"ምልክት",exMade:"የተዘጋጀበት ቀን",exDays:"የተመዘገቡ ቀናት",exTotalP:"መጣ+ዘገየ (በቀን)",exStu:"ተማሪዎች",exAtt:"መገኘት %",exTotal:"ድምር",
+ exNoData:"በዚህ ጊዜ ውስጥ መዝገብ የለም።",exP:"መ",exL:"ዘ",exA:"ቀ",
+
  removedT:"ከዚህ ትምህርት ቤት ተወግደዋል።",resetBtn:"ሌላ ትምህርት ቤት ምረጥ",
  eInvalid:"ኢሜይል ወይም የይለፍ ቃል የተሳሳተ ነው።",eExists:"ይህ ኢሜይል ቀደም ብሎ ተመዝግቧል።",eWeak:"የይለፍ ቃሉ ደካማ ነው (ከ6 ፊደል በላይ ያስፈልጋል)።",eEmail:"ኢሜይሉ ትክክል አይደለም።",eNet:"ኢንተርኔት የለም።",eMany:"ብዙ ጊዜ ሞክረዋል። በኋላ ይሞክሩ።",eDenied:"ፈቃድ የለም። የትምህርት ቤት ኮዱ የተሳሳተ ሊሆን ይችላል።",eOther:"ስህተት ተፈጥሯል። እንደገና ይሞክሩ።",
  needNet:"ይህን ለማድረግ ኢንተርኔት ያስፈልጋል።",fillAll:"ሁሉንም ባዶ ቦታዎች ይሙሉ።"},
@@ -258,6 +283,12 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  teachers:"Teachers",noTeachers:"No teachers have joined yet. Give them the school code.",assign:"Assign classes",removeT:"Remove",
  pendingT:"You have no classes yet. Ask the principal to assign you a class, or create your own in the Classes tab.",
  lockedN:"Teachers can only edit today's and yesterday's records. Ask the principal.",
+ exT:"Export report",exPeriod:"Period",exAll:"All recorded days",exThis:"This month",exLast:"Last month",exL30:"Last 30 days",
+ exCsv:"Download Excel (CSV)",exPrint:"PDF / Print",exSum:"School summary (CSV)",
+ exNote:"CSV opens in Excel or Google Sheets. For PDF, choose \"Save as PDF\" in the print screen. Phone numbers are not included.",
+ exSchool:"School",exLegend:"Legend",exMade:"Generated",exDays:"Days recorded",exTotalP:"Present+Late (per day)",exStu:"Students",exAtt:"Attendance %",exTotal:"Total",
+ exNoData:"No attendance recorded in this period.",exP:"P",exL:"L",exA:"A",
+
  removedT:"You were removed from this school.",resetBtn:"Choose another school",
  eInvalid:"Wrong email or password.",eExists:"This email is already registered.",eWeak:"Password is too weak (6+ characters).",eEmail:"Invalid email address.",eNet:"No internet connection.",eMany:"Too many attempts. Try again later.",eDenied:"Permission denied. The school code may be wrong.",eOther:"Something went wrong. Please try again.",
  needNet:"You need internet to do this.",fillAll:"Fill in all the fields."}
@@ -453,6 +484,123 @@ function viewTake(){
   return out+'<p class="small">'+t.note+'</p>';
 }
 
+/* ---------- Ripoortii baasuu / Export ---------- */
+var exPeriod="all",exMsg="";
+function periodRange(p){
+  var td=todayIso();
+  if(p==="all")return ["0000-00-00","9999-99-99"];
+  if(p==="last30"){var tp=td.split("-"),g=jdnToG(gToJDN(+tp[0],+tp[1],+tp[2])-29);return [g.y+"-"+pad(g.m)+"-"+pad(g.d),td]}
+  var off=p==="lastMonth"?-1:0;
+  if(state.settings.cal==="eth"){
+    var e=isoToE(td),y=e.y,m=e.m+off;
+    if(m<1){m=13;y--}
+    return [eToIso(y,m,1),eToIso(y,m,daysIn(y,m))];
+  }
+  var tq=td.split("-"),y2=+tq[0],m2=+tq[1]+off;
+  if(m2<1){m2=12;y2--}
+  return [y2+"-"+pad(m2)+"-01",y2+"-"+pad(m2)+"-"+pad(new Date(y2,m2,0).getDate())];
+}
+function periodText(rg){
+  var t=L(),n=exPeriod==="all"?t.exAll:exPeriod==="thisMonth"?t.exThis:exPeriod==="lastMonth"?t.exLast:t.exL30;
+  return exPeriod==="all"?n:n+" ("+fmtDate(rg[0])+" - "+fmtDate(rg[1])+")";
+}
+function classData(c,rg){
+  var dates=Object.keys(state.records).filter(function(k){return k.indexOf(c.id+"|")===0}).map(function(k){return k.split("|")[1]})
+    .filter(function(d){return d>=rg[0]&&d<=rg[1]}).sort();
+  var rows=c.students.map(function(s){
+    var P=0,A=0,Lt=0;
+    var cells=dates.map(function(d){
+      var v=(state.records[c.id+"|"+d]||{})[s.id]||"";
+      if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++;else v="";
+      return v;
+    });
+    var tot=P+A+Lt;
+    return {s:s,cells:cells,P:P,A:A,L:Lt,tot:tot,pct:tot?Math.round((P+Lt)/tot*100):null};
+  });
+  return {dates:dates,rows:rows};
+}
+function csvCell(v){v=String(v==null?"":v);return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
+function csvLine(a){return a.map(csvCell).join(",")}
+function mcode(v){var t=L();return v==="P"?t.exP:v==="A"?t.exA:v==="L"?t.exL:""}
+function sexText(s){var t=L();return s.sex==="M"?t.male:s.sex==="F"?t.female:""}
+function shortDate(iso){
+  if(state.settings.cal==="eth"){var e=isoToE(iso);return e.d+"/"+e.m}
+  var p=iso.split("-");return (+p[2])+"/"+(+p[1]);
+}
+function classCsv(c,rg){
+  var t=L(),d=classData(c,rg),out=[];
+  out.push(csvLine([t.title]));
+  if(cloudMode&&cloud.schoolName)out.push(csvLine([t.exSchool,cloud.schoolName]));
+  out.push(csvLine([t.klass,c.name]));
+  out.push(csvLine([t.exPeriod,periodText(rg)]));
+  out.push(csvLine([t.exLegend,t.exP+"="+t.P+", "+t.exL+"="+t.L+", "+t.exA+"="+t.A]));
+  out.push(csvLine([t.exMade,fmtStamp(Date.now())]));
+  out.push("");
+  out.push(csvLine(["#",t.name,t.sex,t.age].concat(d.dates.map(fmtDate),[t.P,t.L,t.A,t.exDays,t.exAtt])));
+  d.rows.forEach(function(r,i){
+    out.push(csvLine([i+1,r.s.name,sexText(r.s),r.s.age||""].concat(r.cells.map(mcode),[r.P,r.L,r.A,r.tot,r.pct==null?"":r.pct])));
+  });
+  var present=d.dates.map(function(x,j){var n=0;d.rows.forEach(function(r){if(r.cells[j]==="P"||r.cells[j]==="L")n++});return n});
+  out.push(csvLine(["",t.exTotalP,"",""].concat(present)));
+  return out.join("\r\n");
+}
+function summaryCsv(rg){
+  var t=L(),out=[];
+  out.push(csvLine([t.title]));
+  if(cloudMode&&cloud.schoolName)out.push(csvLine([t.exSchool,cloud.schoolName]));
+  out.push(csvLine([t.exPeriod,periodText(rg)]));
+  out.push(csvLine([t.exMade,fmtStamp(Date.now())]));
+  out.push("");
+  out.push(csvLine([t.klass,t.exStu,t.male,t.female,t.exDays,t.exAtt,t.male+" %",t.female+" %"]));
+  var tot={n:0,m:0,f:0,pl:0,all:0,mpl:0,mall:0,fpl:0,fall:0};
+  state.classes.forEach(function(c){
+    var d=classData(c,rg),m=0,f=0,pl=0,all=0,mpl=0,mall=0,fpl=0,fall=0;
+    d.rows.forEach(function(r){
+      if(r.s.sex==="M")m++;else if(r.s.sex==="F")f++;
+      var a=r.P+r.L,b=r.tot;pl+=a;all+=b;
+      if(r.s.sex==="M"){mpl+=a;mall+=b}else if(r.s.sex==="F"){fpl+=a;fall+=b}
+    });
+    function pc(a,b){return b?Math.round(a/b*100):""}
+    out.push(csvLine([c.name,c.students.length,m,f,d.dates.length,pc(pl,all),pc(mpl,mall),pc(fpl,fall)]));
+    tot.n+=c.students.length;tot.m+=m;tot.f+=f;tot.pl+=pl;tot.all+=all;tot.mpl+=mpl;tot.mall+=mall;tot.fpl+=fpl;tot.fall+=fall;
+  });
+  function pc2(a,b){return b?Math.round(a/b*100):""}
+  out.push(csvLine([t.exTotal,tot.n,tot.m,tot.f,"",pc2(tot.pl,tot.all),pc2(tot.mpl,tot.mall),pc2(tot.fpl,tot.fall)]));
+  return out.join("\r\n");
+}
+function safeName(s){return String(s).replace(/[^A-Za-z0-9\u1200-\u137F_-]+/g,"_").replace(/^_+|_+$/g,"")||"kutaa"}
+function downloadText(name,text){
+  var blob=new Blob(["\ufeff"+text],{type:"text/csv;charset=utf-8"});
+  var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;
+  document.body.appendChild(a);a.click();
+  setTimeout(function(){try{URL.revokeObjectURL(a.href)}catch(e){}a.remove()},2000);
+}
+function printClass(c,rg){
+  var t=L(),d=classData(c,rg);
+  var h='<h2 style="margin:0 0 4px">'+esc(t.title)+'</h2><div>'+(cloudMode&&cloud.schoolName?esc(cloud.schoolName)+' · ':'')+esc(t.klass)+': <b>'+esc(c.name)+'</b> · '+esc(periodText(rg))+'</div>'+
+    '<div style="margin-bottom:6px">'+esc(t.exLegend)+': '+esc(t.exP)+'='+esc(t.P)+', '+esc(t.exL)+'='+esc(t.L)+', '+esc(t.exA)+'='+esc(t.A)+'</div>';
+  h+='<table><thead><tr><th>#</th><th class="n">'+esc(t.name)+'</th><th>'+esc(t.sex)+'</th>'+d.dates.map(function(x){return '<th>'+shortDate(x)+'</th>'}).join("")+
+    '<th>'+esc(t.exP)+'</th><th>'+esc(t.exL)+'</th><th>'+esc(t.exA)+'</th><th>%</th></tr></thead><tbody>';
+  d.rows.forEach(function(r,i){
+    h+='<tr><td>'+(i+1)+'</td><td class="n">'+esc(r.s.name)+'</td><td>'+esc(sexText(r.s))+'</td>'+
+      r.cells.map(function(v){return '<td'+(v==="A"?' class="a"':'')+'>'+esc(mcode(v))+'</td>'}).join("")+
+      '<td>'+r.P+'</td><td>'+r.L+'</td><td>'+r.A+'</td><td>'+(r.pct==null?'':r.pct)+'</td></tr>';
+  });
+  h+='</tbody></table><div style="margin-top:6px">'+esc(fmtStamp(Date.now()))+'</div>';
+  document.getElementById("printArea").innerHTML=h;
+  setTimeout(function(){window.print()},60);
+}
+function exportCard(){
+  var t=L(),opts=[["all",t.exAll],["thisMonth",t.exThis],["lastMonth",t.exLast],["last30",t.exL30]];
+  var h='<div class="card"><h2>'+t.exT+'</h2><div class="fld"><label>'+t.exPeriod+'<select data-exp="1">'+
+    opts.map(function(o){return '<option value="'+o[0]+'"'+(o[0]===exPeriod?' selected':'')+'>'+esc(o[1])+'</option>'}).join("")+'</select></label></div>'+
+    (exMsg?'<div class="note">'+esc(exMsg)+'</div>':'')+
+    '<button class="btn" data-act="exdl">'+t.exCsv+'</button>'+
+    '<button class="btn ghost" style="margin-top:10px;width:100%" data-act="exprint">'+t.exPrint+'</button>';
+  if(!isTeacher())h+='<button class="btn ghost" style="margin-top:10px;width:100%" data-act="exsum">'+t.exSum+'</button>';
+  return h+'<p class="small">'+t.exNote+'</p></div>';
+}
+
 function viewReport(){
   var c=cls(),t=L();
   if(!c)return noClass();
@@ -480,7 +628,7 @@ function viewReport(){
       '<div class="pct'+(r.tot&&r.pct<80?' low':'')+'">'+(r.tot?r.pct+'%':'—')+'</div>'+
       '<div class="meter"><i class="mp" style="width:'+(r.P/n*100)+'%"></i><i class="ml" style="width:'+(r.L/n*100)+'%"></i><i class="ma" style="width:'+(r.A/n*100)+'%"></i></div></div></div>';
   });
-  return out+'<p class="small">'+t.pctNote+'</p>';
+  return out+exportCard()+'<p class="small">'+t.pctNote+'</p>';
 }
 
 function viewManage(){
@@ -517,6 +665,7 @@ function viewManage(){
 document.addEventListener("change",function(e){
   var t=e.target;
   if(t.dataset.assign){cloudAssign(t.dataset.assign,t.dataset.uid,t.checked);return}
+  if(t.dataset.exp){exPeriod=t.value;exMsg="";render();return}
   if(t.dataset.pref==="lang"){state.settings.lang=t.value;save();render();return}
   if(t.dataset.pref==="cal"){state.settings.cal=t.value;save();render();return}
   if(t.dataset.change==="class"){state.current=t.value;save();confirmId=null;render();return}
@@ -553,6 +702,18 @@ document.addEventListener("click",function(e){
     if(isLocked())return;
     var chg2={};c.students.forEach(function(s){if(!r2[s.id]){r2[s.id]="P";chg2[s.id]="P"}});
     state.saved[k2]=Date.now();save();if(cloudMode&&Object.keys(chg2).length)cloudMark(c,date,chg2);y=window.scrollY;render();window.scrollTo(0,y);
+  }else if(act==="exdl"&&c){
+    var rg1=periodRange(exPeriod);
+    if(!classData(c,rg1).dates.length){exMsg=L().exNoData;render();return}
+    exMsg="";downloadText("galmee_"+safeName(c.name)+"_"+exPeriod+".csv",classCsv(c,rg1));
+  }else if(act==="exprint"&&c){
+    var rg2=periodRange(exPeriod);
+    if(!classData(c,rg2).dates.length){exMsg=L().exNoData;render();return}
+    exMsg="";printClass(c,rg2);
+  }else if(act==="exsum"&&!isTeacher()){
+    var rg3=periodRange(exPeriod),has=state.classes.some(function(k){return classData(k,rg3).dates.length});
+    if(!has){exMsg=L().exNoData;render();return}
+    exMsg="";downloadText("galmee_summary_"+exPeriod+".csv",summaryCsv(rg3));
   }else if(act==="addclass"&&!isTeacher()){
     var inp=document.getElementById("newClass"),n=inp.value.trim();
     if(!n){inp.focus();return}
