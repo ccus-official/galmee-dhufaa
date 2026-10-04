@@ -1,5 +1,5 @@
 /* Service worker: app fi Firebase SDK interneet malee akka banamu gochuuf */
-const CACHE = "galmee-v10";
+const CACHE = "galmee-v12";
 const ASSETS = ["./", "./index.html", "./manifest.webmanifest", "./icon-192.png", "./icon-512.png", "./icon-maskable-512.png"];
 
 self.addEventListener("install", (e) => {
