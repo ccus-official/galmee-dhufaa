@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#16313F">
+<meta name="theme-color" content="#1A67A9">
 <title>Galmee Dhufaa</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="icon-192.png">
@@ -16,7 +16,7 @@
   --present:#2E7D4F; --present-bg:#DDF0E3;
   --absent:#BF3B25; --absent-bg:#F9DDD7;
   --late:#9A6B00; --late-bg:#FBEBB8;
-  --accent:#16313F; --accent-ink:#FFFFFF; --focus:#1B6FD1;
+  --accent:#1A67A9; --accent-ink:#FFFFFF; --focus:#1B6FD1;
   --font:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Ethiopic","Abyssinica SIL",sans-serif;
 }
 @media (prefers-color-scheme:dark){
@@ -119,6 +119,45 @@ nav button{font-size:14px;padding:0 2px}
   #printArea td.a{font-weight:700}
 }
 nav.n5 button{font-size:13px;padding:0 2px}
+
+/* ---------- Login (design: GD badge, tabs, labeled fields) ---------- */
+:root{--lg-bg:#F3F6FB;--lg-card:#FFFFFF;--lg-line:#E3E7EE;--lg-ink:#111827;--lg-muted:#6B7280;--lg-blue:#1A67A9;--lg-tab:#EDF1F6;--lg-tabink:#5F6B7A;--lg-ph:#7B828D}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--lg-bg:#0F1B22;--lg-card:#172830;--lg-line:#2A3F49;--lg-ink:#E6EFEA;--lg-muted:#97AAB1;--lg-blue:#5AA7EA;--lg-tab:#223640;--lg-tabink:#A9BCC4;--lg-ph:#7F949C}}
+:root[data-theme="dark"]{--lg-bg:#0F1B22;--lg-card:#172830;--lg-line:#2A3F49;--lg-ink:#E6EFEA;--lg-muted:#97AAB1;--lg-blue:#5AA7EA;--lg-tab:#223640;--lg-tabink:#A9BCC4;--lg-ph:#7F949C}
+header h1{color:var(--lg-blue)}
+body.loginview{background:var(--lg-bg)}
+body.loginview header,body.loginview nav{display:none}
+.login{min-height:92vh;min-height:calc(100dvh - 40px);display:flex;flex-direction:column;justify-content:center;padding:20px 0}
+.lgc{background:var(--lg-card);border:1px solid var(--lg-line);border-radius:22px;padding:22px 18px 20px;box-shadow:0 18px 45px rgba(20,40,70,.10)}
+.lgbadge{width:66px;height:66px;border-radius:16px;background:var(--lg-blue);color:#fff;font-weight:800;font-size:30px;display:flex;align-items:center;justify-content:center;margin:2px auto 14px;letter-spacing:.01em}
+.lgtitle{margin:0;text-align:center;font-size:28px;font-weight:800;color:var(--lg-blue);letter-spacing:-.01em}
+.lgsub{margin:4px 0 18px;text-align:center;color:var(--lg-muted);font-size:15px}
+.lgtabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:6px}
+.lgtab{min-height:46px;border:0;border-radius:11px;background:var(--lg-tab);color:var(--lg-tabink);font-weight:700;font-size:16px;cursor:pointer}
+.lgtab[aria-selected="true"]{background:var(--lg-blue);color:#fff}
+.lglabel{display:block;margin:16px 0 6px;font-weight:700;color:var(--lg-ink);font-size:15px}
+.lginput{width:100%;min-height:48px;border:1px solid var(--lg-line);border-radius:12px;background:var(--lg-card);color:var(--lg-ink);padding:0 14px;font-size:16px}
+.lginput::placeholder{color:var(--lg-ph)}
+.lgbtn{width:100%;min-height:48px;margin-top:20px;border:0;border-radius:12px;background:var(--lg-blue);color:#fff;font-weight:700;font-size:16px;cursor:pointer}
+.lglink{display:block;width:100%;margin:12px auto 0;min-height:40px;border:0;background:none;color:var(--lg-blue);font-weight:600;font-size:15px;cursor:pointer}
+.lghint{margin:14px 0 0;color:var(--lg-muted);font-size:13px;text-align:center}
+.lgc .err,.lgc .ok{margin:12px 0 0}
+.lglang{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 14px;margin-top:14px}
+.lglang .lglink{display:inline-block;width:auto;margin:0;padding:0 4px;color:var(--lg-muted);font-weight:500}
+.lglang .lglink[aria-current="true"]{color:var(--lg-blue);font-weight:800}
+.lgc input:focus-visible,.lgc button:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.rolepick{display:grid;gap:8px;margin:2px 0}
+.rolebtn{display:block;width:100%;text-align:left;padding:11px 14px;border:2px solid var(--lg-line);border-radius:14px;background:var(--lg-card);color:var(--lg-ink);cursor:pointer;font:inherit}
+.rolebtn b{display:block;font-size:16px}
+.rolebtn small{display:block;color:var(--lg-muted);font-size:13px;margin-top:2px;line-height:1.35}
+.rolebtn[aria-pressed="true"]{border-color:var(--lg-blue);background:var(--lg-tab)}
+.rolebtn.t[aria-pressed="true"]{border-color:var(--present);background:var(--present-bg)}
+.rolebtn.a[aria-pressed="true"]{border-color:var(--muted)}
+.rolecard{border-left:6px solid var(--lg-blue)}
+.rolecard.t{border-left-color:var(--present)}
+.rolecard.a{border-left-color:var(--muted)}
+.rchip{display:inline-block;padding:0 9px;border-radius:999px;font-size:12px;font-weight:700;line-height:20px;border:1.5px solid var(--lg-blue);color:var(--lg-blue);background:var(--lg-tab)}
+.rchip.t{border-color:var(--present);color:var(--present);background:var(--present-bg)}
 </style>
 </head>
 <body>
@@ -245,7 +284,16 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  exNoData:"Yeroo kana keessa galmeen hin jiru.",exP:"D",exL:"T",exA:"H",
  notAllowed:"Email kee mana barnootaa uumuuf hin hayyamamne. Hayyama argachuuf nama app kana siif kenne quunnami.",
  createNote:"Hogganaa hayyamame qofa mana barnootaa uuma. Barsiisaa taate yoo ta'e, koodii mana barnootaa gadi jiru fayyadami.",
- tabAdmin:"Admin",admT:"Admin: manneen barnootaa hunda",admNote:"Maqaa barattootaa fi lakkoofsa bilbilaa hin argitu. Walitti qabama qofa (lakkoofsa fi dhibbantaa).",
+ tabAdmin:"Admin",admSelf:"Ofii kee baasuu ykn gahee kee jijjiiruu hin dandeessu.",
+ roleChoose:"Gahee kee filadhu",roleOne:"Akaawuntiin tokko gahee tokko qofa qaba: hogganaa, barsiisaa, ykn Admin.",roleAdminName:"Admin (Biiroo Barnootaa)",
+ rpDesc:"Mana barnootaa kee uumta, barsiisota fi kutaa to'atta.",rtDesc:"Koodii mana barnootaa hogganaan siif kenne qabda.",raDesc:"Manneen barnootaa hunda ilaalta (maqaa barataa malee).",
+ iAmP:"Ani hogganaa dha",iAmT:"Ani barsiisaa dha",iAmA:"Ani Admin dha (Biiroo)",
+ schPh:"Maqaa mana barnootaa kee galchi",codePh:"Koodii mana barnootaa (fkn. 7DK83H)",errRole:"Gahee kee filadhu.",
+ adminUidX:"Admin ta'uuf UID kee abbaa project'tti ergi. Inni Firebase irratti 'admins' keessatti galmeessa.",
+ lgSub:"Sirna Bulchiinsa Mana Barumsaa",lgTabIn:"Seeni",lgTabUp:"Galmaa'i",lgEmailL:"Email",lgPassL:"Password",
+ lgEmailPh:"Email kee galchi",lgPassPh:"Password kee galchi",lgNamePh:"Maqaa kee galchi",
+ lgHintUp:"Galmaa'anii booda koodii mana barnootaa galchuun barsiisaa ta'ii makamta. Hogganaa hayyamame yoo taate mana barnootaa uumta.",
+ lgLocal:"Akaawuntii malee itti fufi (mobaayilii kana irratti qofa)",lgRetry:"Irra deebi'i",admT:"Admin: manneen barnootaa hunda",admNote:"Maqaa barattootaa fi lakkoofsa bilbilaa hin argitu. Walitti qabama qofa (lakkoofsa fi dhibbantaa).",
  admAllowT:"Hogganaa hayyamame",admAllowX:"Email hogganaa galchi. Inni akaawuntii uumee mana barnootaa uumuu danda'a.",admAllowAdd:"Hayyami",admNoAllowed:"Hogganaan hin hayyamamne.",
  admDone:"Raawwatameera.",admSchools:"Manneen barnootaa",admNoSchools:"Mana barnootaan hin jiru.",admNoSum:"Ripoortiin hin ergamne (hogganaan app banuu qaba).",
  admClasses:"Kutaawwan",admCode:"Koodii",admLast:"Galmee dhumaa",admUpd:"Haaromfame",admStatus:"Haala",admBlocked:"Dhorkameera",admActive:"Hojii irra",
@@ -277,7 +325,16 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  exNoData:"በዚህ ጊዜ ውስጥ መዝገብ የለም።",exP:"መ",exL:"ዘ",exA:"ቀ",
  notAllowed:"ኢሜይልዎ ትምህርት ቤት ለመፍጠር አልተፈቀደም። ፈቃድ ለማግኘት ይህን መተግበሪያ የሰጠዎትን ያነጋግሩ።",
  createNote:"ትምህርት ቤት መፍጠር የሚችሉት የተፈቀደላቸው ርዕሰ መምህራን ብቻ ናቸው። መምህር ከሆኑ ከታች ያለውን የትምህርት ቤት ኮድ ይጠቀሙ።",
- tabAdmin:"አስተዳዳሪ",admT:"አስተዳዳሪ፦ ሁሉም ትምህርት ቤቶች",admNote:"የተማሪ ስምና ስልክ ቁጥር አይታይም። ጥቅል መረጃ (ቁጥርና መቶኛ) ብቻ።",
+ tabAdmin:"አስተዳዳሪ",admSelf:"ራስዎን ማስወገድ ወይም ሚናዎን መቀየር አይችሉም።",
+ roleChoose:"ሚናዎን ይምረጡ",roleOne:"አንድ አካውንት አንድ ሚና ብቻ አለው፦ ርዕሰ መምህር፣ መምህር ወይም አስተዳዳሪ።",roleAdminName:"አስተዳዳሪ (የትምህርት ቢሮ)",
+ rpDesc:"ትምህርት ቤትዎን ይፈጥራሉ፣ መምህራንንና ክፍሎችን ያስተዳድራሉ።",rtDesc:"ርዕሰ መምህሩ የሰጠዎት የትምህርት ቤት ኮድ አለዎት።",raDesc:"ሁሉንም ትምህርት ቤቶች ያያሉ (ያለ ተማሪ ስም)።",
+ iAmP:"እኔ ርዕሰ መምህር ነኝ",iAmT:"እኔ መምህር ነኝ",iAmA:"እኔ አስተዳዳሪ (ቢሮ) ነኝ",
+ schPh:"የትምህርት ቤትዎን ስም ያስገቡ",codePh:"የትምህርት ቤት ኮድ (ለምሳሌ 7DK83H)",errRole:"ሚናዎን ይምረጡ።",
+ adminUidX:"አስተዳዳሪ ለመሆን UID-ዎን ለፕሮጀክቱ ባለቤት ይላኩ። እሱ በ Firebase «admins» ውስጥ ይመዘግባል።",
+ lgSub:"የትምህርት ቤት አስተዳደር ሥርዓት",lgTabIn:"ግባ",lgTabUp:"ተመዝገብ",lgEmailL:"ኢሜይል",lgPassL:"የይለፍ ቃል",
+ lgEmailPh:"ኢሜይልዎን ያስገቡ",lgPassPh:"የይለፍ ቃልዎን ያስገቡ",lgNamePh:"ስምዎን ያስገቡ",
+ lgHintUp:"ከተመዘገቡ በኋላ የትምህርት ቤት ኮድ በማስገባት እንደ መምህር ይቀላቀላሉ። የተፈቀደልዎ ርዕሰ መምህር ከሆኑ ትምህርት ቤት ይፈጥራሉ።",
+ lgLocal:"ያለ አካውንት ቀጥል (በዚህ ስልክ ላይ ብቻ)",lgRetry:"እንደገና ሞክር",admT:"አስተዳዳሪ፦ ሁሉም ትምህርት ቤቶች",admNote:"የተማሪ ስምና ስልክ ቁጥር አይታይም። ጥቅል መረጃ (ቁጥርና መቶኛ) ብቻ።",
  admAllowT:"የተፈቀዱ ርዕሰ መምህራን",admAllowX:"የርዕሰ መምህሩን ኢሜይል ያስገቡ። እሱ አካውንት ፈጥሮ ትምህርት ቤት መፍጠር ይችላል።",admAllowAdd:"ፍቀድ",admNoAllowed:"እስካሁን የተፈቀደ የለም።",
  admDone:"ተከናውኗል።",admSchools:"ትምህርት ቤቶች",admNoSchools:"እስካሁን ትምህርት ቤት የለም።",admNoSum:"ሪፖርት አልተላከም (ርዕሰ መምህሩ መተግበሪያውን መክፈት አለበት)።",
  admClasses:"ክፍሎች",admCode:"ኮድ",admLast:"የመጨረሻ መዝገብ",admUpd:"የተዘመነ",admStatus:"ሁኔታ",admBlocked:"ታግዷል",admActive:"ንቁ",
@@ -309,7 +366,16 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  exNoData:"No attendance recorded in this period.",exP:"P",exL:"L",exA:"A",
  notAllowed:"Your email isn't approved to create a school. Contact the person who gave you this app to get access.",
  createNote:"Only approved principals can create a school. If you are a teacher, use the school code below.",
- tabAdmin:"Admin",admT:"Admin: all schools",admNote:"You cannot see student names or phone numbers. Totals and percentages only.",
+ tabAdmin:"Admin",admSelf:"You cannot remove yourself or change your own role.",
+ roleChoose:"Choose your role",roleOne:"One account has one role only: principal, teacher, or admin.",roleAdminName:"Admin (Education Office)",
+ rpDesc:"You create your school and manage teachers and classes.",rtDesc:"You have the school code your principal gave you.",raDesc:"You see all schools (no student names).",
+ iAmP:"I am a principal",iAmT:"I am a teacher",iAmA:"I am an admin (office)",
+ schPh:"Enter your school's name",codePh:"School code (e.g. 7DK83H)",errRole:"Please choose your role.",
+ adminUidX:"To become an admin, send your UID to the project owner. They add it under 'admins' in Firebase.",
+ lgSub:"School Management System",lgTabIn:"Sign in",lgTabUp:"Register",lgEmailL:"Email",lgPassL:"Password",
+ lgEmailPh:"Enter your email",lgPassPh:"Enter your password",lgNamePh:"Enter your name",
+ lgHintUp:"After registering, enter your school code to join as a teacher. Approved principals can create a school.",
+ lgLocal:"Continue without an account (on this phone only)",lgRetry:"Try again",admT:"Admin: all schools",admNote:"You cannot see student names or phone numbers. Totals and percentages only.",
  admAllowT:"Approved principals",admAllowX:"Enter the principal's email. They can then create an account and a school.",admAllowAdd:"Approve",admNoAllowed:"No principals approved yet.",
  admDone:"Done.",admSchools:"Schools",admNoSchools:"No schools yet.",admNoSum:"No report yet (the principal must open the app).",
  admClasses:"Classes",admCode:"Code",admLast:"Last record",admUpd:"Updated",admStatus:"Status",admBlocked:"Blocked",admActive:"Active",
@@ -444,14 +510,16 @@ function renderChrome(){
   document.getElementById("prefs").innerHTML=
     '<label>'+t.lang+'<select data-pref="lang">'+langs+'</select></label>'+
     '<label>'+t.cal+'<select data-pref="cal"><option value="eth"'+(state.settings.cal==="eth"?' selected':'')+'>'+t.eth+'</option><option value="greg"'+(state.settings.cal==="greg"?' selected':'')+'>'+t.greg+'</option></select></label>';
+  var limited=!!(cloud.user&&!cloudMode&&!localOnly);
   var ids=["take","report","manage","acct"],names=[t.tabs[0],t.tabs[1],t.tabs[2],t.tab4];
+  if(limited){ids=["acct"];names=[t.tab4]}
   if(cloud.isAdmin){ids.push("admin");names.push(t.tabAdmin)}
   document.getElementById("nav").className=ids.length>4?"n5":"";
   document.getElementById("nav").innerHTML=ids.map(function(id,i){
     return '<button role="tab" data-tab="'+id+'" aria-selected="'+(tab===id)+'">'+names[i]+'</button>';
   }).join("");
   var cs=document.getElementById("cstat");
-  cs.textContent=cloudMode?"☁ "+(cloud.schoolName||"")+" · "+roleName(cloud.role)+" · "+syncText():"";
+  cs.innerHTML=cloudMode?"☁ "+esc(cloud.schoolName||"")+" · "+roleChip(cloud.role)+" · "+esc(syncText()):"";
 }
 function chooser(){
   return '<div class="card" style="margin-top:16px"><h2>Afaan filadhu · ቋንቋ ይምረጡ · Choose language</h2>'+
@@ -461,9 +529,14 @@ function render(){
   renderPending=false;
   renderChrome();
   if(!state.settings.chosen){
+    document.body.classList.remove("loginview");
     document.getElementById("nav").innerHTML="";document.getElementById("prefs").innerHTML="";
     app.innerHTML=chooser();return;
   }
+  var showLogin=!localOnly&&!cloud.user;
+  if(cloud.user&&!cloudMode&&!localOnly&&tab!=="acct"&&!(tab==="admin"&&cloud.isAdmin))tab="acct";
+  document.body.classList.toggle("loginview",showLogin);
+  if(showLogin){app.innerHTML=viewLogin();return}
   app.innerHTML=tab==="take"?viewTake():tab==="report"?viewReport():tab==="manage"?viewManage():(tab==="admin"&&cloud.isAdmin)?viewAdmin():viewAccount();
 }
 
@@ -783,9 +856,14 @@ document.addEventListener("click",function(e){
     var st=c.students.filter(function(x){return x.id===b.dataset.id})[0];
     if(st){if(!document.getElementById("eName").value.trim())return;readFields("e",st)}
     sortSt(c);editId=null;save();cloudSaveClass(c);render();
+  }else if(act==="grole"){
+    cloud.keepN=val("cName")||cloud.keepN;cloud.keepE=val("cEmail")||cloud.keepE;cloud.keepS=val("cSchool")||cloud.keepS;cloud.keepC=val("cCode")||cloud.keepC;
+    cloud.regRole=b.dataset.r;cloud.errMsg=null;render()
   }else if(act==="csignup"){doSignUp()
   }else if(act==="csignin"){doSignIn()
-  }else if(act==="cmode"){cloud.authMode=cloud.authMode==="up"?"in":"up";cloud.errMsg=null;cloud.msg=null;render()
+  }else if(act==="cmode"){cloud.authMode=b.dataset.m?b.dataset.m:(cloud.authMode==="up"?"in":"up");cloud.errMsg=null;cloud.msg=null;render()
+  }else if(act==="clocal"){localOnly=true;try{localStorage.setItem("galmee-local-only","1")}catch(e){}render();window.scrollTo(0,0)
+  }else if(act==="cretry"){cloud.errMsg=null;ensureCloud();render()
   }else if(act==="creset"){doReset()
   }else if(act==="csignout"){doSignOut()
   }else if(act==="ccreate"){createSchool()
@@ -837,12 +915,14 @@ document.addEventListener("click",function(e){
 var FB_CFG={apiKey:"AIzaSyC-CdRX6D2dOjAPFCQdl5N6J6EsTLiotmM",authDomain:"galmee-dhufaa.firebaseapp.com",projectId:"galmee-dhufaa",storageBucket:"galmee-dhufaa.firebasestorage.app",messagingSenderId:"243122059521",appId:"1:243122059521:web:694d01ab7f5010b7b10300"};
 var FB_VER="10.14.1";
 var cloudMode=false;
+var localOnly=false;try{localOnly=localStorage.getItem("galmee-local-only")==="1"}catch(e){}
 var cloud={sdk:null,sdkP:null,started:false,db:null,auth:null,authKnown:false,status:"idle",user:null,schoolId:null,schoolName:"",role:null,
   members:[],userUnsubs:[],schoolUnsubs:[],dataUnsubs:[],attUnsubs:{},pend:{},errMsg:null,msg:null,needSetup:false,removed:false,authMode:"in",isAdmin:false,blocked:false,blockedKnown:false,startedRole:null,lastSum:null,admUnsubs:[],adm:null,admMemUn:null};
 var renderPending=false;
 
 function val(id){var el=document.getElementById(id);return el?el.value.trim():""}
 function roleName(r){var t=L();return r==="principal"?t.roleP:t.roleT}
+function roleChip(r){return '<span class="rchip '+(r==="principal"?"p":"t")+'">'+esc(roleName(r))+'</span>'}
 function anyPending(){return Object.keys(cloud.pend).some(function(k){return cloud.pend[k]})}
 function syncText(){var t=L();return !navigator.onLine?t.offline+(anyPending()?" ⏳":""):(anyPending()?t.syncing:t.synced)}
 function inField(){var a=document.activeElement;return !!(a&&a!==document.body&&app.contains(a)&&/^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName))}
@@ -906,13 +986,16 @@ function onUser(user){
   fs.getDoc(fs.doc(cloud.db,"admins",user.uid)).then(function(ad){
     if(ad.exists()&&cloud.user&&cloud.user.uid===user.uid){cloud.isAdmin=true;startAdmin();softRender()}
   }).catch(function(){});
-  cloud.userUnsubs.push(fs.onSnapshot(fs.doc(cloud.db,"users",user.uid),function(snap){
+  cloud.userUnsubs.push(fs.onSnapshot(fs.doc(cloud.db,"users",user.uid),{includeMetadataChanges:true},function(snap){
     var d=snap.exists()?snap.data():null;
     if(d&&d.schoolId){
       if(cloud.schoolId!==d.schoolId)enterSchool(d.schoolId);
     }else{
+      /* Cache irraa qofa "hin jiru" jedhee yoo ta'e (interneet laafaa), server eegi: mana barnootaa filadhu hin agarsiisin */
+      if(snap.metadata&&snap.metadata.fromCache)return;
       if(cloud.schoolId)leaveSchool();
-      cloud.needSetup=true;
+      cloud.needSetup=true;tab="acct";
+      if(cloud.pending){var pd=cloud.pending;cloud.pending=null;setTimeout(function(){runPending(pd)},0)}
     }
     softRender();
   },onErr));
@@ -1030,14 +1113,16 @@ function isLocked(){
 /* ----- Seensa / Auth ----- */
 function doSignUp(){
   if(cloud.busy)return;
-  var em=val("cEmail"),pw=(document.getElementById("cPass")||{}).value||"",nm=val("cName");
-  cloud.keepE=em;cloud.keepN=nm;
-  if(!em||!pw){cloud.errMsg=L().fillAll;render();return}
-  cloud.errMsg=null;cloud.busy=true;cloud.msg=L().wait;render();
+  var t=L(),em=val("cEmail"),pw=(document.getElementById("cPass")||{}).value||"",nm=val("cName"),sc=val("cSchool"),cd=val("cCode").toUpperCase().replace(/[^A-Z0-9]/g,""),r=cloud.regRole;
+  cloud.keepE=em;cloud.keepN=nm;cloud.keepS=sc;cloud.keepC=cd;
+  if(!r){cloud.errMsg=t.errRole;render();return}
+  if(!em||!pw||!nm||(r==="principal"&&!sc)||(r==="teacher"&&!cd)){cloud.errMsg=t.fillAll;render();return}
+  cloud.errMsg=null;cloud.busy=true;cloud.msg=t.wait;
+  cloud.pending={role:r,school:sc,code:cd,name:nm};render();
   var A=cloud.sdk.auth;
   A.createUserWithEmailAndPassword(cloud.auth,em,pw).then(function(cred){
-    if(nm)return A.updateProfile(cred.user,{displayName:nm}).catch(function(){});
-  }).catch(onErr);
+    return A.updateProfile(cred.user,{displayName:nm}).catch(function(){});
+  }).catch(function(e){cloud.pending=null;onErr(e)});
 }
 function doSignIn(){
   if(cloud.busy)return;
@@ -1065,8 +1150,14 @@ function genCode(){
   for(var i=0;i<6;i++)o+=al[a[i]%al.length];
   return o;
 }
-function createSchool(){
-  var t=L(),nm=val("sName"),me=val("sUser")||cloud.user.displayName||cloud.user.email||"";
+function runPending(pd){
+  cloud.regRole=null;
+  if(pd.role==="principal")createSchool(pd.school,pd.name);
+  else if(pd.role==="teacher")joinSchool(pd.code,pd.name);
+  else{cloud.busy=false;cloud.msg=null;render()}
+}
+function createSchool(nmArg,meArg){
+  var t=L(),nm=nmArg||val("sName"),me=meArg||val("sUser")||cloud.user.displayName||cloud.user.email||"";
   if(!nm){cloud.errMsg=t.fillAll;render();return}
   if(!navigator.onLine){cloud.errMsg=t.needNet;render();return}
   cloud.errMsg=null;
@@ -1086,15 +1177,19 @@ function createSchool(){
   })();
   }).catch(onErr);
 }
-function joinSchool(){
-  var t=L(),code=val("sCode").toUpperCase().replace(/[^A-Z0-9]/g,""),me=val("sUser")||cloud.user.displayName||cloud.user.email||"";
+function joinSchool(codeArg,meArg){
+  var t=L(),code=(codeArg||val("sCode")).toUpperCase().replace(/[^A-Z0-9]/g,""),me=meArg||val("sUser")||cloud.user.displayName||cloud.user.email||"";
   if(!code){cloud.errMsg=t.fillAll;render();return}
   if(!navigator.onLine){cloud.errMsg=t.needNet;render();return}
   cloud.errMsg=null;
-  var fs=cloud.sdk.fs,db=cloud.db,u=cloud.user,b=fs.writeBatch(db);
-  b.set(fs.doc(db,"schools",code,"members",u.uid),{role:"teacher",email:u.email||"",name:me,joinedAt:fs.serverTimestamp()});
-  b.set(fs.doc(db,"users",u.uid),{schoolId:code,email:u.email||""});
-  b.commit().catch(onErr);
+  var fs=cloud.sdk.fs,db=cloud.db,u=cloud.user;
+  fs.getDoc(fs.doc(db,"schools",code,"members",u.uid)).then(function(md){
+    var b=fs.writeBatch(db);
+    /* Duraanuu miseensa yoo ta'e: gahee isaa (hogganaa/barsiisaa) hin jijjiiru, hidhaa qofa deebisa */
+    if(!md.exists())b.set(fs.doc(db,"schools",code,"members",u.uid),{role:"teacher",email:u.email||"",name:me,joinedAt:fs.serverTimestamp()});
+    b.set(fs.doc(db,"users",u.uid),{schoolId:code,email:u.email||""});
+    return b.commit();
+  }).catch(onErr);
 }
 function resetUserSchool(){
   var fs=cloud.sdk.fs;
@@ -1204,10 +1299,12 @@ function admToggleBlock(sid){
   else fs.setDoc(ref,{blockedBy:cloud.user.uid,blockedAt:fs.serverTimestamp()}).catch(admErr);
 }
 function admSetRole(sid,uid,role){
+  if(uid===cloud.user.uid){cloud.adm.err=L().admSelf;cloud.adm.msg=null;render();return}
   var fs=cloud.sdk.fs;
   fs.updateDoc(fs.doc(cloud.db,"schools",sid,"members",uid),{role:role}).catch(admErr);
 }
 function admRemoveMember(sid,uid){
+  if(uid===cloud.user.uid){cloud.adm.err=L().admSelf;cloud.adm.msg=null;render();return}
   var fs=cloud.sdk.fs;
   fs.deleteDoc(fs.doc(cloud.db,"schools",sid,"members",uid)).catch(admErr);
 }
@@ -1288,6 +1385,38 @@ function viewAdmin(){
   return out;
 }
 
+
+function loginForm(){
+  var t=L(),up=cloud.authMode==="up",r=cloud.regRole||null;
+  var h='<div class="lgtabs" role="tablist"><button type="button" class="lgtab" role="tab" aria-selected="'+(!up)+'" data-act="cmode" data-m="in">'+t.lgTabIn+'</button><button type="button" class="lgtab" role="tab" aria-selected="'+up+'" data-act="cmode" data-m="up">'+t.lgTabUp+'</button></div>';
+  if(cloud.errMsg)h+='<div class="err" id="cerr">'+esc(cloud.errMsg)+'</div>';
+  if(cloud.msg)h+='<div class="ok">'+esc(cloud.msg)+'</div>';
+  if(up){
+    h+='<label class="lglabel">'+t.roleChoose+'</label><div class="rolepick" role="group">'+
+      [["principal","p",t.roleP,t.rpDesc],["teacher","t",t.roleT,t.rtDesc],["admin","a",t.roleAdminName,t.raDesc]].map(function(x){
+        return '<button type="button" class="rolebtn '+x[1]+'" data-act="grole" data-r="'+x[0]+'" aria-pressed="'+(r===x[0])+'"><b>'+esc(x[2])+'</b><small>'+esc(x[3])+'</small></button>';
+      }).join("")+'</div><p class="lghint" style="margin:8px 0 0;text-align:left">'+t.roleOne+'</p>';
+    h+='<label class="lglabel" for="cName">'+t.yourName+'</label><input class="lginput" id="cName" type="text" autocomplete="name" placeholder="'+esc(t.lgNamePh)+'" value="'+esc(cloud.keepN||"")+'">';
+    if(r==="principal")h+='<label class="lglabel" for="cSchool">'+t.schName+'</label><input class="lginput" id="cSchool" type="text" autocomplete="off" placeholder="'+esc(t.schPh)+'" value="'+esc(cloud.keepS||"")+'">';
+    if(r==="teacher")h+='<label class="lglabel" for="cCode">'+t.schCode+'</label><input class="lginput" id="cCode" type="text" autocapitalize="characters" autocomplete="off" placeholder="'+esc(t.codePh)+'" value="'+esc(cloud.keepC||"")+'">';
+  }
+  h+='<label class="lglabel" for="cEmail">'+t.lgEmailL+'</label><input class="lginput" id="cEmail" type="email" inputmode="email" autocomplete="email" placeholder="'+esc(t.lgEmailPh)+'" value="'+esc(cloud.keepE||"")+'">';
+  h+='<label class="lglabel" for="cPass">'+t.lgPassL+'</label><input class="lginput" id="cPass" type="password" autocomplete="'+(up?'new-password':'current-password')+'" placeholder="'+esc(t.lgPassPh)+'">';
+  h+='<button type="button" class="lgbtn" data-act="'+(up?'csignup':'csignin')+'">'+(up?t.lgTabUp:t.lgTabIn)+'</button>';
+  h+=up?'<p class="lghint">'+t.lgHintUp+'</p>':'<button type="button" class="lglink" data-act="creset">'+t.forgot+'</button>';
+  return h;
+}
+function loginHead(){var t=L();return '<div class="lgbadge" aria-hidden="true">GD</div><h1 class="lgtitle">'+esc(t.title)+'</h1><p class="lgsub">'+esc(t.lgSub)+'</p>'}
+function viewLogin(){
+  var t=L(),body;
+  if(cloud.status==="fail")body='<p class="lghint" style="font-size:15px;margin:0 0 6px">'+t.cloudFail+'</p><button type="button" class="lgbtn" data-act="cretry">'+t.lgRetry+'</button>';
+  else if(!cloud.authKnown)body='<p class="lgsub" style="margin:0">'+t.connecting+'</p>';
+  else body=loginForm();
+  var langs=Object.keys(T).map(function(k){return '<button type="button" class="lglink" data-lang="'+k+'"'+(k===state.settings.lang?' aria-current="true"':'')+'>'+T[k].langName+'</button>'}).join("");
+  return '<div class="login"><div class="lgc">'+loginHead()+body+'</div>'+
+    '<div class="lglang">'+langs+'</div>'+
+    '<button type="button" class="lglink" style="margin-top:10px;font-size:14px;color:var(--lg-muted)" data-act="clocal">'+t.lgLocal+'</button></div>';
+}
 function viewAccount(){
   var t=L(),out="";
   if(cloud.errMsg)out+='<div class="err" id="cerr" style="margin-top:12px">'+esc(cloud.errMsg)+'</div>';
@@ -1295,27 +1424,22 @@ function viewAccount(){
   if(cloud.status==="fail")return out+'<div class="empty"><b>☁</b>'+t.cloudFail+'</div>';
   if(!cloud.authKnown)return out+'<div class="empty">'+t.connecting+'</div>';
   if(!cloud.user){
-    var up=cloud.authMode==="up";
-    return out+'<div class="card" style="margin-top:16px"><h2>'+t.cTitle+'</h2><p class="small" style="margin-top:0">'+t.cInfo+'</p><div class="fld">'+
-      (up?'<label>'+t.yourName+'<input type="text" id="cName" autocomplete="name" value="'+esc(cloud.keepN||"")+'"></label>':'')+
-      '<label>'+t.email+'<input type="email" id="cEmail" autocomplete="email" inputmode="email" value="'+esc(cloud.keepE||"")+'"></label>'+
-      '<label>'+t.pass+'<input type="password" id="cPass" autocomplete="'+(up?'new-password':'current-password')+'"></label></div>'+
-      '<button class="btn" data-act="'+(up?'csignup':'csignin')+'">'+(up?t.signUp:t.signIn)+'</button>'+
-      '<div class="two" style="grid-template-columns:1fr"><button class="btn ghost" data-act="cmode">'+(up?t.toIn:t.toUp)+'</button>'+(up?'':'<button class="btn ghost" data-act="creset">'+t.forgot+'</button>')+'</div></div>';
+    return out+'<div class="lgc" style="margin-top:16px">'+loginHead()+loginForm()+'</div>';
   }
   var u=cloud.user;
   var signout='<button class="btn ghost" data-act="csignout" style="width:100%;margin-bottom:14px">'+t.signOut+' ('+esc(u.email||"")+')</button>';
   if(cloud.needSetup){
-    out+='<div class="card" style="margin-top:16px"><h2>'+t.setupT+'</h2><div class="fld"><label>'+t.yourName+'<input type="text" id="sUser" value="'+esc(u.displayName||"")+'" autocomplete="name"></label></div></div>';
-    out+='<div class="card"><h2>'+t.createSch+'</h2><p class="small" style="margin-top:0">'+t.createNote+'</p><div class="fld"><label>'+t.schName+'<input type="text" id="sName"></label></div><button class="btn" data-act="ccreate">'+t.createBtn+'</button></div>';
-    out+='<div class="card"><h2>'+t.joinSch+'</h2><div class="fld"><label>'+t.schCode+'<input type="text" id="sCode" autocapitalize="characters" autocomplete="off"></label></div><button class="btn" data-act="cjoin">'+t.joinBtn+'</button></div>';
+    out+='<div class="card" style="margin-top:16px"><h2>'+t.roleChoose+'</h2><p class="small" style="margin:0">'+t.roleOne+'</p><div class="fld"><label>'+t.yourName+'<input type="text" id="sUser" value="'+esc(u.displayName||"")+'" autocomplete="name"></label></div></div>';
+    out+='<div class="card rolecard p"><h2>'+t.iAmP+'</h2><p class="small" style="margin-top:0">'+t.rpDesc+' '+t.createNote+'</p><div class="fld"><label>'+t.schName+'<input type="text" id="sName"></label></div><button class="btn" data-act="ccreate">'+t.createBtn+'</button></div>';
+    out+='<div class="card rolecard t"><h2>'+t.iAmT+'</h2><p class="small" style="margin-top:0">'+t.rtDesc+'</p><div class="fld"><label>'+t.schCode+'<input type="text" id="sCode" autocapitalize="characters" autocomplete="off"></label></div><button class="btn" data-act="cjoin">'+t.joinBtn+'</button></div>';
+    out+='<div class="card rolecard a"><h2>'+t.iAmA+'</h2><p class="small" style="margin-top:0">'+t.raDesc+'</p><p class="small">'+t.adminUidX+'</p><div class="code" style="font-size:13px;letter-spacing:0;word-break:break-all">'+esc(u.uid)+'</div></div>';
     return out+signout;
   }
   if(cloud.removed)return out+'<div class="empty" style="margin-top:16px"><b>'+t.removedT+'</b><button class="btn" data-act="cresetuser">'+t.resetBtn+'</button></div>'+signout;
   if(cloud.blocked)return out+'<div class="empty" style="margin-top:16px"><b>'+t.blockedT+'</b>'+t.blockedX+'</div>'+signout;
   if(!cloud.role)return out+'<div class="empty" style="margin-top:16px">'+t.connecting+'</div>'+signout;
   out+='<div class="card" style="margin-top:16px"><h2>'+esc(cloud.schoolName||t.school)+'</h2>'+
-    '<p class="small" style="margin:0">'+t.yourRole+': <b>'+roleName(cloud.role)+'</b></p>'+
+    '<p class="small" style="margin:0">'+t.yourRole+': '+roleChip(cloud.role)+'</p>'+
     '<p class="small" style="margin:4px 0 0">'+syncText()+'</p>'+
     (cloud.role==="principal"?'<p class="small" style="margin:12px 0 6px">'+t.shareCode+'</p><div class="code">'+esc(cloud.schoolId)+'</div>':'')+'</div>';
   if(cloud.role==="teacher"&&!state.classes.length)out+='<div class="note">'+t.pendingT+'</div>';
@@ -1348,7 +1472,7 @@ document.addEventListener("keydown",function(e){
   }
 });
 render();
-try{if(localStorage.getItem("galmee-cloud")==="1")ensureCloud()}catch(e){}
+try{if(!localOnly||localStorage.getItem("galmee-cloud")==="1")ensureCloud()}catch(e){ensureCloud()}
 
 /* ---------- Interneet malee / Offline (PWA) ---------- */
 if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){
