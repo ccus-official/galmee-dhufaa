@@ -158,6 +158,12 @@ body.loginview header,body.loginview nav{display:none}
 .rolecard.a{border-left-color:var(--muted)}
 .rchip{display:inline-block;padding:0 9px;border-radius:999px;font-size:12px;font-weight:700;line-height:20px;border:1.5px solid var(--lg-blue);color:var(--lg-blue);background:var(--lg-tab)}
 .rchip.t{border-color:var(--present);color:var(--present);background:var(--present-bg)}
+
+.stbl{width:100%;border-collapse:collapse;font-size:14px}
+.stbl th,.stbl td{padding:8px 4px;border-bottom:1px solid var(--line);text-align:center;vertical-align:middle}
+.stbl th:first-child,.stbl td:first-child{text-align:left;width:48%}
+.stbl th{font-size:13px;color:var(--muted);font-weight:700}
+.stbl tr.p td:first-child{color:var(--present)}.stbl tr.a td:first-child{color:var(--absent)}.stbl tr.l td:first-child{color:var(--late)}
 </style>
 </head>
 <body>
@@ -275,7 +281,7 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  online:"Interneetii irra jirta",offline:"Interneet hin jiru",syncing:"Wal-simachaa jira…",synced:"Wal-simateera",
  migT:"Ragaa mobaayilii ol-kaasi",migX:function(n){return "Kutaa "+n+" mobaayilii kee irra jiru gara cloud tti ol-kaasi."},migBtn:"Ol-kaasi",migDone:"Ol-kaa'amaa jira. Interneet yeroo argatu xumurama.",
  teachers:"Barsiisota",noTeachers:"Barsiisaan tokkollee hin hirmaanne. Koodii mana barnootaa isaaniif kenni.",assign:"Kutaa isaaniif kenni",removeT:"Baasi",
- pendingT:"Kutaan siif hin kennamne. Hogganaa kutaa akka siif kennu gaafadhu, ykn kutaa mataa kee Kutaa tab keessaa uumi.",
+ pendingT:"Kutaan siif hin kennamne. Hogganaa mana barnootaa kutaa akka siif kennu gaafadhi.",
  lockedN:"Barsiisaan galmee har'a fi kaleessa qofa sirreessuu danda'a. Hogganaa gaafadhu.",
  exT:"Ripoortii baasi",exPeriod:"Yeroo",exAll:"Guyyaa galmaa'e hunda",exThis:"Ji'a kana",exLast:"Ji'a darbe",exL30:"Guyyaa 30 darban",
  exCsv:"Excel (CSV) buusi",exPrint:"PDF / Maxxansi",exSum:"Walitti qabama mana barnootaa (CSV)",
@@ -284,9 +290,12 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  exNoData:"Yeroo kana keessa galmeen hin jiru.",exP:"D",exL:"T",exA:"H",
  notAllowed:"Email kee mana barnootaa uumuuf hin hayyamamne. Hayyama argachuuf nama app kana siif kenne quunnami.",
  createNote:"Hogganaa hayyamame qofa mana barnootaa uuma. Barsiisaa taate yoo ta'e, koodii mana barnootaa gadi jiru fayyadami.",
- tabAdmin:"Admin",admSelf:"Ofii kee baasuu ykn gahee kee jijjiiruu hin dandeessu.",
+ tabAdmin:"Admin",admSelf:"Ofii kee baasuu ykn gahee kee jijjiiruu hin dandeessu.",failWhy:"Sababa teeknikaa",failFile:"App kun faayila (file://) ykn Spck preview irraa banamee jira. Cloud link website (https://...) irratti qofa hojjeta. Link GitHub Pages Chrome irratti bani.",sumT:"Gabaasa guyyaa",sumClass:"Kutaa",sumSchool:"Gabaasa mana barnootaa (kutaa hunda)",sumTimes:"Sa'aatii kutaa tokkoon tokkoon itti maqaan waamame",
+ sumReg:"Baay'ina barattoota galmaa'anii",sumPres:"Baay'ina barattoota dhufanii",sumAbs:"Baay'ina barattoota hafanii",sumLate:"Baay'ina barattoota yeroo barnootaa booda dhufanii (late)",
+ sumRegS:"Galmaa'an",sumPresS:"Dhufan",sumAbsS:"Hafan",sumLateS:"Turtan (late)",sumAllCame:"Hunda dhufan (dhufan + turtan)",ethClock:"sa'aa Itoophiyaa",colM:"Dhi.",colF:"Dha.",colT:"Id.",
+ sumTime:"Sa'aatii maqaan itti waamame",sumNone:"Guyyaa kana galmeen hin jiru.",sumNoSex:"Saala hin galmoofne",sumNotMarked:"Hin galmaa'in",exDate:"Guyyaa",
  roleChoose:"Gahee kee filadhu",roleOne:"Akaawuntiin tokko gahee tokko qofa qaba: hogganaa, barsiisaa, ykn Admin.",roleAdminName:"Admin (Biiroo Barnootaa)",
- rpDesc:"Mana barnootaa kee uumta, barsiisota fi kutaa to'atta.",rtDesc:"Koodii mana barnootaa hogganaan siif kenne qabda.",raDesc:"Manneen barnootaa hunda ilaalta (maqaa barataa malee).",
+ rpDesc:"Mana barnootaa kee uumta (Admin dura email kee hayyamuu qaba), barsiisota, kutaa fi barattoota to'atta.",rtDesc:"Koodii mana barnootaa hogganaan siif kenne qabda. Kutaa hogganaan siif kenne qofa argita.",raDesc:"Hogganaa hayyamta, manneen barnootaa hunda ilaalta, dhorkita, hogganaa jijjiirta. Maqaa barataa hin argitu.",
  iAmP:"Ani hogganaa dha",iAmT:"Ani barsiisaa dha",iAmA:"Ani Admin dha (Biiroo)",
  schPh:"Maqaa mana barnootaa kee galchi",codePh:"Koodii mana barnootaa (fkn. 7DK83H)",errRole:"Gahee kee filadhu.",
  adminUidX:"Admin ta'uuf UID kee abbaa project'tti ergi. Inni Firebase irratti 'admins' keessatti galmeessa.",
@@ -316,7 +325,7 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  online:"ኢንተርኔት አለ",offline:"ኢንተርኔት የለም",syncing:"በመመሳሰል ላይ…",synced:"ተመስሏል",
  migT:"የስልክ መረጃ ጫን",migX:function(n){return n+" በስልክዎ ላይ ያሉ ክፍሎችን ወደ ክላውድ ይጫኑ።"},migBtn:"ጫን",migDone:"በመጫን ላይ ነው። ኢንተርኔት ሲያገኝ ይጠናቀቃል።",
  teachers:"መምህራን",noTeachers:"እስካሁን የተቀላቀለ መምህር የለም። የትምህርት ቤቱን ኮድ ይስጧቸው።",assign:"ክፍል ስጣቸው",removeT:"አስወግድ",
- pendingT:"ክፍል አልተሰጠዎትም። ርዕሰ መምህሩን ክፍል እንዲሰጥዎ ይጠይቁ፣ ወይም በ«ክፍል» ትር ውስጥ የራስዎን ክፍል ይፍጠሩ።",
+ pendingT:"ክፍል አልተሰጠዎትም። ርዕሰ መምህሩ ክፍል እንዲሰጥዎ ይጠይቁ።",
  lockedN:"መምህር የዛሬንና የትናንትናን መዝገብ ብቻ ማስተካከል ይችላል። ርዕሰ መምህሩን ይጠይቁ።",
  exT:"ሪፖርት አውጣ",exPeriod:"ጊዜ",exAll:"የተመዘገቡ ቀናት ሁሉ",exThis:"ይህ ወር",exLast:"ባለፈው ወር",exL30:"ያለፉት 30 ቀናት",
  exCsv:"Excel (CSV) አውርድ",exPrint:"PDF / አትም",exSum:"የትምህርት ቤቱ ጥቅል ሪፖርት (CSV)",
@@ -325,9 +334,12 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  exNoData:"በዚህ ጊዜ ውስጥ መዝገብ የለም።",exP:"መ",exL:"ዘ",exA:"ቀ",
  notAllowed:"ኢሜይልዎ ትምህርት ቤት ለመፍጠር አልተፈቀደም። ፈቃድ ለማግኘት ይህን መተግበሪያ የሰጠዎትን ያነጋግሩ።",
  createNote:"ትምህርት ቤት መፍጠር የሚችሉት የተፈቀደላቸው ርዕሰ መምህራን ብቻ ናቸው። መምህር ከሆኑ ከታች ያለውን የትምህርት ቤት ኮድ ይጠቀሙ።",
- tabAdmin:"አስተዳዳሪ",admSelf:"ራስዎን ማስወገድ ወይም ሚናዎን መቀየር አይችሉም።",
+ tabAdmin:"አስተዳዳሪ",admSelf:"ራስዎን ማስወገድ ወይም ሚናዎን መቀየር አይችሉም።",failWhy:"ቴክኒካዊ ምክንያት",failFile:"ይህ መተግበሪያ እንደ ፋይል (file://) ወይም ከ Spck ቅድመ እይታ ተከፍቷል። ክላውድ በድር ጣቢያ አድራሻ (https://...) ብቻ ይሰራል። የ GitHub Pages አድራሻውን በ Chrome ይክፈቱ።",sumT:"የቀን ሪፖርት",sumClass:"ክፍል",sumSchool:"የትምህርት ቤት ሪፖርት (ሁሉም ክፍሎች)",sumTimes:"ስም የተጠራበት ሰዓት በየክፍሉ",
+ sumReg:"የተመዘገቡ ተማሪዎች ብዛት",sumPres:"የተገኙ ተማሪዎች ብዛት",sumAbs:"የቀሩ ተማሪዎች ብዛት",sumLate:"ከትምህርት ሰዓት በኋላ የደረሱ ተማሪዎች ብዛት (ዘገየ)",
+ sumRegS:"የተመዘገቡ",sumPresS:"የተገኙ",sumAbsS:"የቀሩ",sumLateS:"ዘገዩ",sumAllCame:"ሁሉም የመጡ (የመጡ + ዘግይተው የመጡ)",ethClock:"የኢትዮጵያ ሰዓት",colM:"ወ.",colF:"ሴ.",colT:"ድ.",
+ sumTime:"ስም የተጠራበት ሰዓት",sumNone:"በዚህ ቀን መዝገብ የለም።",sumNoSex:"ጾታ ያልተመዘገበ",sumNotMarked:"ያልተመዘገቡ",exDate:"ቀን",
  roleChoose:"ሚናዎን ይምረጡ",roleOne:"አንድ አካውንት አንድ ሚና ብቻ አለው፦ ርዕሰ መምህር፣ መምህር ወይም አስተዳዳሪ።",roleAdminName:"አስተዳዳሪ (የትምህርት ቢሮ)",
- rpDesc:"ትምህርት ቤትዎን ይፈጥራሉ፣ መምህራንንና ክፍሎችን ያስተዳድራሉ።",rtDesc:"ርዕሰ መምህሩ የሰጠዎት የትምህርት ቤት ኮድ አለዎት።",raDesc:"ሁሉንም ትምህርት ቤቶች ያያሉ (ያለ ተማሪ ስም)።",
+ rpDesc:"ትምህርት ቤትዎን ይፈጥራሉ (አስተዳዳሪው መጀመሪያ ኢሜይልዎን መፍቀድ አለበት)፣ መምህራንን፣ ክፍሎችንና ተማሪዎችን ያስተዳድራሉ።",rtDesc:"ርዕሰ መምህሩ የሰጠዎት የትምህርት ቤት ኮድ አለዎት። ርዕሰ መምህሩ የሰጠዎትን ክፍል ብቻ ያያሉ።",raDesc:"ርዕሰ መምህራንን ይፈቅዳሉ፣ ሁሉንም ትምህርት ቤቶች ያያሉ፣ ያግዳሉ፣ ርዕሰ መምህር ይቀይራሉ። የተማሪ ስም አያዩም።",
  iAmP:"እኔ ርዕሰ መምህር ነኝ",iAmT:"እኔ መምህር ነኝ",iAmA:"እኔ አስተዳዳሪ (ቢሮ) ነኝ",
  schPh:"የትምህርት ቤትዎን ስም ያስገቡ",codePh:"የትምህርት ቤት ኮድ (ለምሳሌ 7DK83H)",errRole:"ሚናዎን ይምረጡ።",
  adminUidX:"አስተዳዳሪ ለመሆን UID-ዎን ለፕሮጀክቱ ባለቤት ይላኩ። እሱ በ Firebase «admins» ውስጥ ይመዘግባል።",
@@ -357,7 +369,7 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  online:"Online",offline:"Offline",syncing:"Syncing…",synced:"Synced",
  migT:"Upload phone data",migX:function(n){return "Upload the "+n+" class(es) stored on this phone to the cloud."},migBtn:"Upload",migDone:"Uploading. It finishes when you are online.",
  teachers:"Teachers",noTeachers:"No teachers have joined yet. Give them the school code.",assign:"Assign classes",removeT:"Remove",
- pendingT:"You have no classes yet. Ask the principal to assign you a class, or create your own in the Classes tab.",
+ pendingT:"You have no classes yet. Ask your principal to assign you a class.",
  lockedN:"Teachers can only edit today's and yesterday's records. Ask the principal.",
  exT:"Export report",exPeriod:"Period",exAll:"All recorded days",exThis:"This month",exLast:"Last month",exL30:"Last 30 days",
  exCsv:"Download Excel (CSV)",exPrint:"PDF / Print",exSum:"School summary (CSV)",
@@ -366,9 +378,12 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  exNoData:"No attendance recorded in this period.",exP:"P",exL:"L",exA:"A",
  notAllowed:"Your email isn't approved to create a school. Contact the person who gave you this app to get access.",
  createNote:"Only approved principals can create a school. If you are a teacher, use the school code below.",
- tabAdmin:"Admin",admSelf:"You cannot remove yourself or change your own role.",
+ tabAdmin:"Admin",admSelf:"You cannot remove yourself or change your own role.",failWhy:"Technical reason",failFile:"This app was opened as a file (file://) or from a preview. Cloud only works from a website address (https://...). Open the GitHub Pages link in Chrome.",sumT:"Daily summary",sumClass:"Class",sumSchool:"School summary (all classes)",sumTimes:"Time the roll was called, by class",
+ sumReg:"Students registered",sumPres:"Students present",sumAbs:"Students absent",sumLate:"Students who came after class time (late)",
+ sumRegS:"Registered",sumPresS:"Present",sumAbsS:"Absent",sumLateS:"Late",sumAllCame:"All who came (present + late)",ethClock:"Ethiopian time",colM:"M.",colF:"F.",colT:"Total",
+ sumTime:"Roll called at",sumNone:"No attendance recorded for this day.",sumNoSex:"Gender not set",sumNotMarked:"Not marked",exDate:"Date",
  roleChoose:"Choose your role",roleOne:"One account has one role only: principal, teacher, or admin.",roleAdminName:"Admin (Education Office)",
- rpDesc:"You create your school and manage teachers and classes.",rtDesc:"You have the school code your principal gave you.",raDesc:"You see all schools (no student names).",
+ rpDesc:"You create your school (the Admin must approve your email first) and manage teachers, classes and students.",rtDesc:"You have the school code your principal gave you. You only see the classes your principal assigns to you.",raDesc:"You approve principals, see all schools, block schools and change principals. You never see student names.",
  iAmP:"I am a principal",iAmT:"I am a teacher",iAmA:"I am an admin (office)",
  schPh:"Enter your school's name",codePh:"School code (e.g. 7DK83H)",errRole:"Please choose your role.",
  adminUidX:"To become an admin, send your UID to the project owner. They add it under 'admins' in Firebase.",
@@ -419,7 +434,7 @@ var KEY="galmee-dhufaa-v1";
 var state={classes:[],records:{},current:null,settings:{lang:"om",cal:"eth"}};
 try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&p.classes){state=p;state.settings=state.settings||{lang:"om",cal:"eth"}}}}catch(e){}
 if(state.classes.length)state.settings.chosen=true;
-state.saved=state.saved||{};
+state.saved=state.saved||{};state.first=state.first||{};
 state.classes.forEach(sortSt);sortCl(state.classes);
 var localState=state;
 function save(){try{localStorage.setItem(KEY,JSON.stringify(localState))}catch(e){}}
@@ -645,6 +660,17 @@ function classCsv(c,rg){
   });
   var present=d.dates.map(function(x,j){var n=0;d.rows.forEach(function(r){if(r.cells[j]==="P"||r.cells[j]==="L")n++});return n});
   out.push(csvLine(["",t.exTotalP,"",""].concat(present)));
+  out.push(csvLine(["",t.sumTime,"",""].concat(d.dates.map(function(x){var a=calledAt(c,x);return a?fmtClock(a):""}))));
+  out.push("");
+  out.push(csvLine([t.sumT]));
+  var G=[["reg",t.sumRegS],["P",t.sumPresS],["A",t.sumAbsS],["L",t.sumLateS]],hd=[t.exDate||"",t.sumTime];
+  G.forEach(function(g){hd.push(g[1]+" "+t.colM,g[1]+" "+t.colF,g[1]+" "+t.colT)});
+  out.push(csvLine(hd));
+  d.dates.forEach(function(x){
+    var o=dayCounts(c,x),a=calledAt(c,x),row=[fmtDate(x),a?fmtClock(a):""];
+    G.forEach(function(g){row.push(o[g[0]].M,o[g[0]].F,o[g[0]].T)});
+    out.push(csvLine(row));
+  });
   return out.join("\r\n");
 }
 function summaryCsv(rg){
@@ -689,6 +715,14 @@ function printClass(c,rg){
       r.cells.map(function(v){return '<td'+(v==="A"?' class="a"':'')+'>'+esc(mcode(v))+'</td>'}).join("")+
       '<td>'+r.P+'</td><td>'+r.L+'</td><td>'+r.A+'</td><td>'+(r.pct==null?'':r.pct)+'</td></tr>';
   });
+  h+='</tbody></table>';
+  var G=[["reg",t.sumRegS],["P",t.sumPresS],["A",t.sumAbsS],["L",t.sumLateS]];
+  h+='<h3 style="margin:12px 0 4px">'+esc(t.sumT)+'</h3><table><thead><tr><th rowspan="2">'+esc(t.exDate||"")+'</th><th rowspan="2">'+esc(t.sumTime)+'</th>'+
+    G.map(function(g){return '<th colspan="3">'+esc(g[1])+'</th>'}).join("")+'</tr><tr>'+G.map(function(){return '<th>'+esc(t.colM)+'</th><th>'+esc(t.colF)+'</th><th>'+esc(t.colT)+'</th>'}).join("")+'</tr></thead><tbody>';
+  d.dates.forEach(function(x){
+    var o=dayCounts(c,x),a=calledAt(c,x);
+    h+='<tr><td>'+esc(fmtDate(x))+'</td><td>'+(a?fmtClock(a):'')+'</td>'+G.map(function(g){return '<td>'+o[g[0]].M+'</td><td>'+o[g[0]].F+'</td><td>'+o[g[0]].T+'</td>'}).join("")+'</tr>';
+  });
   h+='</tbody></table><div style="margin-top:6px">'+esc(fmtStamp(Date.now()))+'</div>';
   document.getElementById("printArea").innerHTML=h;
   setTimeout(function(){window.print()},60);
@@ -704,13 +738,61 @@ function exportCard(){
   return h+'<p class="small">'+t.exNote+'</p></div>';
 }
 
+/* ---------- Gabaasa guyyaa: galmaa'an / dhufan / hafan / turtan (Dhi. / Dha. / Id.) ---------- */
+function dayCounts(c,d){
+  var r=getRec(c,d),o={reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false};
+  c.students.forEach(function(s){
+    var g=s.sex==="M"?"M":s.sex==="F"?"F":"";
+    o.reg.T++;if(g)o.reg[g]++;else o.nosex++;
+    var v=r[s.id];
+    if(v==="P"||v==="A"||v==="L"){o.has=true;o[v].T++;if(g)o[v][g]++}else o.unmarked++;
+  });
+  return o;
+}
+function addCounts(a,b){
+  ["reg","P","A","L"].forEach(function(k){["M","F","T"].forEach(function(g){a[k][g]+=b[k][g]})});
+  a.nosex+=b.nosex;a.unmarked+=b.unmarked;a.has=a.has||b.has;return a;
+}
+function emptyCounts(){return {reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false}}
+function calledAt(c,d){var k=recKey(c,d);return (state.first&&state.first[k])||state.saved[k]||0}
+function fmtClock(ms){var x=new Date(ms);return pad(x.getHours())+":"+pad(x.getMinutes())}
+function fmtClockE(ms){var x=new Date(ms),h=((x.getHours()-6+12)%12)||12;return h+":"+pad(x.getMinutes())}
+function clockBoth(ms){return fmtClock(ms)+' ('+L().ethClock+' '+fmtClockE(ms)+')'}
+function sumTable(o){
+  var t=L();
+  function row(label,x,cls){return '<tr class="'+cls+'"><td>'+esc(label)+'</td><td>'+x.M+'</td><td>'+x.F+'</td><td><b>'+x.T+'</b></td></tr>'}
+  return '<div style="overflow-x:auto"><table class="stbl"><thead><tr><th></th><th>'+t.colM+'</th><th>'+t.colF+'</th><th>'+t.colT+'</th></tr></thead><tbody>'+
+    row(t.sumReg,o.reg,"r")+row(t.sumPres,o.P,"p")+row(t.sumAbs,o.A,"a")+row(t.sumLate,o.L,"l")+'</tbody></table></div>'+
+    '<p class="small" style="margin:8px 0 0">'+t.sumAllCame+': '+t.colM+' <b>'+(o.P.M+o.L.M)+'</b> \u00b7 '+t.colF+' <b>'+(o.P.F+o.L.F)+'</b> \u00b7 '+t.colT+' <b>'+(o.P.T+o.L.T)+'</b></p>'+
+    ((o.nosex||o.unmarked)?'<p class="small" style="margin:8px 0 0">'+(o.unmarked?t.sumNotMarked+': <b>'+o.unmarked+'</b>':'')+(o.unmarked&&o.nosex?' · ':'')+(o.nosex?t.sumNoSex+': <b>'+o.nosex+'</b>':'')+'</p>':'');
+}
+function summaryCards(c){
+  var t=L(),out="",o=dayCounts(c,date),at=calledAt(c,date);
+  out+='<div class="card"><h2>'+t.sumT+'</h2><p class="small" style="margin:0 0 8px">'+t.sumClass+': <b>'+esc(c.name)+'</b> · '+fmtDate(date)+'</p>';
+  if(!o.has)out+='<p class="small" style="margin:0">'+t.sumNone+'</p>';
+  else out+=sumTable(o)+'<p class="small" style="margin:8px 0 0">\u23F0 '+t.sumTime+': <b>'+(at?clockBoth(at):'?')+'</b></p>';
+  out+='</div>';
+  if(state.classes.length>1&&!isTeacher()){
+    var tot=emptyCounts(),lines=[];
+    state.classes.forEach(function(k){
+      var x=dayCounts(k,date);addCounts(tot,x);
+      var a=calledAt(k,date);
+      lines.push('<div class="item"><span>'+esc(k.name)+'</span><span class="small">'+(x.has?'\u23F0 <b>'+(a?fmtClock(a):'?')+'</b> \u00b7 '+t.sumPres+': '+x.P.T+' \u00b7 '+t.sumAbs+': '+x.A.T:t.sumNone)+'</span></div>');
+    });
+    out+='<div class="card"><h2>'+t.sumSchool+'</h2><p class="small" style="margin:0 0 8px">'+fmtDate(date)+'</p>'+(tot.has?sumTable(tot):'<p class="small" style="margin:0">'+t.sumNone+'</p>')+
+      '<p class="small" style="margin:12px 0 0"><b>'+t.sumTimes+'</b></p>'+lines.join("")+'</div>';
+  }
+  return out;
+}
+
 function viewReport(){
   var c=cls(),t=L();
   if(!c)return noClass();
-  var out=classPicker(false);
+  var out=classPicker(true);
   if(!c.students.length)return out+'<div class="empty"><b>'+t.noStT+'</b>'+t.noStX+'</div>';
   var dates=Object.keys(state.records).filter(function(k){return k.indexOf(c.id+"|")===0}).map(function(k){return k.split("|")[1]});
   if(!dates.length)return out+'<div class="empty"><b>'+t.repT+'</b>'+t.repX+'</div>';
+  out+=summaryCards(c);
   var rows=c.students.map(function(s){
     var P=0,A=0,Lt=0;
     dates.forEach(function(d){var v=getRec(c,d)[s.id];if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++});
@@ -796,16 +878,16 @@ document.addEventListener("click",function(e){
   var act=b.dataset.act,c=cls(),y;
   if(act==="mark"&&c){
     if(isLocked())return;
-    var k=recKey(c,date),r=state.records[k]||(state.records[k]={});
+    var k=recKey(c,date),r=state.records[k]||(state.records[k]={}),wasEmpty=!Object.keys(r).length;
     if(r[b.dataset.sid]===b.dataset.s)delete r[b.dataset.sid];else r[b.dataset.sid]=b.dataset.s;
-    state.saved[k]=Date.now();save();
-    if(cloudMode){var chg={};chg[b.dataset.sid]=r[b.dataset.sid]||null;cloudMark(c,date,chg)}
+    state.saved[k]=Date.now();if(wasEmpty){state.first=state.first||{};state.first[k]=Date.now()}save();
+    if(cloudMode){var chg={};chg[b.dataset.sid]=r[b.dataset.sid]||null;cloudMark(c,date,chg,wasEmpty)}
     y=window.scrollY;render();window.scrollTo(0,y);
   }else if(act==="allp"&&c){
-    var k2=recKey(c,date),r2=state.records[k2]||(state.records[k2]={});
+    var k2=recKey(c,date),r2=state.records[k2]||(state.records[k2]={}),wasEmpty2=!Object.keys(r2).length;
     if(isLocked())return;
     var chg2={};c.students.forEach(function(s){if(!r2[s.id]){r2[s.id]="P";chg2[s.id]="P"}});
-    state.saved[k2]=Date.now();save();if(cloudMode&&Object.keys(chg2).length)cloudMark(c,date,chg2);y=window.scrollY;render();window.scrollTo(0,y);
+    state.saved[k2]=Date.now();if(wasEmpty2&&Object.keys(chg2).length){state.first=state.first||{};state.first[k2]=Date.now()}save();if(cloudMode&&Object.keys(chg2).length)cloudMark(c,date,chg2,wasEmpty2);y=window.scrollY;render();window.scrollTo(0,y);
   }else if(act==="exdl"&&c){
     var rg1=periodRange(exPeriod);
     if(!classData(c,rg1).dates.length){exMsg=L().exNoData;render();return}
@@ -904,7 +986,7 @@ document.addEventListener("click",function(e){
     try{
       var o=JSON.parse(txt);
       if(!o||!Array.isArray(o.classes)||typeof o.records!=="object")throw new Error("bad");
-      o.settings=o.settings||state.settings;o.saved=o.saved||{};o.classes.forEach(sortSt);sortCl(o.classes);state=o;localState=o;save();bkText="";bkMsg={k:"ok",t:L().bkOk};
+      o.settings=o.settings||state.settings;o.saved=o.saved||{};o.first=o.first||{};o.classes.forEach(sortSt);sortCl(o.classes);state=o;localState=o;save();bkText="";bkMsg={k:"ok",t:L().bkOk};
     }catch(er){bkText=txt;bkMsg={k:"err",t:L().bkErr}}
     render();
   }
@@ -945,7 +1027,7 @@ function onErr(e){
   cloud.errMsg=errText(code);cloud.msg=null;cloud.busy=false;softRender();
 }
 function runUnsubs(arr){while(arr.length){try{arr.pop()()}catch(e){}}}
-function newCloudState(){return {classes:[],records:{},saved:{},current:null,settings:localState.settings}}
+function newCloudState(){return {classes:[],records:{},saved:{},first:{},current:null,settings:localState.settings}}
 function exitCloudMode(){cloudMode=false;state=localState}
 function stopData(){
   runUnsubs(cloud.dataUnsubs);
@@ -954,10 +1036,26 @@ function stopData(){
 }
 function leaveSchool(){runUnsubs(cloud.schoolUnsubs);stopData();clearTimeout(sumT);cloud.schoolId=null;cloud.schoolName="";cloud.role=null;cloud.blocked=false;cloud.blockedKnown=false;cloud.startedRole=null;cloud.lastSum=null;exitCloudMode()}
 
+function importRetry(u,n){
+  return import(u).catch(function(e){
+    if(n<=0)throw e;
+    return new Promise(function(r){setTimeout(r,1500)}).then(function(){return importRetry(u,n-1)});
+  });
+}
+function describeFail(e){
+  var c=e&&(e.code||e.name)?String(e.code||e.name):"",m=e&&e.message?String(e.message):String(e||"");
+  return (c&&m.indexOf(c)<0?c+": ":"")+m.slice(0,150);
+}
+function failHtml(){
+  var t=L(),web=location.protocol==="https:"||location.protocol==="http:";
+  var msg=web?t.cloudFail:t.failFile;
+  if(typeof navigator.onLine==="boolean"&&!navigator.onLine)msg=t.offline;
+  return esc(msg)+(cloud.failWhy?'<br><small style="color:var(--muted)">'+esc(t.failWhy)+': '+esc(cloud.failWhy)+'</small>':'');
+}
 function loadSdk(){
   if(cloud.sdkP)return cloud.sdkP;
   var base="https://www.gstatic.com/firebasejs/"+FB_VER+"/";
-  cloud.sdkP=Promise.all([import(base+"firebase-app.js"),import(base+"firebase-auth.js"),import(base+"firebase-firestore.js")]).then(function(m){
+  cloud.sdkP=Promise.all([importRetry(base+"firebase-app.js",1),importRetry(base+"firebase-auth.js",1),importRetry(base+"firebase-firestore.js",1)]).then(function(m){
     cloud.sdk={app:m[0],auth:m[1],fs:m[2]};return cloud.sdk;
   });
   cloud.sdkP.catch(function(){cloud.sdkP=null});
@@ -973,7 +1071,7 @@ function ensureCloud(){
     catch(e){cloud.db=sdk.fs.getFirestore(app)}
     cloud.status="ready";
     sdk.auth.onAuthStateChanged(cloud.auth,onUser);
-  }).catch(function(){cloud.status="fail";cloud.started=false;softRender()});
+  }).catch(function(e){cloud.failWhy=describeFail(e);cloud.status="fail";cloud.started=false;softRender()});
 }
 
 function onUser(user){
@@ -1055,11 +1153,12 @@ function syncAttListeners(){
       cloud.pend["a"+cid]=snap.metadata.hasPendingWrites;
       snap.docChanges().forEach(function(ch){
         var k=cid+"|"+ch.doc.id;
-        if(ch.type==="removed"){delete st.records[k];delete st.saved[k];return}
+        if(ch.type==="removed"){delete st.records[k];delete st.saved[k];if(st.first)delete st.first[k];return}
         var v=ch.doc.data({serverTimestamps:"estimate"}),marks={};
         Object.keys(v.marks||{}).forEach(function(sid){if(v.marks[sid])marks[sid]=v.marks[sid]});
         st.records[k]=marks;
         var u=v.updatedAt;st.saved[k]=u&&u.toMillis?u.toMillis():Date.now();
+        st.first=st.first||{};if(v.firstAtMs)st.first[k]=v.firstAtMs;
       });
       schedulePublish();softRender();
     },onErr);
@@ -1079,10 +1178,10 @@ function cloudSaveClass(c){
   }else p=fs.updateDoc(ref,data);
   p.catch(onErr);
 }
-function cloudMark(c,d,changes){
-  var fs=cloud.sdk.fs;
-  fs.setDoc(fs.doc(cloud.db,"schools",cloud.schoolId,"classes",c.id,"attendance",d),
-    {date:d,marks:changes,updatedAt:fs.serverTimestamp(),updatedBy:cloud.user.uid},{merge:true}).catch(onErr);
+function cloudMark(c,d,changes,first){
+  var fs=cloud.sdk.fs,data={date:d,marks:changes,updatedAt:fs.serverTimestamp(),updatedBy:cloud.user.uid};
+  if(first)data.firstAtMs=Date.now(); /* sa'aatii maqaan jalqaba itti waamame */
+  fs.setDoc(fs.doc(cloud.db,"schools",cloud.schoolId,"classes",c.id,"attendance",d),data,{merge:true}).catch(onErr);
 }
 function cloudDeleteClass(cid){
   var fs=cloud.sdk.fs,db=cloud.db,sid=cloud.schoolId;
@@ -1409,7 +1508,7 @@ function loginForm(){
 function loginHead(){var t=L();return '<div class="lgbadge" aria-hidden="true">GD</div><h1 class="lgtitle">'+esc(t.title)+'</h1><p class="lgsub">'+esc(t.lgSub)+'</p>'}
 function viewLogin(){
   var t=L(),body;
-  if(cloud.status==="fail")body='<p class="lghint" style="font-size:15px;margin:0 0 6px">'+t.cloudFail+'</p><button type="button" class="lgbtn" data-act="cretry">'+t.lgRetry+'</button>';
+  if(cloud.status==="fail")body='<p class="lghint" style="font-size:15px;margin:0 0 6px">'+failHtml()+'</p><button type="button" class="lgbtn" data-act="cretry">'+t.lgRetry+'</button>';
   else if(!cloud.authKnown)body='<p class="lgsub" style="margin:0">'+t.connecting+'</p>';
   else body=loginForm();
   var langs=Object.keys(T).map(function(k){return '<button type="button" class="lglink" data-lang="'+k+'"'+(k===state.settings.lang?' aria-current="true"':'')+'>'+T[k].langName+'</button>'}).join("");
@@ -1421,7 +1520,7 @@ function viewAccount(){
   var t=L(),out="";
   if(cloud.errMsg)out+='<div class="err" id="cerr" style="margin-top:12px">'+esc(cloud.errMsg)+'</div>';
   if(cloud.msg)out+='<div class="ok" style="margin-top:12px">'+esc(cloud.msg)+'</div>';
-  if(cloud.status==="fail")return out+'<div class="empty"><b>☁</b>'+t.cloudFail+'</div>';
+  if(cloud.status==="fail")return out+'<div class="empty"><b>☁</b>'+failHtml()+'<br><button class="btn" data-act="cretry">'+t.lgRetry+'</button></div>';
   if(!cloud.authKnown)return out+'<div class="empty">'+t.connecting+'</div>';
   if(!cloud.user){
     return out+'<div class="lgc" style="margin-top:16px">'+loginHead()+loginForm()+'</div>';
