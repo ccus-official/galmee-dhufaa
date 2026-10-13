@@ -164,6 +164,16 @@ body.loginview header,body.loginview nav{display:none}
 .stbl th:first-child,.stbl td:first-child{text-align:left;width:48%}
 .stbl th{font-size:13px;color:var(--muted);font-weight:700}
 .stbl tr.p td:first-child{color:var(--present)}.stbl tr.a td:first-child{color:var(--absent)}.stbl tr.l td:first-child{color:var(--late)}
+
+:root{--ex:#5B4BB5;--ex-bg:#E8E4FA}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ex:#B7ABFF;--ex-bg:#2B2650}}
+:root[data-theme="dark"]{--ex:#B7ABFF;--ex-bg:#2B2650}
+.seg{grid-template-columns:repeat(4,1fr)}
+.seg button{font-size:13.5px;padding:0 2px;line-height:1.15}
+.seg button[data-s="E"][aria-pressed="true"]{background:var(--ex-bg);border-color:var(--ex);color:var(--ex)}
+.chip.e{background:var(--ex-bg);color:var(--ex)}
+.meter .me{background:var(--ex)}
+.stbl tr.e td:first-child{color:var(--ex)}
 </style>
 </head>
 <body>
@@ -194,7 +204,7 @@ om:{langName:"Afaan Oromoo",
  noStT:"Barattoonni hin jiran",noStX:"Kutaa kana keessatti maqaa barattootaa dabali.",addSt:"Barattoota dabali",
  repT:"Ripoortiin hin jiru",repX:"Galmee guyyaa tokko galmeessi, ergasii as argita.",days:"Guyyaan galmaa'e",
  low:function(n){return "Barattoota "+n+" dhufaan isaanii 80% gadi. Maatii isaanii quunnamuu yaadi."},
- line:function(p,l,a){return "Dhufe "+p+" · Turte "+l+" · Hafe "+a},pctNote:"Dhufaan = (Dhufe + Turte) ÷ guyyaa galmaa'e.",
+ line:function(p,l,a,e){return "Dhufe "+p+" · Turte "+l+" · Hafe "+a+(e?" · Hayyama "+e:"")},pctNote:"Dhufaan = (Dhufe + Turte) ÷ guyyaa galmaa'e. Guyyoonni hayyama qaban akeekkachiisa 80% gadi keessatti hin herregaman.",
  newClass:"Kutaa haaraa",ph:"Fkn. Kutaa 7A",addClass:"Kutaa dabali",yours:"Kutaawwan kee",nSt:"barattoota",del:"Haqi",sure:"Mirkaneessi",
  addStT:function(n){return "Barattoota dabali: "+n},
  stPh:"Maqaa tokko sarara tokko irratti. Bilbila maatii yoo jiraate maqaa booda dabali:\nCaalaa Tolasaa, 0911223344\nMaartuu Dammaqsaa",
@@ -220,7 +230,7 @@ am:{langName:"አማርኛ",
  noStT:"ተማሪዎች የሉም",noStX:"በዚህ ክፍል ውስጥ የተማሪዎችን ስም ያክሉ።",addSt:"ተማሪዎች ጨምር",
  repT:"ሪፖርት የለም",repX:"የአንድ ቀን መዝገብ ይመዝግቡ፣ ከዚያ እዚህ ይታያል።",days:"የተመዘገቡ ቀናት",
  low:function(n){return n+" ተማሪዎች ከ80% በታች ተገኝተዋል። ቤተሰቦቻቸውን ማነጋገር ያስቡ።"},
- line:function(p,l,a){return "መጣ "+p+" · ዘገየ "+l+" · ቀረ "+a},pctNote:"መገኘት = (መጣ + ዘገየ) ÷ የተመዘገቡ ቀናት",
+ line:function(p,l,a,e){return "መጣ "+p+" · ዘገየ "+l+" · ቀረ "+a+(e?" · ፈቃድ ያለው "+e:"")},pctNote:"መገኘት = (መጣ + ዘገየ) ÷ የተመዘገቡ ቀናት ፈቃድ ያላቸው ቀናት በ80% ማስጠንቀቂያ ውስጥ አይቆጠሩም።",
  newClass:"አዲስ ክፍል",ph:"ለምሳሌ፡ 7ኛ ክፍል ሀ",addClass:"ክፍል ጨምር",yours:"ክፍሎችዎ",nSt:"ተማሪዎች",del:"ሰርዝ",sure:"አረጋግጥ",
  addStT:function(n){return "ተማሪዎች ጨምር፡ "+n},
  stPh:"በአንድ መስመር አንድ ስም። የወላጅ ስልክ ካለ ከስሙ በኋላ ይጻፉ፡\nአበበ ከበደ, 0911223344\nሰላም ተስፋዬ",
@@ -246,7 +256,7 @@ en:{langName:"English",
  noStT:"No students yet",noStX:"Add the names of the students in this class.",addSt:"Add students",
  repT:"No report yet",repX:"Record attendance for one day and the report will appear here.",days:"Days recorded",
  low:function(n){return n+" students are below 80% attendance. Consider contacting their families."},
- line:function(p,l,a){return "Present "+p+" · Late "+l+" · Absent "+a},pctNote:"Attendance = (Present + Late) ÷ days recorded.",
+ line:function(p,l,a,e){return "Present "+p+" · Late "+l+" · Absent "+a+(e?" · Excused "+e:"")},pctNote:"Attendance = (Present + Late) ÷ days recorded. Excused days are not counted in the below-80% warning.",
  newClass:"New class",ph:"e.g. Grade 7A",addClass:"Add class",yours:"Your classes",nSt:"students",del:"Delete",sure:"Confirm",
  addStT:function(n){return "Add students: "+n},
  stPh:"One name per line. Add a parent's phone after the name if you have it:\nAbebe Kebede, 0911223344\nSelam Tesfaye",
@@ -292,7 +302,7 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  createNote:"Hogganaa hayyamame qofa mana barnootaa uuma. Barsiisaa taate yoo ta'e, koodii mana barnootaa gadi jiru fayyadami.",
  tabAdmin:"Admin",admSelf:"Ofii kee baasuu ykn gahee kee jijjiiruu hin dandeessu.",failWhy:"Sababa teeknikaa",failFile:"App kun faayila (file://) ykn Spck preview irraa banamee jira. Cloud link website (https://...) irratti qofa hojjeta. Link GitHub Pages Chrome irratti bani.",sumT:"Gabaasa guyyaa",sumClass:"Kutaa",sumSchool:"Gabaasa mana barnootaa (kutaa hunda)",sumTimes:"Sa'aatii kutaa tokkoon tokkoon itti maqaan waamame",
  sumReg:"Baay'ina barattoota galmaa'anii",sumPres:"Baay'ina barattoota dhufanii",sumAbs:"Baay'ina barattoota hafanii",sumLate:"Baay'ina barattoota yeroo barnootaa booda dhufanii (late)",
- sumRegS:"Galmaa'an",sumPresS:"Dhufan",sumAbsS:"Hafan",sumLateS:"Turtan (late)",sumAllCame:"Hunda dhufan (dhufan + turtan)",ethClock:"sa'aa Itoophiyaa",colM:"Dhi.",colF:"Dha.",colT:"Id.",
+ E:"Hayyama qaba",exE:"Hy",sumExc:"Baay'ina barattoota hayyama qabanii (Excused)",sumExcS:"Hayyama qaban",sumRegS:"Galmaa'an",sumPresS:"Dhufan",sumAbsS:"Hafan",sumLateS:"Turtan (late)",sumAllCame:"Hunda dhufan (dhufan + turtan)",ethClock:"sa'aa Itoophiyaa",colM:"Dhi.",colF:"Dha.",colT:"Id.",
  sumTime:"Sa'aatii maqaan itti waamame",sumNone:"Guyyaa kana galmeen hin jiru.",sumNoSex:"Saala hin galmoofne",sumNotMarked:"Hin galmaa'in",exDate:"Guyyaa",
  roleChoose:"Gahee kee filadhu",roleOne:"Akaawuntiin tokko gahee tokko qofa qaba: hogganaa, barsiisaa, ykn Admin.",roleAdminName:"Admin (Biiroo Barnootaa)",
  rpDesc:"Mana barnootaa kee uumta (Admin dura email kee hayyamuu qaba), barsiisota, kutaa fi barattoota to'atta.",rtDesc:"Koodii mana barnootaa hogganaan siif kenne qabda. Kutaa hogganaan siif kenne qofa argita.",raDesc:"Hogganaa hayyamta, manneen barnootaa hunda ilaalta, dhorkita, hogganaa jijjiirta. Maqaa barataa hin argitu.",
@@ -336,7 +346,7 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  createNote:"ትምህርት ቤት መፍጠር የሚችሉት የተፈቀደላቸው ርዕሰ መምህራን ብቻ ናቸው። መምህር ከሆኑ ከታች ያለውን የትምህርት ቤት ኮድ ይጠቀሙ።",
  tabAdmin:"አስተዳዳሪ",admSelf:"ራስዎን ማስወገድ ወይም ሚናዎን መቀየር አይችሉም።",failWhy:"ቴክኒካዊ ምክንያት",failFile:"ይህ መተግበሪያ እንደ ፋይል (file://) ወይም ከ Spck ቅድመ እይታ ተከፍቷል። ክላውድ በድር ጣቢያ አድራሻ (https://...) ብቻ ይሰራል። የ GitHub Pages አድራሻውን በ Chrome ይክፈቱ።",sumT:"የቀን ሪፖርት",sumClass:"ክፍል",sumSchool:"የትምህርት ቤት ሪፖርት (ሁሉም ክፍሎች)",sumTimes:"ስም የተጠራበት ሰዓት በየክፍሉ",
  sumReg:"የተመዘገቡ ተማሪዎች ብዛት",sumPres:"የተገኙ ተማሪዎች ብዛት",sumAbs:"የቀሩ ተማሪዎች ብዛት",sumLate:"ከትምህርት ሰዓት በኋላ የደረሱ ተማሪዎች ብዛት (ዘገየ)",
- sumRegS:"የተመዘገቡ",sumPresS:"የተገኙ",sumAbsS:"የቀሩ",sumLateS:"ዘገዩ",sumAllCame:"ሁሉም የመጡ (የመጡ + ዘግይተው የመጡ)",ethClock:"የኢትዮጵያ ሰዓት",colM:"ወ.",colF:"ሴ.",colT:"ድ.",
+ E:"ፈቃድ ያለው",exE:"ፈ",sumExc:"ፈቃድ ያላቸው ተማሪዎች ብዛት (Excused)",sumExcS:"ፈቃድ ያላቸው",sumRegS:"የተመዘገቡ",sumPresS:"የተገኙ",sumAbsS:"የቀሩ",sumLateS:"ዘገዩ",sumAllCame:"ሁሉም የመጡ (የመጡ + ዘግይተው የመጡ)",ethClock:"የኢትዮጵያ ሰዓት",colM:"ወ.",colF:"ሴ.",colT:"ድ.",
  sumTime:"ስም የተጠራበት ሰዓት",sumNone:"በዚህ ቀን መዝገብ የለም።",sumNoSex:"ጾታ ያልተመዘገበ",sumNotMarked:"ያልተመዘገቡ",exDate:"ቀን",
  roleChoose:"ሚናዎን ይምረጡ",roleOne:"አንድ አካውንት አንድ ሚና ብቻ አለው፦ ርዕሰ መምህር፣ መምህር ወይም አስተዳዳሪ።",roleAdminName:"አስተዳዳሪ (የትምህርት ቢሮ)",
  rpDesc:"ትምህርት ቤትዎን ይፈጥራሉ (አስተዳዳሪው መጀመሪያ ኢሜይልዎን መፍቀድ አለበት)፣ መምህራንን፣ ክፍሎችንና ተማሪዎችን ያስተዳድራሉ።",rtDesc:"ርዕሰ መምህሩ የሰጠዎት የትምህርት ቤት ኮድ አለዎት። ርዕሰ መምህሩ የሰጠዎትን ክፍል ብቻ ያያሉ።",raDesc:"ርዕሰ መምህራንን ይፈቅዳሉ፣ ሁሉንም ትምህርት ቤቶች ያያሉ፣ ያግዳሉ፣ ርዕሰ መምህር ይቀይራሉ። የተማሪ ስም አያዩም።",
@@ -380,7 +390,7 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  createNote:"Only approved principals can create a school. If you are a teacher, use the school code below.",
  tabAdmin:"Admin",admSelf:"You cannot remove yourself or change your own role.",failWhy:"Technical reason",failFile:"This app was opened as a file (file://) or from a preview. Cloud only works from a website address (https://...). Open the GitHub Pages link in Chrome.",sumT:"Daily summary",sumClass:"Class",sumSchool:"School summary (all classes)",sumTimes:"Time the roll was called, by class",
  sumReg:"Students registered",sumPres:"Students present",sumAbs:"Students absent",sumLate:"Students who came after class time (late)",
- sumRegS:"Registered",sumPresS:"Present",sumAbsS:"Absent",sumLateS:"Late",sumAllCame:"All who came (present + late)",ethClock:"Ethiopian time",colM:"M.",colF:"F.",colT:"Total",
+ E:"Excused",exE:"E",sumExc:"Students absent with permission (excused)",sumExcS:"Excused",sumRegS:"Registered",sumPresS:"Present",sumAbsS:"Absent",sumLateS:"Late",sumAllCame:"All who came (present + late)",ethClock:"Ethiopian time",colM:"M.",colF:"F.",colT:"Total",
  sumTime:"Roll called at",sumNone:"No attendance recorded for this day.",sumNoSex:"Gender not set",sumNotMarked:"Not marked",exDate:"Date",
  roleChoose:"Choose your role",roleOne:"One account has one role only: principal, teacher, or admin.",roleAdminName:"Admin (Education Office)",
  rpDesc:"You create your school (the Admin must approve your email first) and manage teachers, classes and students.",rtDesc:"You have the school code your principal gave you. You only see the classes your principal assigns to you.",raDesc:"You approve principals, see all schools, block schools and change principals. You never see student names.",
@@ -579,10 +589,10 @@ function viewTake(){
   if(!c)return noClass();
   var out=classPicker(true),locked=isLocked();
   if(!c.students.length)return out+'<div class="empty"><b>'+t.noStT+'</b>'+t.noStX+'<br><button class="btn" data-go="manage">'+t.addSt+'</button></div>';
-  var r=getRec(c,date),p=0,a=0,l=0;
-  c.students.forEach(function(s){var v=r[s.id];if(v==="P")p++;else if(v==="A")a++;else if(v==="L")l++});
-  var un=c.students.length-p-a-l;
-  out+='<div class="counts"><div class="chip p"><b>'+p+'</b>'+t.P+'</div><div class="chip a"><b>'+a+'</b>'+t.A+'</div><div class="chip l"><b>'+l+'</b>'+t.L+'</div></div>';
+  var r=getRec(c,date),p=0,a=0,l=0,ex=0;
+  c.students.forEach(function(s){var v=r[s.id];if(v==="P")p++;else if(v==="A")a++;else if(v==="L")l++;else if(v==="E")ex++});
+  var un=c.students.length-p-a-l-ex;
+  out+='<div class="counts"><div class="chip p"><b>'+p+'</b>'+t.P+'</div><div class="chip a"><b>'+a+'</b>'+t.A+'</div><div class="chip l"><b>'+l+'</b>'+t.L+'</div><div class="chip e"><b>'+ex+'</b>'+t.E+'</div></div>';
   if(locked)out+='<div class="note">'+t.lockedN+'</div>';
   var stamp=state.saved[recKey(c,date)];
   if(stamp)out+='<p class="small" style="margin:0 0 8px;color:var(--present)">✓ '+t.savedOn+': '+fmtStamp(stamp)+'</p>';
@@ -590,7 +600,7 @@ function viewTake(){
   c.students.forEach(function(s,i){
     var v=r[s.id];
     out+='<div class="row"><div class="nm"><span>'+esc(s.name)+(metaOf(s,false)?' <span class="small">'+metaOf(s,false)+'</span>':'')+'</span><span>'+(i+1)+'</span></div><div class="seg">'+
-      ['P','A','L'].map(function(k){return '<button data-act="mark" data-sid="'+s.id+'" data-s="'+k+'" aria-pressed="'+(v===k)+'"'+(locked?' disabled':'')+'>'+t[k]+'</button>'}).join("")+'</div>';
+      ['P','A','L','E'].map(function(k){return '<button data-act="mark" data-sid="'+s.id+'" data-s="'+k+'" aria-pressed="'+(v===k)+'"'+(locked?' disabled':'')+'>'+t[k]+'</button>'}).join("")+'</div>';
     if(v==="A"){
       if(s.phone){
         var body=t.smsBody(s.name,fmtDate(date),c.name);
@@ -626,20 +636,20 @@ function classData(c,rg){
   var dates=Object.keys(state.records).filter(function(k){return k.indexOf(c.id+"|")===0}).map(function(k){return k.split("|")[1]})
     .filter(function(d){return d>=rg[0]&&d<=rg[1]}).sort();
   var rows=c.students.map(function(s){
-    var P=0,A=0,Lt=0;
+    var P=0,A=0,Lt=0,E=0;
     var cells=dates.map(function(d){
       var v=(state.records[c.id+"|"+d]||{})[s.id]||"";
-      if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++;else v="";
+      if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++;else if(v==="E")E++;else v="";
       return v;
     });
-    var tot=P+A+Lt;
-    return {s:s,cells:cells,P:P,A:A,L:Lt,tot:tot,pct:tot?Math.round((P+Lt)/tot*100):null};
+    var tot=P+A+Lt+E;
+    return {s:s,cells:cells,P:P,A:A,L:Lt,E:E,tot:tot,pct:tot?Math.round((P+Lt)/tot*100):null};
   });
   return {dates:dates,rows:rows};
 }
 function csvCell(v){v=String(v==null?"":v);return /[",\r\n]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v}
 function csvLine(a){return a.map(csvCell).join(",")}
-function mcode(v){var t=L();return v==="P"?t.exP:v==="A"?t.exA:v==="L"?t.exL:""}
+function mcode(v){var t=L();return v==="P"?t.exP:v==="A"?t.exA:v==="L"?t.exL:v==="E"?t.exE:""}
 function sexText(s){var t=L();return s.sex==="M"?t.male:s.sex==="F"?t.female:""}
 function shortDate(iso){
   if(state.settings.cal==="eth"){var e=isoToE(iso);return e.d+"/"+e.m}
@@ -651,19 +661,19 @@ function classCsv(c,rg){
   if(cloudMode&&cloud.schoolName)out.push(csvLine([t.exSchool,cloud.schoolName]));
   out.push(csvLine([t.klass,c.name]));
   out.push(csvLine([t.exPeriod,periodText(rg)]));
-  out.push(csvLine([t.exLegend,t.exP+"="+t.P+", "+t.exL+"="+t.L+", "+t.exA+"="+t.A]));
+  out.push(csvLine([t.exLegend,t.exP+"="+t.P+", "+t.exL+"="+t.L+", "+t.exA+"="+t.A+", "+t.exE+"="+t.E]));
   out.push(csvLine([t.exMade,fmtStamp(Date.now())]));
   out.push("");
-  out.push(csvLine(["#",t.name,t.sex,t.age].concat(d.dates.map(fmtDate),[t.P,t.L,t.A,t.exDays,t.exAtt])));
+  out.push(csvLine(["#",t.name,t.sex,t.age].concat(d.dates.map(fmtDate),[t.P,t.L,t.A,t.E,t.exDays,t.exAtt])));
   d.rows.forEach(function(r,i){
-    out.push(csvLine([i+1,r.s.name,sexText(r.s),r.s.age||""].concat(r.cells.map(mcode),[r.P,r.L,r.A,r.tot,r.pct==null?"":r.pct])));
+    out.push(csvLine([i+1,r.s.name,sexText(r.s),r.s.age||""].concat(r.cells.map(mcode),[r.P,r.L,r.A,r.E,r.tot,r.pct==null?"":r.pct])));
   });
   var present=d.dates.map(function(x,j){var n=0;d.rows.forEach(function(r){if(r.cells[j]==="P"||r.cells[j]==="L")n++});return n});
   out.push(csvLine(["",t.exTotalP,"",""].concat(present)));
   out.push(csvLine(["",t.sumTime,"",""].concat(d.dates.map(function(x){var a=calledAt(c,x);return a?fmtClock(a):""}))));
   out.push("");
   out.push(csvLine([t.sumT]));
-  var G=[["reg",t.sumRegS],["P",t.sumPresS],["A",t.sumAbsS],["L",t.sumLateS]],hd=[t.exDate||"",t.sumTime];
+  var G=[["reg",t.sumRegS],["P",t.sumPresS],["A",t.sumAbsS],["L",t.sumLateS],["E",t.sumExcS]],hd=[t.exDate||"",t.sumTime];
   G.forEach(function(g){hd.push(g[1]+" "+t.colM,g[1]+" "+t.colF,g[1]+" "+t.colT)});
   out.push(csvLine(hd));
   d.dates.forEach(function(x){
@@ -707,16 +717,16 @@ function downloadText(name,text){
 function printClass(c,rg){
   var t=L(),d=classData(c,rg);
   var h='<h2 style="margin:0 0 4px">'+esc(t.title)+'</h2><div>'+(cloudMode&&cloud.schoolName?esc(cloud.schoolName)+' · ':'')+esc(t.klass)+': <b>'+esc(c.name)+'</b> · '+esc(periodText(rg))+'</div>'+
-    '<div style="margin-bottom:6px">'+esc(t.exLegend)+': '+esc(t.exP)+'='+esc(t.P)+', '+esc(t.exL)+'='+esc(t.L)+', '+esc(t.exA)+'='+esc(t.A)+'</div>';
+    '<div style="margin-bottom:6px">'+esc(t.exLegend)+': '+esc(t.exP)+'='+esc(t.P)+', '+esc(t.exL)+'='+esc(t.L)+', '+esc(t.exA)+'='+esc(t.A)+', '+esc(t.exE)+'='+esc(t.E)+'</div>';
   h+='<table><thead><tr><th>#</th><th class="n">'+esc(t.name)+'</th><th>'+esc(t.sex)+'</th>'+d.dates.map(function(x){return '<th>'+shortDate(x)+'</th>'}).join("")+
-    '<th>'+esc(t.exP)+'</th><th>'+esc(t.exL)+'</th><th>'+esc(t.exA)+'</th><th>%</th></tr></thead><tbody>';
+    '<th>'+esc(t.exP)+'</th><th>'+esc(t.exL)+'</th><th>'+esc(t.exA)+'</th><th>'+esc(t.exE)+'</th><th>%</th></tr></thead><tbody>';
   d.rows.forEach(function(r,i){
     h+='<tr><td>'+(i+1)+'</td><td class="n">'+esc(r.s.name)+'</td><td>'+esc(sexText(r.s))+'</td>'+
       r.cells.map(function(v){return '<td'+(v==="A"?' class="a"':'')+'>'+esc(mcode(v))+'</td>'}).join("")+
-      '<td>'+r.P+'</td><td>'+r.L+'</td><td>'+r.A+'</td><td>'+(r.pct==null?'':r.pct)+'</td></tr>';
+      '<td>'+r.P+'</td><td>'+r.L+'</td><td>'+r.A+'</td><td>'+r.E+'</td><td>'+(r.pct==null?'':r.pct)+'</td></tr>';
   });
   h+='</tbody></table>';
-  var G=[["reg",t.sumRegS],["P",t.sumPresS],["A",t.sumAbsS],["L",t.sumLateS]];
+  var G=[["reg",t.sumRegS],["P",t.sumPresS],["A",t.sumAbsS],["L",t.sumLateS],["E",t.sumExcS]];
   h+='<h3 style="margin:12px 0 4px">'+esc(t.sumT)+'</h3><table><thead><tr><th rowspan="2">'+esc(t.exDate||"")+'</th><th rowspan="2">'+esc(t.sumTime)+'</th>'+
     G.map(function(g){return '<th colspan="3">'+esc(g[1])+'</th>'}).join("")+'</tr><tr>'+G.map(function(){return '<th>'+esc(t.colM)+'</th><th>'+esc(t.colF)+'</th><th>'+esc(t.colT)+'</th>'}).join("")+'</tr></thead><tbody>';
   d.dates.forEach(function(x){
@@ -740,20 +750,20 @@ function exportCard(){
 
 /* ---------- Gabaasa guyyaa: galmaa'an / dhufan / hafan / turtan (Dhi. / Dha. / Id.) ---------- */
 function dayCounts(c,d){
-  var r=getRec(c,d),o={reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false};
+  var r=getRec(c,d),o={reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},E:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false};
   c.students.forEach(function(s){
     var g=s.sex==="M"?"M":s.sex==="F"?"F":"";
     o.reg.T++;if(g)o.reg[g]++;else o.nosex++;
     var v=r[s.id];
-    if(v==="P"||v==="A"||v==="L"){o.has=true;o[v].T++;if(g)o[v][g]++}else o.unmarked++;
+    if(v==="P"||v==="A"||v==="L"||v==="E"){o.has=true;o[v].T++;if(g)o[v][g]++}else o.unmarked++;
   });
   return o;
 }
 function addCounts(a,b){
-  ["reg","P","A","L"].forEach(function(k){["M","F","T"].forEach(function(g){a[k][g]+=b[k][g]})});
+  ["reg","P","A","L","E"].forEach(function(k){["M","F","T"].forEach(function(g){a[k][g]+=b[k][g]})});
   a.nosex+=b.nosex;a.unmarked+=b.unmarked;a.has=a.has||b.has;return a;
 }
-function emptyCounts(){return {reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false}}
+function emptyCounts(){return {reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},E:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false}}
 function calledAt(c,d){var k=recKey(c,d);return (state.first&&state.first[k])||state.saved[k]||0}
 function fmtClock(ms){var x=new Date(ms);return pad(x.getHours())+":"+pad(x.getMinutes())}
 function fmtClockE(ms){var x=new Date(ms),h=((x.getHours()-6+12)%12)||12;return h+":"+pad(x.getMinutes())}
@@ -762,7 +772,7 @@ function sumTable(o){
   var t=L();
   function row(label,x,cls){return '<tr class="'+cls+'"><td>'+esc(label)+'</td><td>'+x.M+'</td><td>'+x.F+'</td><td><b>'+x.T+'</b></td></tr>'}
   return '<div style="overflow-x:auto"><table class="stbl"><thead><tr><th></th><th>'+t.colM+'</th><th>'+t.colF+'</th><th>'+t.colT+'</th></tr></thead><tbody>'+
-    row(t.sumReg,o.reg,"r")+row(t.sumPres,o.P,"p")+row(t.sumAbs,o.A,"a")+row(t.sumLate,o.L,"l")+'</tbody></table></div>'+
+    row(t.sumReg,o.reg,"r")+row(t.sumPres,o.P,"p")+row(t.sumAbs,o.A,"a")+row(t.sumLate,o.L,"l")+row(t.sumExc,o.E,"e")+'</tbody></table></div>'+
     '<p class="small" style="margin:8px 0 0">'+t.sumAllCame+': '+t.colM+' <b>'+(o.P.M+o.L.M)+'</b> \u00b7 '+t.colF+' <b>'+(o.P.F+o.L.F)+'</b> \u00b7 '+t.colT+' <b>'+(o.P.T+o.L.T)+'</b></p>'+
     ((o.nosex||o.unmarked)?'<p class="small" style="margin:8px 0 0">'+(o.unmarked?t.sumNotMarked+': <b>'+o.unmarked+'</b>':'')+(o.unmarked&&o.nosex?' · ':'')+(o.nosex?t.sumNoSex+': <b>'+o.nosex+'</b>':'')+'</p>':'');
 }
@@ -794,12 +804,12 @@ function viewReport(){
   if(!dates.length)return out+'<div class="empty"><b>'+t.repT+'</b>'+t.repX+'</div>';
   out+=summaryCards(c);
   var rows=c.students.map(function(s){
-    var P=0,A=0,Lt=0;
-    dates.forEach(function(d){var v=getRec(c,d)[s.id];if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++});
-    var tot=P+A+Lt;
-    return {s:s,P:P,A:A,L:Lt,tot:tot,pct:tot?Math.round((P+Lt)/tot*100):0};
+    var P=0,A=0,Lt=0,E=0;
+    dates.forEach(function(d){var v=getRec(c,d)[s.id];if(v==="P")P++;else if(v==="A")A++;else if(v==="L")Lt++;else if(v==="E")E++});
+    var tot=P+A+Lt+E;
+    return {s:s,P:P,A:A,L:Lt,E:E,tot:tot,pct:tot?Math.round((P+Lt)/tot*100):0,adj:tot?Math.round((P+Lt+E)/tot*100):100};
   });
-  var low=rows.filter(function(r){return r.tot>0&&r.pct<80});
+  var low=rows.filter(function(r){return r.tot>0&&r.adj<80});
   out+='<p class="small">'+t.days+': <b>'+dates.length+'</b></p>';
   var gr=genderReport(rows);if(gr)out+='<p class="small" style="margin-bottom:0">'+t.gTitle+'</p>'+gr;
   if(low.length)out+='<div class="note">'+t.low(low.length)+'</div>';
@@ -809,9 +819,9 @@ function viewReport(){
   rows.sort(function(a,b){return a.pct-b.pct});
   rows.forEach(function(r){
     var n=r.tot||1;
-    out+='<div class="row"><div class="rep"><div><b>'+esc(r.s.name)+'</b><div class="small">'+t.line(r.P,r.L,r.A)+'</div></div>'+
-      '<div class="pct'+(r.tot&&r.pct<80?' low':'')+'">'+(r.tot?r.pct+'%':'—')+'</div>'+
-      '<div class="meter"><i class="mp" style="width:'+(r.P/n*100)+'%"></i><i class="ml" style="width:'+(r.L/n*100)+'%"></i><i class="ma" style="width:'+(r.A/n*100)+'%"></i></div></div></div>';
+    out+='<div class="row"><div class="rep"><div><b>'+esc(r.s.name)+'</b><div class="small">'+t.line(r.P,r.L,r.A,r.E)+'</div></div>'+
+      '<div class="pct'+(r.tot&&r.adj<80?' low':'')+'">'+(r.tot?r.pct+'%':'—')+'</div>'+
+      '<div class="meter"><i class="mp" style="width:'+(r.P/n*100)+'%"></i><i class="ml" style="width:'+(r.L/n*100)+'%"></i><i class="ma" style="width:'+(r.A/n*100)+'%"></i><i class="me" style="width:'+(r.E/n*100)+'%"></i></div></div></div>';
   });
   return out+exportCard()+'<p class="small">'+t.pctNote+'</p>';
 }
