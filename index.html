@@ -174,6 +174,11 @@ body.loginview header,body.loginview nav{display:none}
 .chip.e{background:var(--ex-bg);color:var(--ex)}
 .meter .me{background:var(--ex)}
 .stbl tr.e td:first-child{color:var(--ex)}
+.mk{display:inline-block;padding:2px 12px;border-radius:999px;font-size:13px;font-weight:700}
+.mk.mp{background:var(--present-bg);color:var(--present)}
+.mk.ma{background:var(--absent-bg);color:var(--absent)}
+.mk.ml{background:var(--late-bg);color:var(--late)}
+.mk.me{background:var(--ex-bg);color:var(--ex)}
 </style>
 </head>
 <body>
@@ -300,7 +305,7 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  exNoData:"Yeroo kana keessa galmeen hin jiru.",exP:"D",exL:"T",exA:"H",
  notAllowed:"Email kee mana barnootaa uumuuf hin hayyamamne. Hayyama argachuuf nama app kana siif kenne quunnami.",
  createNote:"Hogganaa hayyamame qofa mana barnootaa uuma. Barsiisaa taate yoo ta'e, koodii mana barnootaa gadi jiru fayyadami.",
- tabAdmin:"Admin",admSelf:"Ofii kee baasuu ykn gahee kee jijjiiruu hin dandeessu.",admNewT:"Mana barnootaa haaraa uumi",admNewX:"Maqaa mana barnootaa fi email hogganaa galchi. Hogganaan email kanaan akaawuntii uumuu yeroo mana barnootaa kanatti ofumaan hidhama.",admNewName:"Maqaa mana barnootaa",admNewEmail:"Email hogganaa",admNewBtn:"Uumi",admNewDone:"Mana barnootaa uumameera. Koodii: {c}. Hogganaan ({e}) akaawuntii uumee seenuu danda'a.",failWhy:"Sababa teeknikaa",
+ tabAdmin:"Admin",admSelf:"Ofii kee baasuu ykn gahee kee jijjiiruu hin dandeessu.",admRecBtn:"Galmee dhufaa ilaali",admRecT:"Galmee dhufaa (ilaaluu qofa)",admRecNote:"Admin galmee ilaaluu qofa danda'a, hin jijjiiru. Ilaalamuun galmee hordoffii mana barnootaa keessatti galmaa'a. Lakkoofsi bilbilaa hin mul'atu.",admRecClass:"Kutaa",admRecDate:"Guyyaa",admRecNone:"Galmeen hin jiru",admRecNoClass:"Kutaan hin jiru",admRecClose:"Cufi",log_adminView:"Admin galmee dhufaa ilaale",admNewT:"Mana barnootaa haaraa uumi",admNewX:"Maqaa mana barnootaa fi email hogganaa galchi. Hogganaan email kanaan akaawuntii uumuu yeroo mana barnootaa kanatti ofumaan hidhama.",admNewName:"Maqaa mana barnootaa",admNewEmail:"Email hogganaa",admNewBtn:"Uumi",admNewDone:"Mana barnootaa uumameera. Koodii: {c}. Hogganaan ({e}) akaawuntii uumee seenuu danda'a.",failWhy:"Sababa teeknikaa",
  lockedP:"Hogganaan galmee dhufaa ilaaluu qofa danda'a. Galmee guutuun barsiisaa kutaa sanaati.",
  lockFuture:"Guyyaa fuulduraaf galmee guutuu hin dandeessu.",
  lockWinDay:"Galmeen guyyaa har'aaf qofa, sa'aatii {w} keessatti. Guyyaa biraaf hin sirreeffamu.",
@@ -320,14 +325,14 @@ om:{tab4:"Seensa",wait:"Eegi… (interneet suuta ta'e daqiiqaa tokko fudhachuu d
  E:"Hayyama qaba",exE:"Hy",sumExc:"Baay'ina barattoota hayyama qabanii (Excused)",sumExcS:"Hayyama qaban",sumRegS:"Galmaa'an",sumPresS:"Dhufan",sumAbsS:"Hafan",sumLateS:"Turtan (late)",sumAllCame:"Hunda dhufan (dhufan + turtan)",ethClock:"sa'aa Itoophiyaa",colM:"Dhi.",colF:"Dha.",colT:"Id.",
  sumTime:"Sa'aatii maqaan itti waamame",sumNone:"Guyyaa kana galmeen hin jiru.",sumNoSex:"Saala hin galmoofne",sumNotMarked:"Hin galmaa'in",exDate:"Guyyaa",
  roleChoose:"Gahee kee filadhu",roleOne:"Akaawuntiin tokko gahee tokko qofa qaba: hogganaa, barsiisaa, ykn Admin.",roleAdminName:"Admin (Biiroo Barnootaa)",
- rpDesc:"Mana barnootaa kee uumta (Admin dura email kee hayyamuu qaba), barsiisota, kutaa fi barattoota to'atta.",rtDesc:"Koodii mana barnootaa hogganaan siif kenne qabda. Kutaa hogganaan siif kenne qofa argita.",raDesc:"Hogganaa hayyamta, manneen barnootaa hunda ilaalta, dhorkita, hogganaa jijjiirta. Maqaa barataa hin argitu.",
+ rpDesc:"Mana barnootaa kee uumta (Admin dura email kee hayyamuu qaba), barsiisota, kutaa fi barattoota to'atta.",rtDesc:"Koodii mana barnootaa hogganaan siif kenne qabda. Kutaa hogganaan siif kenne qofa argita.",raDesc:"Hogganaa hayyamta, manneen barnootaa hunda ilaalta, galmee dhufaa ilaalta (sirreessuu hin dandeessu), dhorkita, hogganaa jijjiirta. Lakkoofsa bilbilaa maatii hin argitu.",
  iAmP:"Ani hogganaa dha",iAmT:"Ani barsiisaa dha",iAmA:"Ani Admin dha (Biiroo)",
  schPh:"Maqaa mana barnootaa (Admin kenne yoo jiraate duwwaa dhiisi)",codePh:"Koodii mana barnootaa (fkn. 7DK83H)",errRole:"Gahee kee filadhu.",
  adminUidX:"Admin ta'uuf UID kee abbaa project'tti ergi. Inni Firebase irratti 'admins' keessatti galmeessa.",
  lgSub:"Sirna Bulchiinsa Mana Barumsaa",lgTabIn:"Seeni",lgTabUp:"Galmaa'i",lgEmailL:"Email",lgPassL:"Password",
  lgEmailPh:"Email kee galchi",lgPassPh:"Password kee galchi",lgNamePh:"Maqaa kee galchi",
  lgHintUp:"Galmaa'anii booda koodii mana barnootaa galchuun barsiisaa ta'ii makamta. Hogganaa hayyamame yoo taate mana barnootaa uumta.",
- lgLocal:"Akaawuntii malee itti fufi (mobaayilii kana irratti qofa)",lgRetry:"Irra deebi'i",admT:"Admin: manneen barnootaa hunda",admNote:"Maqaa barattootaa fi lakkoofsa bilbilaa hin argitu. Walitti qabama qofa (lakkoofsa fi dhibbantaa).",
+ lgLocal:"Akaawuntii malee itti fufi (mobaayilii kana irratti qofa)",lgRetry:"Irra deebi'i",admT:"Admin: manneen barnootaa hunda",admNote:"Galmee dhufaa ilaaluu qofa dandeessa (jijjiiruu hin dandeessu); ilaaluun galmee hordoffii keessatti galmaa'a. Lakkoofsa bilbilaa maatii hin argitu. Ripoortii walitti qabame (CSV) lakkoofsa fi dhibbantaa qofa.",
  admAllowT:"Hogganaa hayyamame",admAllowX:"Email hogganaa galchi. Inni akaawuntii uumee mana barnootaa uumuu danda'a.",admAllowAdd:"Hayyami",admNoAllowed:"Hogganaan hin hayyamamne.",
  admDone:"Raawwatameera.",admSchools:"Manneen barnootaa",admNoSchools:"Mana barnootaan hin jiru.",admNoSum:"Ripoortiin hin ergamne (hogganaan app banuu qaba).",
  admClasses:"Kutaawwan",admCode:"Koodii",admLast:"Galmee dhumaa",admUpd:"Haaromfame",admStatus:"Haala",admBlocked:"Dhorkameera",admActive:"Hojii irra",
@@ -359,7 +364,7 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  exNoData:"በዚህ ጊዜ ውስጥ መዝገብ የለም።",exP:"መ",exL:"ዘ",exA:"ቀ",
  notAllowed:"ኢሜይልዎ ትምህርት ቤት ለመፍጠር አልተፈቀደም። ፈቃድ ለማግኘት ይህን መተግበሪያ የሰጠዎትን ያነጋግሩ።",
  createNote:"ትምህርት ቤት መፍጠር የሚችሉት የተፈቀደላቸው ርዕሰ መምህራን ብቻ ናቸው። መምህር ከሆኑ ከታች ያለውን የትምህርት ቤት ኮድ ይጠቀሙ።",
- tabAdmin:"አስተዳዳሪ",admSelf:"ራስዎን ማስወገድ ወይም ሚናዎን መቀየር አይችሉም።",admNewT:"አዲስ ትምህርት ቤት ፍጠር",admNewX:"የትምህርት ቤቱን ስምና የርዕሰ መምህሩን ኢሜይል ያስገቡ። ርዕሰ መምህሩ በዚህ ኢሜይል አካውንት ሲፈጥር ከዚህ ትምህርት ቤት ጋር በራሱ ይገናኛል።",admNewName:"የትምህርት ቤት ስም",admNewEmail:"የርዕሰ መምህሩ ኢሜይል",admNewBtn:"ፍጠር",admNewDone:"ትምህርት ቤቱ ተፈጥሯል። ኮድ፦ {c}። ርዕሰ መምህሩ ({e}) አካውንት ፈጥሮ መግባት ይችላል።",failWhy:"ቴክኒካዊ ምክንያት",
+ tabAdmin:"አስተዳዳሪ",admSelf:"ራስዎን ማስወገድ ወይም ሚናዎን መቀየር አይችሉም።",admRecBtn:"የመገኘት መዝገብ ይመልከቱ",admRecT:"የመገኘት መዝገብ (ለማየት ብቻ)",admRecNote:"አስተዳዳሪው መዝገቡን ማየት ብቻ ይችላል፣ አይቀይርም። ማየቱ በትምህርት ቤቱ የእንቅስቃሴ መዝገብ ውስጥ ይመዘገባል። የስልክ ቁጥር አይታይም።",admRecClass:"ክፍል",admRecDate:"ቀን",admRecNone:"መዝገብ የለም",admRecNoClass:"ክፍል የለም",admRecClose:"ዝጋ",log_adminView:"አስተዳዳሪው የመገኘት መዝገብ ተመልክቷል",admNewT:"አዲስ ትምህርት ቤት ፍጠር",admNewX:"የትምህርት ቤቱን ስምና የርዕሰ መምህሩን ኢሜይል ያስገቡ። ርዕሰ መምህሩ በዚህ ኢሜይል አካውንት ሲፈጥር ከዚህ ትምህርት ቤት ጋር በራሱ ይገናኛል።",admNewName:"የትምህርት ቤት ስም",admNewEmail:"የርዕሰ መምህሩ ኢሜይል",admNewBtn:"ፍጠር",admNewDone:"ትምህርት ቤቱ ተፈጥሯል። ኮድ፦ {c}። ርዕሰ መምህሩ ({e}) አካውንት ፈጥሮ መግባት ይችላል።",failWhy:"ቴክኒካዊ ምክንያት",
  lockedP:"ርዕሰ መምህር የመገኘት መዝገብን ማየት ብቻ ይችላል። መዝገቡን የሚሞላው የክፍሉ መምህር ነው።",
  lockFuture:"ለወደፊት ቀን መዝገብ መሙላት አይችሉም።",
  lockWinDay:"መዝገብ የሚሞላው ለዛሬ ብቻ ነው፣ በ{w} ውስጥ። ለሌላ ቀን አይስተካከልም።",
@@ -379,14 +384,14 @@ am:{tab4:"መለያ",wait:"እባክዎ ይጠብቁ… (ኢንተርኔት ቀ�
  E:"ፈቃድ ያለው",exE:"ፈ",sumExc:"ፈቃድ ያላቸው ተማሪዎች ብዛት (Excused)",sumExcS:"ፈቃድ ያላቸው",sumRegS:"የተመዘገቡ",sumPresS:"የተገኙ",sumAbsS:"የቀሩ",sumLateS:"ዘገዩ",sumAllCame:"ሁሉም የመጡ (የመጡ + ዘግይተው የመጡ)",ethClock:"የኢትዮጵያ ሰዓት",colM:"ወ.",colF:"ሴ.",colT:"ድ.",
  sumTime:"ስም የተጠራበት ሰዓት",sumNone:"በዚህ ቀን መዝገብ የለም።",sumNoSex:"ጾታ ያልተመዘገበ",sumNotMarked:"ያልተመዘገቡ",exDate:"ቀን",
  roleChoose:"ሚናዎን ይምረጡ",roleOne:"አንድ አካውንት አንድ ሚና ብቻ አለው፦ ርዕሰ መምህር፣ መምህር ወይም አስተዳዳሪ።",roleAdminName:"አስተዳዳሪ (የትምህርት ቢሮ)",
- rpDesc:"ትምህርት ቤትዎን ይፈጥራሉ (አስተዳዳሪው መጀመሪያ ኢሜይልዎን መፍቀድ አለበት)፣ መምህራንን፣ ክፍሎችንና ተማሪዎችን ያስተዳድራሉ።",rtDesc:"ርዕሰ መምህሩ የሰጠዎት የትምህርት ቤት ኮድ አለዎት። ርዕሰ መምህሩ የሰጠዎትን ክፍል ብቻ ያያሉ።",raDesc:"ርዕሰ መምህራንን ይፈቅዳሉ፣ ሁሉንም ትምህርት ቤቶች ያያሉ፣ ያግዳሉ፣ ርዕሰ መምህር ይቀይራሉ። የተማሪ ስም አያዩም።",
+ rpDesc:"ትምህርት ቤትዎን ይፈጥራሉ (አስተዳዳሪው መጀመሪያ ኢሜይልዎን መፍቀድ አለበት)፣ መምህራንን፣ ክፍሎችንና ተማሪዎችን ያስተዳድራሉ።",rtDesc:"ርዕሰ መምህሩ የሰጠዎት የትምህርት ቤት ኮድ አለዎት። ርዕሰ መምህሩ የሰጠዎትን ክፍል ብቻ ያያሉ።",raDesc:"ርዕሰ መምህራንን ይፈቅዳሉ፣ ሁሉንም ትምህርት ቤቶች ያያሉ፣ የመገኘት መዝገብ ያያሉ (ማስተካከል አይችሉም)፣ ያግዳሉ፣ ርዕሰ መምህር ይቀይራሉ። የወላጆችን ስልክ ቁጥር አያዩም።",
  iAmP:"እኔ ርዕሰ መምህር ነኝ",iAmT:"እኔ መምህር ነኝ",iAmA:"እኔ አስተዳዳሪ (ቢሮ) ነኝ",
  schPh:"የትምህርት ቤት ስም (አስተዳዳሪው ከሰጠዎት ባዶ ይተዉ)",codePh:"የትምህርት ቤት ኮድ (ለምሳሌ 7DK83H)",errRole:"ሚናዎን ይምረጡ።",
  adminUidX:"አስተዳዳሪ ለመሆን UID-ዎን ለፕሮጀክቱ ባለቤት ይላኩ። እሱ በ Firebase «admins» ውስጥ ይመዘግባል።",
  lgSub:"የትምህርት ቤት አስተዳደር ሥርዓት",lgTabIn:"ግባ",lgTabUp:"ተመዝገብ",lgEmailL:"ኢሜይል",lgPassL:"የይለፍ ቃል",
  lgEmailPh:"ኢሜይልዎን ያስገቡ",lgPassPh:"የይለፍ ቃልዎን ያስገቡ",lgNamePh:"ስምዎን ያስገቡ",
  lgHintUp:"ከተመዘገቡ በኋላ የትምህርት ቤት ኮድ በማስገባት እንደ መምህር ይቀላቀላሉ። የተፈቀደልዎ ርዕሰ መምህር ከሆኑ ትምህርት ቤት ይፈጥራሉ።",
- lgLocal:"ያለ አካውንት ቀጥል (በዚህ ስልክ ላይ ብቻ)",lgRetry:"እንደገና ሞክር",admT:"አስተዳዳሪ፦ ሁሉም ትምህርት ቤቶች",admNote:"የተማሪ ስምና ስልክ ቁጥር አይታይም። ጥቅል መረጃ (ቁጥርና መቶኛ) ብቻ።",
+ lgLocal:"ያለ አካውንት ቀጥል (በዚህ ስልክ ላይ ብቻ)",lgRetry:"እንደገና ሞክር",admT:"አስተዳዳሪ፦ ሁሉም ትምህርት ቤቶች",admNote:"የመገኘት መዝገብ መመልከት ብቻ ይችላሉ (መቀየር አይችሉም)፤ መመልከትዎ በእንቅስቃሴ መዝገብ ውስጥ ይመዘገባል። የወላጅ ስልክ ቁጥር አይታይም። ጥቅል ሪፖርት (CSV) ቁጥርና መቶኛ ብቻ ነው።",
  admAllowT:"የተፈቀዱ ርዕሰ መምህራን",admAllowX:"የርዕሰ መምህሩን ኢሜይል ያስገቡ። እሱ አካውንት ፈጥሮ ትምህርት ቤት መፍጠር ይችላል።",admAllowAdd:"ፍቀድ",admNoAllowed:"እስካሁን የተፈቀደ የለም።",
  admDone:"ተከናውኗል።",admSchools:"ትምህርት ቤቶች",admNoSchools:"እስካሁን ትምህርት ቤት የለም።",admNoSum:"ሪፖርት አልተላከም (ርዕሰ መምህሩ መተግበሪያውን መክፈት አለበት)።",
  admClasses:"ክፍሎች",admCode:"ኮድ",admLast:"የመጨረሻ መዝገብ",admUpd:"የተዘመነ",admStatus:"ሁኔታ",admBlocked:"ታግዷል",admActive:"ንቁ",
@@ -418,7 +423,7 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  exNoData:"No attendance recorded in this period.",exP:"P",exL:"L",exA:"A",
  notAllowed:"Your email isn't approved to create a school. Contact the person who gave you this app to get access.",
  createNote:"Only approved principals can create a school. If you are a teacher, use the school code below.",
- tabAdmin:"Admin",admSelf:"You cannot remove yourself or change your own role.",admNewT:"Create a new school",admNewX:"Enter the school name and the principal's email. When the principal creates an account with that email, they are linked to this school automatically.",admNewName:"School name",admNewEmail:"Principal's email",admNewBtn:"Create",admNewDone:"School created. Code: {c}. The principal ({e}) can now create an account and sign in.",failWhy:"Technical reason",
+ tabAdmin:"Admin",admSelf:"You cannot remove yourself or change your own role.",admRecBtn:"View attendance",admRecT:"Attendance (view only)",admRecNote:"The Admin can only view attendance, never change it. Each view is written to the school's activity log. Phone numbers are not shown.",admRecClass:"Class",admRecDate:"Date",admRecNone:"No attendance recorded",admRecNoClass:"No classes yet",admRecClose:"Close",log_adminView:"Admin viewed attendance",admNewT:"Create a new school",admNewX:"Enter the school name and the principal's email. When the principal creates an account with that email, they are linked to this school automatically.",admNewName:"School name",admNewEmail:"Principal's email",admNewBtn:"Create",admNewDone:"School created. Code: {c}. The principal ({e}) can now create an account and sign in.",failWhy:"Technical reason",
  lockedP:"The principal can only view attendance. Teachers of the class fill it in.",
  lockFuture:"You cannot fill in attendance for a future day.",
  lockWinDay:"Attendance can only be filled for today, during {w}. Other days cannot be edited.",
@@ -438,14 +443,14 @@ en:{tab4:"Account",wait:"Please wait… (on a slow connection this can take a mi
  E:"Excused",exE:"E",sumExc:"Students absent with permission (excused)",sumExcS:"Excused",sumRegS:"Registered",sumPresS:"Present",sumAbsS:"Absent",sumLateS:"Late",sumAllCame:"All who came (present + late)",ethClock:"Ethiopian time",colM:"M.",colF:"F.",colT:"Total",
  sumTime:"Roll called at",sumNone:"No attendance recorded for this day.",sumNoSex:"Gender not set",sumNotMarked:"Not marked",exDate:"Date",
  roleChoose:"Choose your role",roleOne:"One account has one role only: principal, teacher, or admin.",roleAdminName:"Admin (Education Office)",
- rpDesc:"You create your school (the Admin must approve your email first) and manage teachers, classes and students.",rtDesc:"You have the school code your principal gave you. You only see the classes your principal assigns to you.",raDesc:"You approve principals, see all schools, block schools and change principals. You never see student names.",
+ rpDesc:"You create your school (the Admin must approve your email first) and manage teachers, classes and students.",rtDesc:"You have the school code your principal gave you. You only see the classes your principal assigns to you.",raDesc:"You approve principals, see all schools and their attendance (view only, never edit), block schools and change principals. You never see parents' phone numbers.",
  iAmP:"I am a principal",iAmT:"I am a teacher",iAmA:"I am an admin (office)",
  schPh:"School name (leave empty if the Admin gave you a school)",codePh:"School code (e.g. 7DK83H)",errRole:"Please choose your role.",
  adminUidX:"To become an admin, send your UID to the project owner. They add it under 'admins' in Firebase.",
  lgSub:"School Management System",lgTabIn:"Sign in",lgTabUp:"Register",lgEmailL:"Email",lgPassL:"Password",
  lgEmailPh:"Enter your email",lgPassPh:"Enter your password",lgNamePh:"Enter your name",
  lgHintUp:"After registering, enter your school code to join as a teacher. Approved principals can create a school.",
- lgLocal:"Continue without an account (on this phone only)",lgRetry:"Try again",admT:"Admin: all schools",admNote:"You cannot see student names or phone numbers. Totals and percentages only.",
+ lgLocal:"Continue without an account (on this phone only)",lgRetry:"Try again",admT:"Admin: all schools",admNote:"You can only view attendance, never change it; each view is written to the activity log. Parents' phone numbers are not shown. The combined report (CSV) has totals and percentages only.",
  admAllowT:"Approved principals",admAllowX:"Enter the principal's email. They can then create an account and a school.",admAllowAdd:"Approve",admNoAllowed:"No principals approved yet.",
  admDone:"Done.",admSchools:"Schools",admNoSchools:"No schools yet.",admNoSum:"No report yet (the principal must open the app).",
  admClasses:"Classes",admCode:"Code",admLast:"Last record",admUpd:"Updated",admStatus:"Status",admBlocked:"Blocked",admActive:"Active",
@@ -794,8 +799,9 @@ function exportCard(){
 }
 
 /* ---------- Gabaasa guyyaa: galmaa'an / dhufan / hafan / turtan (Dhi. / Dha. / Id.) ---------- */
-function dayCounts(c,d){
-  var r=getRec(c,d),o={reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},E:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false};
+function dayCounts(c,d){return countsFor(c,getRec(c,d))}
+function countsFor(c,r){
+  var o={reg:{M:0,F:0,T:0},P:{M:0,F:0,T:0},A:{M:0,F:0,T:0},L:{M:0,F:0,T:0},E:{M:0,F:0,T:0},nosex:0,unmarked:0,has:false};
   c.students.forEach(function(s){
     var g=s.sex==="M"?"M":s.sex==="F"?"F":"";
     o.reg.T++;if(g)o.reg[g]++;else o.nosex++;
@@ -904,6 +910,8 @@ function viewManage(){
 /* ---------- Taateewwan / Events ---------- */
 document.addEventListener("change",function(e){
   var t=e.target;
+  if(t.dataset.admrcls&&cloud.adm&&cloud.adm.rec){admRecPick(t.value);render();return}
+  if(t.dataset.admrdate&&cloud.adm&&cloud.adm.rec){cloud.adm.rec.date=t.value;render();return}
   if(t.dataset.admp&&cloud.adm){cloud.adm.period=t.value;render();return}
   if(t.dataset.assign){cloudAssign(t.dataset.assign,t.dataset.uid,t.checked);return}
   if(t.dataset.exp){exPeriod=t.value;exMsg="";render();return}
@@ -1025,6 +1033,8 @@ document.addEventListener("click",function(e){
     saveWin(won,wst===null?480:wst,wen===null?540:wen);
   }else if(act==="winpreset"&&cloud.role==="principal"){saveWin(true,480,540)
   }else if(act==="adm_rename"&&cloud.isAdmin){admRename(b.dataset.sid)
+  }else if(act==="adm_rec"&&cloud.isAdmin){admRecOpen(b.dataset.sid)
+  }else if(act==="adm_recclose"&&cloud.isAdmin){admRecStop();render()
   }else if(act==="adm_newschool"&&cloud.isAdmin){admNewSchool()
   }else if(act==="adm_allow"&&cloud.isAdmin){admAllow()
   }else if(act==="adm_unallow"&&cloud.isAdmin){
@@ -1493,6 +1503,7 @@ function admErr(e){
   softRender();
 }
 function stopAdmin(){
+  admRecStop();
   runUnsubs(cloud.admUnsubs);
   if(cloud.admMemUn){try{cloud.admMemUn()}catch(e){}cloud.admMemUn=null}
   cloud.isAdmin=false;cloud.adm=null;
@@ -1509,6 +1520,7 @@ function startAdmin(){
   watch("schools","schools");watch("schoolSummaries","summ");watch("blockedSchools","blocked");watch("allowedPrincipals","allowed");
 }
 function admOpen(sid){
+  admRecStop();
   if(cloud.admMemUn){try{cloud.admMemUn()}catch(e){}cloud.admMemUn=null}
   cloud.adm.open=sid;cloud.adm.members=[];
   var fs=cloud.sdk.fs;
@@ -1518,8 +1530,74 @@ function admOpen(sid){
   },admErr);
   render();
 }
+/* ---------- Admin: galmee dhufaa ilaaluu (ilaaluu qofa) ---------- */
+function admRecStop(){
+  var r=cloud.adm&&cloud.adm.rec;
+  if(r){["clsUn","attUn"].forEach(function(k){if(r[k]){try{r[k]()}catch(e){}r[k]=null}})}
+  if(cloud.adm)cloud.adm.rec=null;
+}
+function admRecOpen(sid){
+  admRecStop();
+  var fs=cloud.sdk.fs,r={sid:sid,classes:{},cid:null,att:{},date:null,clsUn:null,attUn:null};
+  cloud.adm.rec=r;
+  r.clsUn=fs.onSnapshot(fs.collection(cloud.db,"schools",sid,"classes"),function(snap){
+    var o={};
+    snap.forEach(function(d){
+      var v=d.data();
+      /* lakkoofsa bilbilaa hin fudhatamu: maqaa, saala, umurii qofa */
+      o[d.id]={id:d.id,name:v.name||"",students:(v.students||[]).map(function(s){return {id:s.id,name:s.name||"",sex:s.sex,age:s.age}})};
+    });
+    r.classes=o;
+    if(!r.cid||!o[r.cid]){var ids=Object.keys(o).sort(function(a,b){return COL.compare(o[a].name,o[b].name)});if(ids.length)admRecPick(ids[0])}
+    softRender();
+  },admErr);
+  logAct("adminView",admName(sid),sid,"Admin");
+  render();
+}
+function admRecPick(cid){
+  var r=cloud.adm.rec;if(!r)return;
+  if(r.attUn){try{r.attUn()}catch(e){}r.attUn=null}
+  r.cid=cid;r.att={};r.date=null;
+  var fs=cloud.sdk.fs;
+  r.attUn=fs.onSnapshot(fs.collection(cloud.db,"schools",r.sid,"classes",cid,"attendance"),function(snap){
+    var o={};
+    snap.forEach(function(d){
+      var v=d.data({serverTimestamps:"estimate"}),m={};
+      Object.keys(v.marks||{}).forEach(function(k){if(v.marks[k])m[k]=v.marks[k]});
+      var u=v.updatedAt;
+      o[d.id]={marks:m,first:v.firstAtMs||0,saved:u&&u.toMillis?u.toMillis():0};
+    });
+    r.att=o;
+    var ds=Object.keys(o).sort().reverse();
+    if(!r.date||!o[r.date])r.date=ds[0]||null;
+    softRender();
+  },admErr);
+}
+function admRecView(){
+  var t=L(),r=cloud.adm.rec,out='';
+  out+='<div class="card"><h2>'+t.admRecT+'</h2><p class="small" style="margin-top:0">'+esc(admName(r.sid))+' \u00b7 '+t.admRecNote+'</p>';
+  var cids=Object.keys(r.classes).sort(function(a,b){return COL.compare(r.classes[a].name,r.classes[b].name)});
+  if(!cids.length){return out+'<p class="small">'+t.admRecNoClass+'</p><button class="btn ghost" data-act="adm_recclose">'+t.admRecClose+'</button></div>'}
+  out+='<div class="fld"><label>'+t.admRecClass+'<select data-admrcls="1">'+cids.map(function(id){return '<option value="'+esc(id)+'"'+(id===r.cid?' selected':'')+'>'+esc(r.classes[id].name)+'</option>'}).join("")+'</select></label>';
+  var ds=Object.keys(r.att).sort().reverse();
+  out+='<label>'+t.admRecDate+'<select data-admrdate="1">'+(ds.length?ds.map(function(d){return '<option value="'+d+'"'+(d===r.date?' selected':'')+'>'+esc(fmtDate(d))+'</option>'}).join(""):'<option>\u2014</option>')+'</select></label></div>';
+  var c=r.classes[r.cid],a=r.date&&r.att[r.date];
+  if(!a){out+='<p class="small">'+t.admRecNone+'</p>'}
+  else{
+    var o=countsFor(c,a.marks),at=a.first||a.saved;
+    out+=sumTable(o)+'<p class="small" style="margin:8px 0">\u23F0 '+t.sumTime+': <b>'+(at?clockBoth(at):'?')+'</b></p>';
+    var cls={P:"mp",A:"ma",L:"ml",E:"me"};
+    out+=c.students.slice().sort(function(x,y){return COL.compare(x.name,y.name)}).map(function(s){
+      var v=a.marks[s.id];
+      return '<div class="item"><span>'+esc(s.name)+'</span>'+(v?'<span class="mk '+cls[v]+'">'+esc(t[v])+'</span>':'<span class="small">\u2014</span>')+'</div>';
+    }).join("");
+  }
+  return out+'<button class="btn ghost" style="margin-top:10px;width:100%" data-act="adm_recclose">'+t.admRecClose+'</button></div>';
+}
+
 function admClose(){
   if(cloud.admMemUn){try{cloud.admMemUn()}catch(e){}cloud.admMemUn=null}
+  admRecStop();
   cloud.adm.open=null;cloud.adm.members=[];render();
 }
 function admAllow(){
@@ -1606,6 +1684,7 @@ function viewAdmin(){
     }).join(""):'<p class="small">'+t.admNoAllowed+'</p>')+
     '<div class="fld"><label>'+t.email+'<input type="email" id="admEmail" inputmode="email" autocomplete="off"></label></div>'+
     '<button class="btn" data-act="adm_allow">'+t.admAllowAdd+'</button></div>';
+  if(A.rec)out+=admRecView();
   out+='<div class="card"><h2>'+t.admNewT+'</h2><p class="small" style="margin-top:0">'+t.admNewX+'</p><div class="fld">'+
     '<label>'+t.admNewName+'<input type="text" id="admNsName" autocomplete="off"></label>'+
     '<label>'+t.admNewEmail+'<input type="email" id="admNsEmail" inputmode="email" autocomplete="off"></label></div>'+
@@ -1627,6 +1706,7 @@ function viewAdmin(){
       '<button class="btn '+(blocked?'':(askB?'danger':'ghost'))+'" data-act="adm_block" data-sid="'+esc(id)+'">'+(blocked?t.admUnblock:(askB?t.sure:t.admBlock))+'</button></div>';
     if(open){
       out+='<div class="fld" style="margin-top:10px"><label>'+t.admRenL+'<input type="text" id="admRen" value="'+esc(admName(id))+'"></label></div><button class="btn ghost" style="width:100%;margin-top:6px" data-act="adm_rename" data-sid="'+esc(id)+'">'+t.admRenB+'</button>';
+      out+='<button class="btn" style="margin-top:10px;width:100%" data-act="adm_rec" data-sid="'+esc(id)+'">'+t.admRecBtn+'</button>';
       out+='<p class="small" style="margin:10px 0 0">'+t.admCodeHint+'</p>';
       if(!A.members.length)out+='<p class="small">'+t.connecting+'</p>';
       A.members.slice().sort(function(a,b){return (a.role==="principal"?0:1)-(b.role==="principal"?0:1)||COL.compare(a.name||a.email,b.name||b.email)}).forEach(function(m){
