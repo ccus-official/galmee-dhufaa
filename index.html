@@ -1233,10 +1233,6 @@ function startData(){
       var m=[];snap.forEach(function(d){var v=d.data();m.push({uid:d.id,role:v.role,name:v.name||"",email:v.email||"",status:v.status||"approved"})});
       cloud.members=m;softRender();
     },onErr));
-    cloud.dataUnsubs.push(fs.onSnapshot(fs.collection(db,"schools",sid,"logs"),function(snap){
-      var a=[];snap.forEach(function(d){var v=d.data();a.push({atMs:v.atMs||0,byName:v.byName||"",action:v.action||"",detail:v.detail||""})});
-      a.sort(function(x,y){return y.atMs-x.atMs});cloud.logs=a.slice(0,25);softRender();
-    },function(){}));
   }
 }
 function logAct(action,detail,sid,who){
@@ -1959,9 +1955,6 @@ function viewAccount(){
         '<button class="btn ghost" style="margin-top:8px;min-height:40px;width:100%" data-act="crespw" data-uid="'+m.uid+'">'+(confirmId==="p"+m.uid?t.sure:t.respwBtn)+'</button>'+
         '<button class="btn '+(ask?'danger':'ghost')+'" style="margin-top:8px;min-height:40px" data-act="rmteacher" data-uid="'+m.uid+'">'+(ask?t.sure:t.removeT)+'</button></div>';
     }).join(""):'<p class="small" style="margin:0">'+t.noTeachers+'</p>')+'</div>';
-    out+='<div class="card"><h2>'+t.logT+'</h2>'+((cloud.logs&&cloud.logs.length)?cloud.logs.map(function(g){
-      return '<div class="item" style="display:block"><div class="small">'+esc(fmtStamp(g.atMs))+' \u00b7 '+esc(g.byName)+'</div><div><b>'+esc(t["log_"+g.action]||g.action)+'</b>'+(g.detail?' \u00b7 '+esc(g.detail):'')+'</div></div>';
-    }).join(""):'<p class="small" style="margin:0">'+t.logNone+'</p>')+'</div>';
   }
   return out+signout;
 }
